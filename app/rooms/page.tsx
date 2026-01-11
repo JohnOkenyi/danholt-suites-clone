@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'next'
+import { useState } from 'react'
 import Link from 'next/link'
 import { Users, Bed, Maximize, Wifi, Zap, Coffee, Tv } from 'lucide-react'
 
