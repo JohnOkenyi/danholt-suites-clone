@@ -1,0 +1,5 @@
+﻿[2026-01-11 09:18:40Z]
+Base44 Restaurant HTML saved to : C:\Users\Admin\danholt-suites-clone\design-ref\restaurant-base44-raw.html
+Extracted colors saved to       : C:\Users\Admin\danholt-suites-clone\design-ref\restaurant-base44-colors.txt
+Tailwind spec helper saved to   : C:\Users\Admin\danholt-suites-clone\design-ref\restaurant-tailwind-spec.txt
+

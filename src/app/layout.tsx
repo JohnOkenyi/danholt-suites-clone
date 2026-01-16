@@ -1,8 +1,6 @@
 ﻿import type { Metadata } from 'next';
 import React from 'react';
 import './globals.css';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 
 export const metadata: Metadata = {
   title: 'Danholt Suites | Your Home in Abuja',
@@ -17,9 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-neutral-950 text-white">
-        <Header />
         {children}
-        <Footer />
       </body>
     </html>
   );

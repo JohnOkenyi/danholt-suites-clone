@@ -1,0 +1,37 @@
+﻿============================================
+Base44 Restaurant Visual Spec Helper
+(Use this to configure tailwind.config.js)
+============================================
+
+1) Colors (from C:\Users\Admin\danholt-suites-clone\design-ref\restaurant-base44-colors.txt)
+--------------------------------
+No colors detected – inspect Base44 site with a color picker.
+
+Example Tailwind theme snippet (paste into tailwind.config.js theme.extend):
+
+    theme: {
+      extend: {
+        colors: {
+          brand: {
+            dark:  '#0a0a0a',
+            accent:'#fbbf24',
+            muted: '#1f2933'
+          }
+        }
+      }
+    }
+
+2) Layout hints to match Base44 Restaurant
+------------------------------------------
+- Page: min-height full screen, dark background.
+- Container: max width ~1200px, centered with padding.
+- Sections:
+  - Header (nav bar)
+  - Hero block (title, subtitle, buttons)
+  - Menu grid (cards for dishes)
+  - Footer (links, contact, copyright)
+
+3) Animation hints
+------------------------------------------
+- Fade/slide in hero and menu sections.
+- Hover border + shadow on cards.
