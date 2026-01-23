@@ -76,7 +76,7 @@ export default function LuxuryHero() {
                 />
 
                 {/* Main Headline with Staggered Animation */}
-                <div className="overflow-hidden">
+                <div className="overflow-hidden mb-8 md:mb-12">
                     <motion.h1
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -84,21 +84,22 @@ export default function LuxuryHero() {
                         className="relative"
                     >
                         {/* Static text without animation or shadow */}
-                        <div className="flex flex-wrap justify-center gap-x-4 md:gap-x-6 lg:gap-x-8 gap-y-2 md:gap-y-4">
+                        <div className="flex flex-wrap justify-center gap-x-3 gap-y-2 md:gap-x-8 md:gap-y-4 max-w-[90vw] mx-auto">
                             {["Here", "is", "a", "tribute", "to", "good", "living!"].map((word, index) => (
                                 <span
                                     key={index}
                                     className={`
                                         inline-block
-                                        text-3xl md:text-4xl lg:text-5xl xl:text-6xl
+                                        text-4xl sm:text-5xl md:text-6xl lg:text-7xl
                                         font-bold
                                         tracking-tight
-                                        leading-none
+                                        leading-[1.1]
                                         text-white
                                         hover:scale-105
                                         transition-transform
                                         duration-300
                                         cursor-default
+                                        ${index === 3 || index === 6 ? 'w-full md:w-auto mt-2 md:mt-0' : ''} 
                                     `}
                                 >
                                     {word}
@@ -111,10 +112,22 @@ export default function LuxuryHero() {
                             initial={{ scaleX: 0, opacity: 0 }}
                             animate={{ scaleX: 1, opacity: 1 }}
                             transition={{ duration: 1.5, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
-                            className="h-1 w-32 md:w-48 bg-gradient-to-r from-transparent via-danholt-gold to-transparent mx-auto mt-8 md:mt-12 origin-center"
+                            className="h-1 w-24 md:w-48 bg-gradient-to-r from-transparent via-danholt-gold to-transparent mx-auto mt-6 md:mt-8 origin-center"
                         />
                     </motion.h1>
                 </div>
+
+                {/* Mobile Primary CTA */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1, duration: 0.8 }}
+                    className="md:hidden w-full px-8 mb-8"
+                >
+                    <a href="/booking" className="block w-full py-4 bg-danholt-gold text-danholt-midnight font-bold uppercase tracking-widest text-sm rounded-full shadow-lg hover:bg-white transition-colors">
+                        Check Availability
+                    </a>
+                </motion.div>
 
                 {/* Decorative Line Below */}
                 <motion.div

@@ -32,33 +32,36 @@ export default function RoomCard({ room, onViewDetails, onBookNow }: RoomCardPro
             {/* Content */}
             <div className="p-6 flex flex-col flex-grow">
                 <div className="mb-4">
-                    <h3 className="text-2xl font-serif text-danholt-navy mb-2">{room.name}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">{room.description}</p>
+                    <div className="flex justify-between items-start mb-2">
+                        <h3 className="text-2xl font-serif text-danholt-navy">{room.name}</h3>
+                        {/* Mobile Price Display (Visible only if we hide the badge, but let's keep badge and just add space) */}
+                    </div>
+                    <p className="text-gray-500 text-sm leading-relaxed line-clamp-2 mb-4">{room.description}</p>
                 </div>
 
-                {/* Specs */}
-                <div className="flex items-center gap-6 mb-6">
-                    <div className="flex items-center gap-2 text-danholt-gold">
-                        <Users size={18} />
-                        <span className="text-gray-600 text-sm font-medium">{room.guests} Guests</span>
+                {/* Specs - Improved Spacing */}
+                <div className="flex flex-wrap items-center gap-4 mb-6">
+                    <div className="flex items-center gap-2 text-danholt-gold bg-gray-50 px-3 py-1.5 rounded-full">
+                        <Users size={16} />
+                        <span className="text-gray-600 text-xs font-medium">{room.guests} Guests</span>
                     </div>
-                    <div className="flex items-center gap-2 text-danholt-gold">
-                        <Move size={18} />
-                        <span className="text-gray-600 text-sm font-medium">{room.size} m²</span>
+                    <div className="flex items-center gap-2 text-danholt-gold bg-gray-50 px-3 py-1.5 rounded-full">
+                        <Move size={16} />
+                        <span className="text-gray-600 text-xs font-medium">{room.size} m²</span>
                     </div>
                 </div>
 
-                {/* Buttons */}
-                <div className="mt-auto flex gap-4">
+                {/* Buttons - Stacked on Mobile */}
+                <div className="mt-auto flex flex-col sm:flex-row gap-3">
                     <button
                         onClick={() => onViewDetails(room)}
-                        className="flex-1 py-3 px-4 border border-danholt-navy text-danholt-navy rounded-md text-sm font-bold uppercase tracking-wider hover:bg-danholt-navy hover:text-white transition-colors"
+                        className="w-full sm:flex-1 py-3 px-4 border border-danholt-navy text-danholt-navy rounded-md text-sm font-bold uppercase tracking-wider hover:bg-danholt-navy hover:text-white transition-colors"
                     >
                         View Details
                     </button>
                     <button
                         onClick={() => onBookNow(room)}
-                        className="flex-1 py-3 px-4 bg-danholt-navy text-white rounded-md text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-danholt-navy/90 transition-colors"
+                        className="w-full sm:flex-1 py-3 px-4 bg-danholt-navy text-white rounded-md text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-danholt-navy/90 transition-colors"
                     >
                         Book Now <ArrowRight size={16} />
                     </button>

@@ -60,8 +60,22 @@ export default function AnticipationSection() {
                     Before you even ask
                 </p>
 
-                {/* Floating Cards - Beautiful Arc Arrangement */}
-                <div className="pointer-events-auto flex items-end justify-center gap-4 md:gap-6">
+                {/* Mobile Grid Layout (Simple & Touchable) */}
+                <div className="md:hidden grid grid-cols-2 gap-4 w-full max-w-sm mx-auto pointer-events-auto">
+                    {services.map((service) => (
+                        <div key={service.id} className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm flex flex-col items-center gap-2">
+                            <div className="w-10 h-10 rounded-full bg-danholt-gold/10 flex items-center justify-center text-danholt-gold">
+                                <service.icon size={20} strokeWidth={1.5} />
+                            </div>
+                            <span className="text-xs font-medium text-gray-800 text-center">
+                                {service.title}
+                            </span>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Desktop Arc Layout (Original) */}
+                <div className="hidden md:flex pointer-events-auto items-end justify-center gap-4 md:gap-6">
                     {services.map((service, index) => {
                         // Create a beautiful arc pattern
                         const totalCards = services.length;
