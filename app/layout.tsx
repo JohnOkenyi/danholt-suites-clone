@@ -2,7 +2,6 @@
 import React from 'react';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
-import 'leaflet/dist/leaflet.css';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import LiveChatWidget from '@/components/LiveChatWidget';
