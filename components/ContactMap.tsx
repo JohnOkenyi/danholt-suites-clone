@@ -6,13 +6,7 @@ import { Icon } from 'leaflet'
 import { useEffect, useState } from 'react'
 
 export default function ContactMap() {
-    const [isMounted, setIsMounted] = useState(false)
-
-    useEffect(() => {
-        setIsMounted(true)
-    }, [])
-
-    if (!isMounted) return <div className="h-[400px] w-full bg-gray-100 rounded-2xl animate-pulse" />
+    // Parent ContactMapLoader handles ssr: false, so this runs on client only.
 
     // Fix for default Leaflet icon not loading in Next.js
     // Defined here to ensure it only runs on client-side
@@ -35,7 +29,8 @@ export default function ContactMap() {
                 zoom={15}
                 scrollWheelZoom={false}
                 className="h-full w-full"
-                style={{ height: '100%', width: '100%', minHeight: '400px' }}
+
+                style={{ height: '100%', width: '100%', minHeight: '400px', zIndex: 10, position: 'relative' }}
                 zoomControl={false}
             >
                 <ZoomControl position="bottomright" />
