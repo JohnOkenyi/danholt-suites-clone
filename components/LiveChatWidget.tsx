@@ -72,17 +72,25 @@ export default function LiveChatWidget() {
     }, [messages, isTyping, chatMode]);
 
     // Handle initial greeting when switching to Humor Mode
+    // Handle initial greeting when switching to Humor Mode
     useEffect(() => {
         if (chatMode === 'humor') {
-            setMessages(prev => [...prev, {
-                text: "Welcome to Humor Mode. I’m your in‑house comedian-concierge—shall I make your wait more interesting?",
-                isUser: false
-            }]);
+            setMessages(prev => {
+                // Prevent adding welcome message if it's already the last message
+                if (prev.length > 0 && prev[prev.length - 1].text.startsWith("Welcome to Humor Mode")) {
+                    return prev;
+                }
+                return [...prev, {
+                    text: "Welcome to Humor Mode. I’m your in‑house comedian-concierge—shall I make your wait more interesting?",
+                    isUser: false
+                }];
+            });
             setActiveJokeCategory(null);
         } else if (chatMode === 'ai' && messages.length === 0) {
             // Optional: reset if returning to AI and empty
         }
-    }, [chatMode, messages.length]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [chatMode]);
 
     const processResponse = (query: string) => {
         setIsTyping(true);

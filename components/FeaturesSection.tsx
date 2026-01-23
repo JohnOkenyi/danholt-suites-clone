@@ -7,6 +7,7 @@ const features = [
     { title: 'Personalized Service', description: 'Every preference remembered' },
     { title: '24/7 Concierge', description: 'Always at your service' },
     { title: 'Seamless Experience', description: 'From booking to checkout' },
+    { title: 'Exclusive Access', description: 'Members-only privileges' },
 ]
 
 export default function FeaturesSection() {
