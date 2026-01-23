@@ -9,29 +9,16 @@ import Link from 'next/link'
 import { ROOMS } from '@/lib/rooms'
 import { Room } from '@/types/room'
 
+const ADDONS = [
+    { id: 'early_checkin', label: 'Early Check-in Guarantee', price: 2000, desc: 'Secure early check-in (subject to availability).' },
+    { id: 'late_checkout', label: 'Late Checkout Guarantee', price: 2000, desc: 'Extend your stay beyond standard checkout.' },
+    { id: 'celebration', label: 'Celebration Setup', price: 5000, desc: 'Room decoration for special occasions.' },
+    { id: 'sweet_arrival', label: 'Sweet Arrival', price: 10000, desc: 'Pre-order cake, flowers, or wine.' }
+]
 
 function BookingForm() {
     const searchParams = useSearchParams()
     const initialRoomId = searchParams.get('room')
-
-    const [formData, setFormData] = useState({
-        checkIn: '',
-        checkOut: '',
-        guests: 2,
-        roomId: initialRoomId || (ROOMS[0] ? ROOMS[0].id : ''),
-        name: '',
-        email: '',
-        phone: '',
-        requests: '',
-        addons: [] as string[]
-    })
-
-    const ADDONS = [
-        { id: 'early_checkin', label: 'Early Check-in Guarantee', price: 2000, desc: 'Secure early check-in (subject to availability).' },
-        { id: 'late_checkout', label: 'Late Checkout Guarantee', price: 2000, desc: 'Extend your stay beyond standard checkout.' },
-        { id: 'celebration', label: 'Celebration Setup', price: 5000, desc: 'Room decoration for special occasions.' },
-        { id: 'sweet_arrival', label: 'Sweet Arrival', price: 10000, desc: 'Pre-order cake, flowers, or wine.' }
-    ]
 
     const [selectedRoom, setSelectedRoom] = useState<Room | null>(null)
     const [stats, setStats] = useState({ nights: 0, subtotal: 0, total: 0 })

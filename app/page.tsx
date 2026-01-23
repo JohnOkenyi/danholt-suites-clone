@@ -7,9 +7,6 @@ import FeaturesSection from '@/components/FeaturesSection'
 import CraftedExperiences from '@/components/CraftedExperiences'
 import EvolutionSection from '@/components/EvolutionSection'
 import FutureCTASection from '@/components/FutureCTASection'
-import PackagesSection from '@/components/PackagesSection'
-import EventPassBlock from '@/components/EventPassBlock'
-import ReferralSection from '@/components/ReferralSection'
 
 export default function Home() {
     return (
@@ -24,10 +21,8 @@ export default function Home() {
             <ServicePhilosophySection />
             <FeaturesSection />
             <CraftedExperiences />
-            <PackagesSection />
-            <EventPassBlock />
+            <CraftedExperiences />
             <EvolutionSection />
-            <ReferralSection />
             <FutureCTASection />
         </main>
     )
