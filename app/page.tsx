@@ -7,7 +7,6 @@ import FeaturesSection from '@/components/FeaturesSection'
 import CraftedExperiences from '@/components/CraftedExperiences'
 import EvolutionSection from '@/components/EvolutionSection'
 import FutureCTASection from '@/components/FutureCTASection'
-import MembershipSection from '@/components/MembershipSection'
 import PackagesSection from '@/components/PackagesSection'
 import EventPassBlock from '@/components/EventPassBlock'
 import ReferralSection from '@/components/ReferralSection'
@@ -22,8 +21,8 @@ export default function Home() {
                 <AnticipationSection />
             </div>
             <ServicePhilosophySection />
+            <ServicePhilosophySection />
             <FeaturesSection />
-            <MembershipSection />
             <CraftedExperiences />
             <PackagesSection />
             <EventPassBlock />

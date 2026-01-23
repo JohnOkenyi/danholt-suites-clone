@@ -52,17 +52,12 @@ export default function Header() {
                 {item}
               </Link>
             ))}
-            <button
-              onClick={() => {
-                const section = document.getElementById('membership');
-                if (section) {
-                  section.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
+            <Link
+              href="/membership"
               className="text-danholt-gold text-xs font-bold uppercase tracking-widest hover:text-white transition-colors mr-4"
             >
               Join Privilege Club
-            </button>
+            </Link>
             <Link
               href="/booking"
               className="btn-premium ml-4 px-8 py-3 rounded-full bg-danholt-gold text-danholt-midnight font-bold tracking-widest text-xs uppercase"
