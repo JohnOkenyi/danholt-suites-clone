@@ -47,7 +47,7 @@ export default function AnticipationSection() {
                 </div>
 
                 <div className="mb-8">
-                    <h2 className="text-5xl md:text-7xl font-[200] text-gray-900 tracking-tight leading-none drop-shadow-sm flex flex-col items-center gap-2">
+                    <h2 className="text-5xl md:text-7xl font-[200] text-gray-900 tracking-tight leading-tight py-4 drop-shadow-sm flex flex-col items-center gap-2">
                         <AnimatedText text="Where Every Need Is" className="justify-center flex-wrap text-gray-900" delay={0.1} />
                         {/* Gradient Text for Maximum Pop */}
                         <span className="font-[400] text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#B8860B] to-[#D4AF37]">
