@@ -24,18 +24,18 @@ export default function ContactMap() {
         iconAnchor: [12, 41],
     })
 
-    // Jikwoyi, Abuja coordinates (approximate based on description, using generic Abuja center or looking up Jikwoyi)
-    // Jikwoyi is approx 8.986° N, 7.555° E
+    // Jikwoyi, Abuja coordinates
+    // Approximate location for Jikwoyi Phase 3
     const position: [number, number] = [8.986, 7.555]
 
     return (
         <div className="h-[400px] md:h-[500px] w-full rounded-2xl overflow-hidden shadow-xl border border-white/10 relative z-0">
             <MapContainer
                 center={position}
-                zoom={14}
+                zoom={15}
                 scrollWheelZoom={false}
                 className="h-full w-full"
-                zoomControl={false} // We'll add it manually to position it differently if needed, or use default
+                zoomControl={false}
             >
                 <ZoomControl position="bottomright" />
                 <TileLayer
@@ -43,10 +43,12 @@ export default function ContactMap() {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 <Marker position={position} icon={customIcon}>
-                    <Popup>
-                        <div className="text-center">
-                            <h3 className="font-bold text-danholt-midnight">Danholt Suites</h3>
-                            <p className="text-sm">Jikwoyi, Abuja</p>
+                    <Popup className="font-sans">
+                        <div className="text-center p-2">
+                            <h3 className="font-bold text-danholt-midnight font-serif text-lg mb-1">Danholt Suites</h3>
+                            <p className="text-sm text-gray-600">#3 Iyabo, Obeyode Street</p>
+                            <p className="text-xs text-gray-500">(Beside Collinear Hospital)</p>
+                            <p className="text-sm text-gray-600">Dogbano, Jikwoyi, Phase 3, Abuja</p>
                         </div>
                     </Popup>
                 </Marker>
