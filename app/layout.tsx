@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${playfair.variable} font-sans bg-danholt-navy text-danholt-cream antialiased selection:bg-danholt-gold selection:text-white overflow-x-hidden`}>
         <SmoothScrolling>
           <Header />
-          <main className="relative z-10">{children}</main>
+          <main className="relative z-10 w-full overflow-x-hidden">{children}</main>
           <Footer />
           <LiveChatWidget />
         </SmoothScrolling>

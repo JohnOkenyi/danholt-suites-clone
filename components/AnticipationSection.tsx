@@ -60,14 +60,17 @@ export default function AnticipationSection() {
                     Before you even ask
                 </p>
 
-                {/* Mobile Grid Layout (Simple & Touchable) */}
-                <div className="md:hidden grid grid-cols-2 gap-4 w-full max-w-sm mx-auto pointer-events-auto">
+                {/* Mobile Grid Layout (Simple & Touchable but Premium) */}
+                <div className="md:hidden grid grid-cols-2 gap-4 w-full max-w-sm mx-auto pointer-events-auto px-4">
                     {services.map((service) => (
-                        <div key={service.id} className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm flex flex-col items-center gap-2">
-                            <div className="w-10 h-10 rounded-full bg-danholt-gold/10 flex items-center justify-center text-danholt-gold">
-                                <service.icon size={20} strokeWidth={1.5} />
+                        <div key={service.id} className="group relative bg-[#0B1121]/80 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-lg flex flex-col items-center gap-3 active:scale-95 transition-all duration-200">
+                            {/* Glow Effect */}
+                            <div className="absolute inset-0 bg-danholt-gold/5 rounded-2xl opacity-0 group-active:opacity-100 transition-opacity" />
+
+                            <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-danholt-gold/20 to-transparent flex items-center justify-center text-danholt-gold border border-white/5 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                                <service.icon size={24} strokeWidth={1.5} />
                             </div>
-                            <span className="text-xs font-medium text-gray-800 text-center">
+                            <span className="text-xs font-medium text-gray-200 text-center uppercase tracking-wide">
                                 {service.title}
                             </span>
                         </div>
