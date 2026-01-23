@@ -66,6 +66,9 @@ body {
   background-image: url("https://grainy-gradients.vercel.app/noise.svg");
   opacity: 0.03;
   mix-blend-mode: overlay;
+  will-change: transform;
+  transform: translateZ(0);
+  /* Hardware acceleration */
   animation: noise 0.5s infinite linear;
 }
 

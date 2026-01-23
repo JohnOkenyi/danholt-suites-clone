@@ -83,28 +83,11 @@ export default function LuxuryHero() {
                         transition={{ duration: 0.8, delay: 0.2 }}
                         className="relative"
                     >
-                        {/* Split text into words for staggered animation */}
+                        {/* Static text without animation or shadow */}
                         <div className="flex flex-wrap justify-center gap-x-4 md:gap-x-6 lg:gap-x-8 gap-y-2 md:gap-y-4">
                             {["Here", "is", "a", "tribute", "to", "good", "living!"].map((word, index) => (
-                                <motion.span
+                                <span
                                     key={index}
-                                    initial={{ opacity: 0, y: 100, rotateX: -90 }}
-                                    animate={{
-                                        opacity: 1,
-                                        y: [0, -8, 0],
-                                        rotateX: 0
-                                    }}
-                                    transition={{
-                                        opacity: { duration: 0.8, delay: 0.4 + index * 0.1 },
-                                        rotateX: { duration: 0.8, delay: 0.4 + index * 0.1 },
-                                        y: {
-                                            duration: 2.5,
-                                            delay: 1.5 + index * 0.15,
-                                            repeat: Infinity,
-                                            repeatType: "reverse",
-                                            ease: "easeInOut"
-                                        }
-                                    }}
                                     className={`
                                         inline-block
                                         text-3xl md:text-4xl lg:text-5xl xl:text-6xl
@@ -112,18 +95,14 @@ export default function LuxuryHero() {
                                         tracking-tight
                                         leading-none
                                         text-white
-                                        drop-shadow-[0_4px_20px_rgba(0,0,0,0.5)]
                                         hover:scale-105
                                         transition-transform
                                         duration-300
                                         cursor-default
                                     `}
-                                    style={{
-                                        textShadow: '0 4px 20px rgba(0, 0, 0, 0.8)'
-                                    }}
                                 >
                                     {word}
-                                </motion.span>
+                                </span>
                             ))}
                         </div>
 

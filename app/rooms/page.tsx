@@ -1,38 +1,34 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
-import Link from 'next/link'
-import { Wifi, Tv, Coffee, Wind, Check } from 'lucide-react'
-
-const rooms = [
-  {
-    name: "Standard Room",
-    price: "₦70,000",
-    image: "/images/room-standard.jpg",
-    description: "A cozy retreat designed for comfort, featuring modern amenities and a serene atmosphere.",
-    amenities: ["Free WiFi", "Smart TV", "Air Conditioning", "Breakfast Included"]
-  },
-  {
-    name: "Deluxe Suite",
-    price: "₦95,000",
-    image: "/images/room-deluxe.jpg",
-    description: "Spacious elegance with premium furnishings, offering an elevated experience for the discerning traveler.",
-    amenities: ["Free WiFi", "Smart TV", "Mini Bar", "City View", "Work Desk"]
-  },
-  {
-    name: "Executive Deluxe",
-    price: "₦120,000",
-    image: "/images/hero-slide-3.jpg", // Using existing image as placeholder
-    description: "The pinnacle of luxury. Expansive living space, exclusive access, and unparalleled attention to detail.",
-    amenities: ["Free WiFi", "4K Smart TV", "Lounge Area", "Jacuzzi", "Butler Service"]
-  }
-]
+import { useRouter } from 'next/navigation'
+import { ROOMS } from '@/lib/rooms'
+import { Room } from '@/types/room'
+import RoomCard from '@/components/RoomCard'
+import RoomDetailsModal from '@/components/RoomDetailsModal'
 
 export default function RoomsPage() {
+  const router = useRouter()
+  const [selectedRoom, setSelectedRoom] = useState<Room | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleViewDetails = (room: Room) => {
+    setSelectedRoom(room)
+    setIsModalOpen(true)
+  }
+
+  const handleBookNow = (room: Room) => {
+    router.push(`/booking?room=${room.id}`)
+  }
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+  }
+
   return (
-    <main className="bg-black min-h-screen text-white">
+    <main className="bg-danholt-navy min-h-screen text-white relative">
       {/* Rooms Hero */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">
@@ -42,7 +38,7 @@ export default function RoomsPage() {
             fill
             className="object-cover opacity-40 grayscale"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-danholt-navy via-danholt-navy/50 to-transparent" />
         </div>
 
         <motion.div
@@ -63,63 +59,35 @@ export default function RoomsPage() {
         </motion.div>
       </section>
 
-      {/* Room List */}
+      {/* Room Grid */}
       <section className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-          {rooms.map((room, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 md:gap-12">
+          {ROOMS.map((room, i) => (
             <motion.div
-              key={i}
+              key={room.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group"
+              className="h-full"
             >
-              {/* Image Card */}
-              <div className="relative aspect-[4/5] overflow-hidden rounded-sm mb-8 bg-white/5">
-                <Image
-                  src={room.image}
-                  alt={room.name}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
-
-                {/* Price Tag */}
-                <div className="absolute top-4 right-4 bg-danholt-gold/90 text-danholt-navy px-4 py-2 text-sm font-bold backdrop-blur-md">
-                  {room.price} <span className="text-[10px] font-normal opacity-80">/ NIGHT</span>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div>
-                <h3 className="text-2xl font-serif text-white mb-2 group-hover:text-danholt-gold transition-colors">
-                  {room.name}
-                </h3>
-                <p className="text-white/50 text-sm leading-relaxed mb-6 h-20">
-                  {room.description}
-                </p>
-
-                {/* Amenities List */}
-                <div className="space-y-2 mb-8 border-t border-white/10 pt-6">
-                  {room.amenities.map((amenity, idx) => (
-                    <div key={idx} className="flex items-center gap-3 text-white/70 text-xs tracking-wide">
-                      <Check className="w-3 h-3 text-danholt-gold" />
-                      {amenity}
-                    </div>
-                  ))}
-                </div>
-
-                <Link href="/book" className="w-full">
-                  <button className="w-full py-4 border border-white/20 text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-danholt-gold hover:border-danholt-gold hover:text-danholt-navy transition-all duration-300">
-                    Book This Room
-                  </button>
-                </Link>
-              </div>
+              <RoomCard
+                room={room}
+                onViewDetails={handleViewDetails}
+                onBookNow={handleBookNow}
+              />
             </motion.div>
           ))}
         </div>
       </section>
+
+      {/* Modal */}
+      <RoomDetailsModal
+        room={selectedRoom}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        onBookNow={handleBookNow}
+      />
     </main>
   )
 }

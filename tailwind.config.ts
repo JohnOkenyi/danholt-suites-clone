@@ -25,6 +25,7 @@ const config: Config = {
           dark: '#1A1A1A', // Dark gray/black
           light: '#F5F5F0', // Light cream/beige
           cream: '#F8F5F0', // Warm cream
+          teal: '#14B8A6', // Primary buttons - Teal/Cyan
         },
       },
       fontFamily: {

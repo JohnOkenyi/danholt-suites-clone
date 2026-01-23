@@ -1,102 +1,187 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { MapPin, Phone, Mail } from 'lucide-react'
+import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react'
+import { ContactInfoCard } from '@/components/ContactInfoCard'
+import ContactMapLoader from '@/components/ContactMapLoader'
 
 export default function ContactPage() {
+  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  })
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setFormStatus('submitting')
+
+    // Simulating API call
+    await new Promise(resolve => setTimeout(resolve, 1500))
+
+    // Simple validation check simulation
+    if (formData.name && formData.email && formData.message) {
+      setFormStatus('success')
+      alert("Message Sent! We will contact you shortly.")
+      setFormData({ name: '', email: '', subject: '', message: '' })
+      setFormStatus('idle')
+    } else {
+      setFormStatus('error')
+    }
+  }
+
   return (
-    <main className="bg-black min-h-screen text-white">
-      {/* Hero */}
-      <section className="pt-48 pb-24 px-6 md:px-12 text-center max-w-4xl mx-auto">
+    <main className="min-h-screen bg-danholt-midnight text-white selection:bg-danholt-gold selection:text-danholt-midnight">
+      {/* Header Section */}
+      <section className="pt-48 pb-20 px-6 md:px-12 text-center max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="text-danholt-gold text-xs font-bold uppercase tracking-[0.4em] mb-6 block">
-            Get in Touch
+          <span className="text-danholt-gold text-sm font-bold uppercase tracking-[0.2em] mb-4 block font-serif">
+            GET IN TOUCH
           </span>
-          <h1 className="text-5xl md:text-7xl font-serif text-white mb-8">
+          <h1 className="text-5xl md:text-7xl font-serif text-white mb-6">
             Contact Us
           </h1>
-          <p className="text-white/60 text-lg font-light">
-            We are here to answer any questions you may have about our services.
+          <p className="text-white/60 text-lg font-light max-w-2xl mx-auto">
+            We&apos;re here to assist with your inquiries, reservations, or any special requests.
           </p>
         </motion.div>
       </section>
 
-      <section className="pb-32 px-6 md:px-12 max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+      <section className="pb-32 px-6 md:px-12 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
 
-          {/* Contact Info */}
-          <div className="space-y-12">
-            <div className="flex items-start gap-6">
-              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0">
-                <MapPin className="w-5 h-5 text-danholt-gold" />
-              </div>
-              <div>
-                <h3 className="text-xl font-serif text-white mb-2">Visit Us</h3>
-                <p className="text-white/50 leading-relaxed">
-                  #3 Iyabo, Obeyode Street,<br />Dogbano, Jikwoyi, Abuja
-                </p>
-              </div>
+          {/* Left Column: Cards Grid */}
+          <div className="space-y-16">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <ContactInfoCard
+                icon={MapPin}
+                title="Location"
+                content={[
+                  "#3 Iyabo, Obeyode Street",
+                  "(Beside Collinear Hospital)",
+                  "Dogbano, Jikwoyi, Phase 3, Abuja"
+                ]}
+              />
+              <ContactInfoCard
+                icon={Phone}
+                title="Phone"
+                content={[
+                  "07046080351"
+                ]}
+              />
+              <ContactInfoCard
+                icon={Mail}
+                title="Email"
+                content={[
+                  "reservations@danholt.com",
+                  "concierge@danholt.com"
+                ]}
+              />
+              <ContactInfoCard
+                icon={Clock}
+                title="Reception"
+                content={[
+                  "24 hours, 7 days a week",
+                  "Concierge: 6AM - 11PM"
+                ]}
+              />
             </div>
 
-            <div className="flex items-start gap-6">
-              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0">
-                <Phone className="w-5 h-5 text-danholt-gold" />
-              </div>
-              <div>
-                <h3 className="text-xl font-serif text-white mb-2">Call Us</h3>
-                <p className="text-white/50 leading-relaxed">
-                  0704 608 0351<br />
-                  0812 345 6789
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-6">
-              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0">
-                <Mail className="w-5 h-5 text-danholt-gold" />
-              </div>
-              <div>
-                <h3 className="text-xl font-serif text-white mb-2">Email Us</h3>
-                <p className="text-white/50 leading-relaxed">
-                  reservations@danholt.com
-                </p>
-              </div>
+            {/* Map Section */}
+            <div className="w-full">
+              <ContactMapLoader />
             </div>
           </div>
 
-          {/* Form */}
-          <div className="bg-white/5 p-8 md:p-12 rounded-lg border border-white/5">
-            <form className="space-y-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-white/50">Name</label>
-                  <input type="text" className="w-full bg-transparent border-b border-white/20 py-2 text-white focus:border-danholt-gold focus:outline-none transition-colors" placeholder="John Doe" />
+          {/* Right Column: Contact Form */}
+          <div className="lg:sticky lg:top-32 h-fit">
+            <div className="bg-white rounded-2xl p-8 md:p-12 shadow-2xl">
+              <div className="mb-8">
+                <h2 className="text-3xl font-serif font-bold text-danholt-midnight mb-2">Send a Message</h2>
+                <p className="text-gray-500">We usually reply within 24 hours.</p>
+              </div>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-danholt-midnight block">Name</label>
+                    <input
+                      type="text"
+                      name="name"
+                      required
+                      placeholder="Your name"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-danholt-midnight placeholder:text-gray-400 focus:outline-none focus:border-danholt-gold focus:ring-1 focus:ring-danholt-gold transition-all"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-sm font-bold text-danholt-midnight block">Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      placeholder="your@email.com"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-danholt-midnight placeholder:text-gray-400 focus:outline-none focus:border-danholt-gold focus:ring-1 focus:ring-danholt-gold transition-all"
+                    />
+                  </div>
                 </div>
+
                 <div className="space-y-2">
-                  <label className="text-xs font-bold uppercase tracking-widest text-white/50">Phone</label>
-                  <input type="tel" className="w-full bg-transparent border-b border-white/20 py-2 text-white focus:border-danholt-gold focus:outline-none transition-colors" placeholder="+234..." />
+                  <label className="text-sm font-bold text-danholt-midnight block">Subject</label>
+                  <input
+                    type="text"
+                    name="subject"
+                    required
+                    placeholder="How can we help?"
+                    value={formData.subject}
+                    onChange={handleInputChange}
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-danholt-midnight placeholder:text-gray-400 focus:outline-none focus:border-danholt-gold focus:ring-1 focus:ring-danholt-gold transition-all"
+                  />
                 </div>
-              </div>
 
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-white/50">Email</label>
-                <input type="email" className="w-full bg-transparent border-b border-white/20 py-2 text-white focus:border-danholt-gold focus:outline-none transition-colors" placeholder="john@example.com" />
-              </div>
+                <div className="space-y-2">
+                  <label className="text-sm font-bold text-danholt-midnight block">Message</label>
+                  <textarea
+                    name="message"
+                    required
+                    rows={6}
+                    placeholder="Your message..."
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-danholt-midnight placeholder:text-gray-400 focus:outline-none focus:border-danholt-gold focus:ring-1 focus:ring-danholt-gold transition-all resize-none"
+                  />
+                </div>
 
-              <div className="space-y-2">
-                <label className="text-xs font-bold uppercase tracking-widest text-white/50">Message</label>
-                <textarea className="w-full bg-transparent border-b border-white/20 py-2 text-white focus:border-danholt-gold focus:outline-none transition-colors min-h-[100px]" placeholder="How can we help you?" />
-              </div>
-
-              <button type="button" className="px-10 py-4 bg-danholt-gold text-danholt-navy font-bold uppercase tracking-widest text-xs hover:bg-white transition-colors duration-300">
-                Send Message
-              </button>
-            </form>
+                <button
+                  type="submit"
+                  disabled={formStatus === 'submitting'}
+                  className="w-full py-4 bg-danholt-midnight text-white font-bold uppercase tracking-widest rounded-lg hover:bg-black transition-colors flex items-center justify-center gap-3 disabled:opacity-70"
+                >
+                  {formStatus === 'submitting' ? (
+                    <span>Sending...</span>
+                  ) : (
+                    <>
+                      <Send className="w-5 h-5" />
+                      <span>Send Message</span>
+                    </>
+                  )}
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </section>

@@ -15,16 +15,16 @@ const experiences = [
         link: "/rooms"
     },
     {
-        title: "Restaurant & Bar",
-        subtitle: "Global Flavors",
-        description: "Culinary art that transcends the ordinary plate.",
-        image: "https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
-        link: "/dining"
+        title: "Restaurant",
+        subtitle: "Culinary Delight",
+        description: "Authentic Nigerian flavors and international cuisine.",
+        image: "/images/nigerian-dish.png",
+        link: "/restaurant"
     },
     {
-        title: "Sports Facility",
+        title: "Sports Facilities",
         subtitle: "Body & Mind",
-        description: "State-of-the-art facilities for complete rejuvenation.",
+        description: "World-class stadium and fitness center for complete rejuvenation.",
         image: "https://danholtsuites.com/assets/img/gallery/13.jpg",
         link: "/facilities"
     }
@@ -32,7 +32,7 @@ const experiences = [
 
 export default function CraftedExperiences() {
     return (
-        <section className="py-20 bg-danholt-midnight relative z-10 border-t border-white/5">
+        <section className="py-20 bg-danholt-navy relative z-10 border-t border-white/5">
             <div className="max-w-[1400px] mx-auto px-6 md:px-12">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-24">
                     <div>

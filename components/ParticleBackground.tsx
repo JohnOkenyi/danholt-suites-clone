@@ -39,23 +39,23 @@ function noise(x: number, y: number, time: number): number {
         Math.cos(y * 0.015 + time * 0.7) * 0.2
 }
 
+// Configuration - Easy to customize
+const CONFIG = {
+    REPULSION_RADIUS: 140,      // Pixels - area of mouse influence
+    REPULSION_STRENGTH: 8,       // Force applied to particles
+    RETURN_SPEED: 0.03,          // How fast particles return to drift
+    DRIFT_INTENSITY: 0.3,        // Intensity of floating motion
+    PARTICLE_DENSITY: 0.00004,   // Particles per pixel² (responsive)
+    MIN_PARTICLES: 50,
+    MAX_PARTICLES: 120,
+}
+
 export default function ParticleBackground({ className = '' }: ParticleBackgroundProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const particlesRef = useRef<Particle[]>([])
     const mouseRef = useRef({ x: -1000, y: -1000, isActive: false })
     const animationRef = useRef<number>(0)
     const timeRef = useRef(0)
-
-    // Configuration - Easy to customize
-    const CONFIG = {
-        REPULSION_RADIUS: 140,      // Pixels - area of mouse influence
-        REPULSION_STRENGTH: 8,       // Force applied to particles
-        RETURN_SPEED: 0.03,          // How fast particles return to drift
-        DRIFT_INTENSITY: 0.3,        // Intensity of floating motion
-        PARTICLE_DENSITY: 0.00004,   // Particles per pixel² (responsive)
-        MIN_PARTICLES: 50,
-        MAX_PARTICLES: 120,
-    }
 
     // Generate particle colors - mostly dark with occasional accents
     const getParticleColor = (): string => {

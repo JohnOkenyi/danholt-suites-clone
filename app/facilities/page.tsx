@@ -8,26 +8,26 @@ const facilities = [
   {
     title: "Conference Hall",
     description: "Our state-of-the-art conference hall is designed for business excellence. Equipped with high-speed internet, modern audio-visual systems, and ergonomic seating, it's the perfect venue for seminars, workshops, and corporate meetings.",
-    image: "/images/hero-slide-1.jpg", // Placeholder
+    image: "/images/conference-hall-custom.jpg",
     features: ["High-speed WiFi", "Projector & Screen", "Sound System", "Catering Available"]
   },
   {
     title: "Sports Facilities",
     description: "Maintain your active lifestyle with our premium sports facilities. Whether you prefer a competitive game of tennis or a team match on our 5-a-side football pitch, we provide the perfect environment for recreation and fitness.",
-    image: "/images/hero-slide-3.jpg", // Placeholder
+    image: "/images/sports-pitch-custom.jpg",
     features: ["5-a-side Football Pitch", "Lawn Tennis Court", "Floodlights for Night Games", "Equipment Rental"]
   },
   {
     title: "Children's Playground",
     description: "A safe and fun environment for our younger guests. Our playground is equipped with modern play structures and is located within a secure area so parents can relax while the kids have fun.",
-    image: "/images/feature-pool.jpg", // Placeholder
+    image: "/images/playground-custom.jpg",
     features: ["Secure Enclosure", "Modern Play Equipment", "Soft Landing Surfaces", "Supervised Area"]
   }
 ]
 
 export default function FacilitiesPage() {
   return (
-    <main className="bg-black min-h-screen text-white">
+    <main className="bg-danholt-navy min-h-screen text-white">
       {/* Hero */}
       <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 z-0">

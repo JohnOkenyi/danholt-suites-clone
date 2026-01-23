@@ -75,8 +75,8 @@ export default function FutureCTASection() {
                     color: '#ffffff',
                     margin: '0 0 60px 0'
                 }}>
-                    The future of hospitality isn't impersonal.<br />
-                    <span style={{ color: 'rgba(255, 255, 255, 0.6)' }}>It's human.</span>
+                    The future of hospitality isn&apos;t impersonal.<br />
+                    <span style={{ color: 'rgba(255, 255, 255, 0.6)' }}>It&apos;s human.</span>
                 </h1>
 
                 <button className="cta-button" style={{
