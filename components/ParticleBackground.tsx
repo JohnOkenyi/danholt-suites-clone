@@ -45,9 +45,9 @@ const CONFIG = {
     REPULSION_STRENGTH: 8,       // Force applied to particles
     RETURN_SPEED: 0.03,          // How fast particles return to drift
     DRIFT_INTENSITY: 0.3,        // Intensity of floating motion
-    PARTICLE_DENSITY: 0.00002,   // Particles per pixel² (reduced for performance)
-    MIN_PARTICLES: 50,
-    MAX_PARTICLES: 120,
+    PARTICLE_DENSITY: 0.00001,   // Reduced density significantly
+    MIN_PARTICLES: 20,           // Lower limits
+    MAX_PARTICLES: 60,
 }
 
 export default function ParticleBackground({ className = '' }: ParticleBackgroundProps) {

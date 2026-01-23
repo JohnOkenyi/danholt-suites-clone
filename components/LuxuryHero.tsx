@@ -53,7 +53,7 @@ export default function LuxuryHero() {
                             fill
                             priority={currentImageIndex === 0}
                             className="object-cover"
-                            quality={90}
+                            quality={75}
                         />
                     </motion.div>
                 </AnimatePresence>

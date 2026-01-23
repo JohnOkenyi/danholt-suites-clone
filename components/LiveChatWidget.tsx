@@ -11,36 +11,42 @@ const quickQuestions = [
     "How do I make a reservation?",
 ];
 
+import { findAnswer } from '@/lib/knowledgeBase';
+
 export default function LiveChatWidget() {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Array<{ text: string; isUser: boolean }>>([]);
     const [inputValue, setInputValue] = useState('');
     const [chatMode, setChatMode] = useState<'ai' | 'human'>('ai');
+    const [isTyping, setIsTyping] = useState(false);
+
+    const processResponse = (query: string) => {
+        setIsTyping(true);
+        setTimeout(() => {
+            let response;
+            if (chatMode === 'ai') {
+                const answer = findAnswer(query);
+                response = answer || "I apologize, I don't have that specific information. Would you like to speak with a human agent? You can click the 'Human Agent' toggle above or call us at +234 800 000 0000.";
+            } else {
+                response = "A human concierge has been notified and will be with you shortly. Your ticket number is #" + Math.floor(Math.random() * 1000) + ".";
+            }
+
+            setMessages(prev => [...prev, { text: response, isUser: false }]);
+            setIsTyping(false);
+        }, 1000);
+    };
 
     const handleSendMessage = () => {
         if (!inputValue.trim()) return;
-
-        setMessages([...messages, { text: inputValue, isUser: true }]);
+        const msg = inputValue;
+        setMessages([...messages, { text: msg, isUser: true }]);
         setInputValue('');
-
-        // Simulate response
-        setTimeout(() => {
-            const response = chatMode === 'ai'
-                ? "Thank you for your message! Our team will assist you shortly. For immediate assistance, please call 0704 608 0351."
-                : "A concierge will be with you shortly. Please hold...";
-            setMessages(prev => [...prev, { text: response, isUser: false }]);
-        }, 1000);
+        processResponse(msg);
     };
 
     const handleQuickQuestion = (question: string) => {
         setMessages([...messages, { text: question, isUser: true }]);
-
-        setTimeout(() => {
-            setMessages(prev => [...prev, {
-                text: "Thank you for your inquiry! Our team is reviewing your question and will respond shortly.",
-                isUser: false
-            }]);
-        }, 800);
+        processResponse(question);
     };
 
     return (
