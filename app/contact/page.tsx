@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react'
 import { ContactInfoCard } from '@/components/ContactInfoCard'
 import ContactMapLoader from '@/components/ContactMapLoader'
+import 'leaflet/dist/leaflet.css'
 
 export default function ContactPage() {
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')

@@ -1,7 +1,7 @@
 'use client'
 
 import { MapContainer, TileLayer, Marker, Popup, ZoomControl } from 'react-leaflet'
-import 'leaflet/dist/leaflet.css'
+
 import { Icon } from 'leaflet'
 import { useEffect, useState } from 'react'
 
@@ -35,6 +35,7 @@ export default function ContactMap() {
                 zoom={15}
                 scrollWheelZoom={false}
                 className="h-full w-full"
+                style={{ height: '100%', width: '100%', minHeight: '400px' }}
                 zoomControl={false}
             >
                 <ZoomControl position="bottomright" />
