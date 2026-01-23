@@ -68,6 +68,7 @@ export default function ContactPage() {
                 icon={MapPin}
                 title="Location"
                 content={[
+                  "Danholt Suites",
                   "#3 Iyabo, Obeyode Street",
                   "(Beside Collinear Hospital)",
                   "Dogbano, Jikwoyi, Phase 3, Abuja"
