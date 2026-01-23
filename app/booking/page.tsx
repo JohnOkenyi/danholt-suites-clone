@@ -22,8 +22,16 @@ function BookingForm() {
         name: '',
         email: '',
         phone: '',
-        requests: ''
+        requests: '',
+        addons: [] as string[]
     })
+
+    const ADDONS = [
+        { id: 'early_checkin', label: 'Early Check-in Guarantee', price: 2000, desc: 'Secure early check-in (subject to availability).' },
+        { id: 'late_checkout', label: 'Late Checkout Guarantee', price: 2000, desc: 'Extend your stay beyond standard checkout.' },
+        { id: 'celebration', label: 'Celebration Setup', price: 5000, desc: 'Room decoration for special occasions.' },
+        { id: 'sweet_arrival', label: 'Sweet Arrival', price: 10000, desc: 'Pre-order cake, flowers, or wine.' }
+    ]
 
     const [selectedRoom, setSelectedRoom] = useState<Room | null>(null)
     const [stats, setStats] = useState({ nights: 0, subtotal: 0, total: 0 })
@@ -53,14 +61,18 @@ function BookingForm() {
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
 
         const subtotal = diffDays * selectedRoom.price
+        const addonsTotal = formData.addons.reduce((acc, addonId) => {
+            const addon = ADDONS.find(a => a.id === addonId)
+            return acc + (addon ? addon.price : 0)
+        }, 0)
 
         setStats({
             nights: diffDays,
             subtotal: subtotal,
-            total: subtotal // Add tax calculation here if needed later
+            total: subtotal + addonsTotal
         })
 
-    }, [formData.checkIn, formData.checkOut, selectedRoom])
+    }, [formData.checkIn, formData.checkOut, selectedRoom, formData.addons])
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
@@ -175,10 +187,56 @@ function BookingForm() {
                             </div>
                         </div>
 
-                        {/* Step 2: Personal Information */}
+
+
+                        {/* Step 1.5: Enhance Your Stay */}
                         <div className="space-y-6">
                             <h2 className="text-2xl font-serif text-white border-b border-white/10 pb-4 flex items-center gap-3">
                                 <span className="bg-danholt-gold text-danholt-navy w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">2</span>
+                                Enhance Your Stay
+                            </h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {ADDONS.map(addon => (
+                                    <label
+                                        key={addon.id}
+                                        className={`relative flex items-start gap-4 p-4 rounded-xl border cursor-pointer transition-all duration-300
+                                            ${formData.addons.includes(addon.id)
+                                                ? 'bg-danholt-gold/10 border-danholt-gold'
+                                                : 'bg-white/5 border-white/10 hover:border-white/20'
+                                            }
+                                        `}
+                                    >
+                                        <div className="pt-1">
+                                            <input
+                                                type="checkbox"
+                                                checked={formData.addons.includes(addon.id)}
+                                                onChange={(e) => {
+                                                    const isChecked = e.target.checked
+                                                    setFormData(prev => ({
+                                                        ...prev,
+                                                        addons: isChecked
+                                                            ? [...prev.addons, addon.id]
+                                                            : prev.addons.filter(id => id !== addon.id)
+                                                    }))
+                                                }}
+                                                className="w-4 h-4 rounded-sm accent-danholt-gold"
+                                            />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-white font-bold text-sm mb-1">{addon.label}</h3>
+                                            <p className="text-white/50 text-xs mb-2">{addon.desc}</p>
+                                            <span className="text-danholt-gold text-xs font-bold">+₦{addon.price.toLocaleString()}</span>
+                                        </div>
+                                    </label>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Step 3: Personal Information */}
+                        <div className="space-y-6">
+                            <h2 className="text-2xl font-serif text-white border-b border-white/10 pb-4 flex items-center gap-3">
+
+                                <span className="bg-danholt-gold text-danholt-navy w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">3</span>
                                 Guest Information
                             </h2>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -299,6 +357,17 @@ function BookingForm() {
                                             <span className="text-gray-600">Nights</span>
                                             <span className="font-medium">{stats.nights}</span>
                                         </div>
+                                        {formData.addons.length > 0 && (
+                                            <div className="flex justify-between text-sm">
+                                                <span className="text-gray-600">Add-ons</span>
+                                                <span className="font-medium">
+                                                    +₦{formData.addons.reduce((acc, id) => {
+                                                        const addon = ADDONS.find(a => a.id === id)
+                                                        return acc + (addon ? addon.price : 0)
+                                                    }, 0).toLocaleString()}
+                                                </span>
+                                            </div>
+                                        )}
                                         <div className="flex justify-between text-base font-bold text-danholt-navy pt-3 border-t border-gray-100">
                                             <span>Total</span>
                                             <span>₦{stats.total.toLocaleString()}</span>
