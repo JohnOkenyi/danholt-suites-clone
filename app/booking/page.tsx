@@ -20,6 +20,18 @@ function BookingForm() {
     const searchParams = useSearchParams()
     const initialRoomId = searchParams.get('room')
 
+    const [formData, setFormData] = useState({
+        checkIn: '',
+        checkOut: '',
+        guests: 2,
+        roomId: initialRoomId || (ROOMS[0] ? ROOMS[0].id : ''),
+        name: '',
+        email: '',
+        phone: '',
+        requests: '',
+        addons: [] as string[]
+    })
+
     const [selectedRoom, setSelectedRoom] = useState<Room | null>(null)
     const [stats, setStats] = useState({ nights: 0, subtotal: 0, total: 0 })
 
