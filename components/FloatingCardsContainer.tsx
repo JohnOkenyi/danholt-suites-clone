@@ -77,7 +77,7 @@ export default function FloatingCardsContainer() {
     // 0.5 -> 1.0: Settling phase
 
     return (
-        <div ref={containerRef} className="absolute inset-0 pointer-events-none z-50 h-[200vh]">
+        <div ref={containerRef} className="hidden md:block absolute inset-0 pointer-events-none z-50 h-[200vh]">
             <div className="sticky top-0 h-screen w-full overflow-hidden">
                 {cards.map((card, index) => (
                     <FloatingCard

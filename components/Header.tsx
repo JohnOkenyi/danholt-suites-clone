@@ -90,14 +90,14 @@ export default function Header() {
           >
             <div className="absolute inset-0 bg-[url('/noise.svg')] opacity-20 pointer-events-none" />
 
-            {['Home', 'Rooms', 'Facilities', 'Dining', 'Contact'].map((item) => (
+            {['Home', 'Rooms', 'Facilities', 'Dining', 'Membership', 'Contact'].map((item) => (
               <Link
                 key={item}
                 href={`/${item.toLowerCase() === 'home' ? '' : item.toLowerCase()}`}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="text-3xl font-serif text-danholt-cold-white hover:text-danholt-gold transition-colors tracking-widest"
               >
-                {item}
+                {item === 'Membership' ? 'Privilege Club' : item}
               </Link>
             ))}
             <Link

@@ -230,6 +230,15 @@ export default function ParticleBackground({ className = '' }: ParticleBackgroun
         const handleResize = () => {
             const parent = canvas.parentElement
             if (!parent) return
+
+            // Mobile optimization: Disable on small screens
+            if (window.innerWidth < 768) {
+                canvas.width = 0
+                canvas.height = 0
+                particlesRef.current = []
+                return
+            }
+
             canvas.width = parent.offsetWidth
             canvas.height = parent.offsetHeight
 
