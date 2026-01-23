@@ -19,7 +19,7 @@ const experiences = [
         subtitle: "Culinary Delight",
         description: "Authentic Nigerian flavors and international cuisine.",
         image: "/images/nigerian-dish.png",
-        link: "/restaurant"
+        link: "/dining"
     },
     {
         title: "Sports Facilities",

@@ -20,6 +20,15 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/restaurant',
+        destination: '/dining',
+        permanent: true,
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig
