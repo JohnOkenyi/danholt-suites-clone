@@ -19,18 +19,28 @@ export default function TiltCard({ children, className }: { children: React.Reac
     const rotateX = useTransform(mouseY, [-0.5, 0.5], ["5deg", "-5deg"])
     const rotateY = useTransform(mouseX, [-0.5, 0.5], ["-5deg", "5deg"])
 
-    const handleMouseMove = (e: React.MouseEvent) => {
-        const rect = ref.current?.getBoundingClientRect()
-        if (rect) {
-            const width = rect.width
-            const height = rect.height
-            const mouseX = e.clientX - rect.left
-            const mouseY = e.clientY - rect.top
-            const xPct = mouseX / width - 0.5
-            const yPct = mouseY / height - 0.5
-            x.set(xPct)
-            y.set(yPct)
+    const width = useRef(0)
+    const height = useRef(0)
+    const left = useRef(0)
+    const top = useRef(0)
+
+    const handleMouseEnter = () => {
+        if (ref.current) {
+            const rect = ref.current.getBoundingClientRect()
+            width.current = rect.width
+            height.current = rect.height
+            left.current = rect.left
+            top.current = rect.top
         }
+    }
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        const mouseX = e.clientX - left.current
+        const mouseY = e.clientY - top.current
+        const xPct = mouseX / width.current - 0.5
+        const yPct = mouseY / height.current - 0.5
+        x.set(xPct)
+        y.set(yPct)
     }
 
     const handleMouseLeave = () => {
@@ -41,6 +51,7 @@ export default function TiltCard({ children, className }: { children: React.Reac
     return (
         <motion.div
             ref={ref}
+            onMouseEnter={handleMouseEnter}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             style={{
