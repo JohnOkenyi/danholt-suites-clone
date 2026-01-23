@@ -18,9 +18,7 @@ export default function Home() {
                 <AnticipationSection />
             </div>
             <ServicePhilosophySection />
-            <ServicePhilosophySection />
             <FeaturesSection />
-            <CraftedExperiences />
             <CraftedExperiences />
             <EvolutionSection />
             <FutureCTASection />
