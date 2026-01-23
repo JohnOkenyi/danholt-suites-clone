@@ -1,221 +1,125 @@
 'use client'
 
-import { useState } from 'react'
+import React from 'react'
+import { motion } from 'framer-motion'
+import Image from 'next/image'
 import Link from 'next/link'
-import { Users, Bed, Maximize, Wifi, Zap, Coffee, Tv } from 'lucide-react'
+import { Wifi, Tv, Coffee, Wind, Check } from 'lucide-react'
+
+const rooms = [
+  {
+    name: "Standard Room",
+    price: "₦70,000",
+    image: "/images/room-standard.jpg",
+    description: "A cozy retreat designed for comfort, featuring modern amenities and a serene atmosphere.",
+    amenities: ["Free WiFi", "Smart TV", "Air Conditioning", "Breakfast Included"]
+  },
+  {
+    name: "Deluxe Suite",
+    price: "₦95,000",
+    image: "/images/room-deluxe.jpg",
+    description: "Spacious elegance with premium furnishings, offering an elevated experience for the discerning traveler.",
+    amenities: ["Free WiFi", "Smart TV", "Mini Bar", "City View", "Work Desk"]
+  },
+  {
+    name: "Executive Deluxe",
+    price: "₦120,000",
+    image: "/images/hero-slide-3.jpg", // Using existing image as placeholder
+    description: "The pinnacle of luxury. Expansive living space, exclusive access, and unparalleled attention to detail.",
+    amenities: ["Free WiFi", "4K Smart TV", "Lounge Area", "Jacuzzi", "Butler Service"]
+  }
+]
 
 export default function RoomsPage() {
-  const [selectedCategory, setSelectedCategory] = useState('all')
-
-  const rooms = [
-    {
-      id: '1',
-      name: 'Standard',
-      slug: 'standard',
-      description: 'Comfortable and affordable accommodation',
-      price: 10000,
-      category: 'budget',
-      categoryLabel: 'Budget Friendly',
-      capacity: 2,
-      bed: 'Double Bed',
-      size: 22,
-      amenities: ['Free WiFi', '24/7 Power', 'Air Conditioning', 'Flat Screen TV'],
-    },
-    {
-      id: '2',
-      name: 'Deluxe',
-      slug: 'deluxe',
-      description: 'Elegantly furnished room with modern amenities',
-      price: 15000,
-      category: 'family',
-      categoryLabel: 'Best for Family',
-      capacity: 2,
-      bed: 'Queen Bed',
-      size: 28,
-      amenities: ['Free WiFi', '24/7 Power', 'Mini Bar', 'Breakfast'],
-    },
-    {
-      id: '3',
-      name: 'Executive Deluxe',
-      slug: 'executive-deluxe',
-      description: 'Premium suite with dedicated workspace and extra living space',
-      price: 20000,
-      category: 'business',
-      categoryLabel: 'Best for Business',
-      capacity: 2,
-      bed: 'King Bed',
-      size: 35,
-      amenities: ['Free WiFi', '24/7 Power', 'Mini Bar', 'Breakfast'],
-    },
-  ]
-
-  const categories = [
-    { id: 'all', label: 'All Rooms' },
-    { id: 'business', label: 'Best for Business' },
-    { id: 'family', label: 'Best for Family' },
-    { id: 'budget', label: 'Budget Friendly' },
-  ]
-
-  const filteredRooms = selectedCategory === 'all' 
-    ? rooms 
-    : rooms.filter(room => room.category === selectedCategory)
-
-  const allAmenities = [
-    { icon: Wifi, label: 'Free WiFi', description: 'High-speed internet' },
-    { icon: Zap, label: '24/7 Power', description: 'Uninterrupted supply' },
-    { icon: Coffee, label: 'Room Service', description: 'At your convenience' },
-    { icon: Tv, label: 'Flat Screen TV', description: 'Entertainment' },
-  ]
-
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative h-96 flex items-center justify-center bg-gradient-to-br from-dark via-gray-900 to-dark">
-        <div className="relative z-10 text-center px-4">
-          <span className="text-gold text-sm font-semibold tracking-wider uppercase">ACCOMMODATION</span>
-          <h1 className="text-5xl font-bold text-white mt-2 mb-4">Our Rooms</h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            Choose from our selection of elegantly designed rooms, each offering comfort and modern amenities.
+    <main className="bg-black min-h-screen text-white">
+      {/* Rooms Hero */}
+      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/room-deluxe.jpg"
+            alt="Luxury Room Hero"
+            fill
+            className="object-cover opacity-40 grayscale"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 text-center px-6"
+        >
+          <span className="text-danholt-gold text-xs font-bold uppercase tracking-[0.4em] mb-4 block">
+            Accommodation
+          </span>
+          <h1 className="text-5xl md:text-7xl font-serif text-white mb-6">
+            Stay in Style
+          </h1>
+          <p className="text-white/60 max-w-xl mx-auto text-lg font-light leading-relaxed">
+            Experience the perfect blend of comfort and luxury in our thoughtfully designed suites.
           </p>
-        </div>
+        </motion.div>
       </section>
 
-      {/* Booking Widget */}
-      <section className="py-8 bg-white shadow-md">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Check-in</label>
-              <input type="date" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold" />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Check-out</label>
-              <input type="date" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold" />
-            </div>
-            <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Guests</label>
-              <select className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold">
-                <option>2 Guests</option>
-                <option>1 Guest</option>
-                <option>3 Guests</option>
-                <option>4 Guests</option>
-              </select>
-            </div>
-            <div className="flex items-end">
-              <button className="w-full bg-gold hover:bg-opacity-90 text-white py-2 rounded-lg font-semibold">
-                Check Availability
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Room List */}
+      <section className="py-24 px-6 md:px-12 max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {rooms.map((room, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="group"
+            >
+              {/* Image Card */}
+              <div className="relative aspect-[4/5] overflow-hidden rounded-sm mb-8 bg-white/5">
+                <Image
+                  src={room.image}
+                  alt={room.name}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500" />
 
-      {/* Category Filter */}
-      <section className="py-8 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap gap-3 justify-center">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => setSelectedCategory(category.id)}
-                className={`px-6 py-2 rounded-full font-medium transition-all ${
-                  selectedCategory === category.id
-                    ? 'bg-gold text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                {category.label}
-              </button>
-            ))}
-          </div>
-          <p className="text-center mt-4 text-gray-600">
-            {filteredRooms.length} room{filteredRooms.length !== 1 ? 's' : ''} available
-          </p>
-        </div>
-      </section>
-
-      {/* Rooms Grid */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredRooms.map((room) => (
-              <div key={room.id} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300">
-                <div className="relative bg-gradient-to-br from-gold to-amber-600 h-64 flex items-center justify-center">
-                  <span className="text-white text-3xl font-bold">{room.name}</span>
-                  <span className="absolute top-4 right-4 px-3 py-1 bg-white text-gold text-xs font-semibold rounded-full">
-                    {room.categoryLabel}
-                  </span>
-                </div>
-
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
-                    <h3 className="text-2xl font-bold text-dark">{room.name}</h3>
-                    <div className="text-right">
-                      <p className="text-sm text-gray-600">From</p>
-                      <p className="text-2xl font-bold text-gold">₦{room.price.toLocaleString()}</p>
-                      <p className="text-sm text-gray-600">/night</p>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-600 mb-4">{room.description}</p>
-
-                  <div className="grid grid-cols-3 gap-4 mb-4 pb-4 border-b">
-                    <div className="flex flex-col items-center">
-                      <Users className="w-5 h-5 text-gold mb-1" />
-                      <p className="text-sm font-semibold text-dark">{room.capacity} Guests</p>
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <Bed className="w-5 h-5 text-gold mb-1" />
-                      <p className="text-sm font-semibold text-dark">{room.bed}</p>
-                    </div>
-                    <div className="flex flex-col items-center">
-                      <Maximize className="w-5 h-5 text-gold mb-1" />
-                      <p className="text-sm font-semibold text-dark">{room.size} m²</p>
-                    </div>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {room.amenities.map((amenity, i) => (
-                      <span key={i} className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full">
-                        {amenity}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex gap-3">
-                    <button className="flex-1 border-2 border-gold text-gold hover:bg-gold hover:text-white py-2 rounded-lg font-semibold transition-all">
-                      View Details
-                    </button>
-                    <button className="flex-1 bg-gold hover:bg-opacity-90 text-white py-2 rounded-lg font-semibold transition-all">
-                      Book Now
-                    </button>
-                  </div>
+                {/* Price Tag */}
+                <div className="absolute top-4 right-4 bg-danholt-gold/90 text-danholt-navy px-4 py-2 text-sm font-bold backdrop-blur-md">
+                  {room.price} <span className="text-[10px] font-normal opacity-80">/ NIGHT</span>
                 </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* What We Offer */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="text-gold text-sm font-semibold tracking-wider uppercase">WHAT WE OFFER</span>
-            <h2 className="text-4xl font-bold text-dark mt-2">Every Room Includes</h2>
-          </div>
+              {/* Content */}
+              <div>
+                <h3 className="text-2xl font-serif text-white mb-2 group-hover:text-danholt-gold transition-colors">
+                  {room.name}
+                </h3>
+                <p className="text-white/50 text-sm leading-relaxed mb-6 h-20">
+                  {room.description}
+                </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {allAmenities.map((amenity, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl text-center hover:shadow-lg transition-shadow">
-                <amenity.icon className="w-12 h-12 text-gold mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-dark mb-2">{amenity.label}</h3>
-                <p className="text-gray-600">{amenity.description}</p>
+                {/* Amenities List */}
+                <div className="space-y-2 mb-8 border-t border-white/10 pt-6">
+                  {room.amenities.map((amenity, idx) => (
+                    <div key={idx} className="flex items-center gap-3 text-white/70 text-xs tracking-wide">
+                      <Check className="w-3 h-3 text-danholt-gold" />
+                      {amenity}
+                    </div>
+                  ))}
+                </div>
+
+                <Link href="/book" className="w-full">
+                  <button className="w-full py-4 border border-white/20 text-white text-xs font-bold uppercase tracking-[0.2em] hover:bg-danholt-gold hover:border-danholt-gold hover:text-danholt-navy transition-all duration-300">
+                    Book This Room
+                  </button>
+                </Link>
               </div>
-            ))}
-          </div>
+            </motion.div>
+          ))}
         </div>
       </section>
-    </div>
+    </main>
   )
 }

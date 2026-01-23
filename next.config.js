@@ -10,6 +10,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'danholt-suites-ccb8a24a.base44.app',
       },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'danholtsuites.com',
+      },
     ],
   },
 }

@@ -1,72 +1,69 @@
+'use client'
+
 import Link from 'next/link'
-import { Phone, Mail, MapPin } from 'lucide-react'
 
 export default function Footer() {
   return (
-    <footer className="bg-dark text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* About Section */}
-          <div>
-            <h3 className="text-2xl font-bold mb-4">
-              <span className="text-gold">DANHOLT</span> SUITES
-            </h3>
-            <p className="text-gray-400">
-              Your home in Abuja. Experience comfort, privacy, and convenience at Danholt Suites – where every stay feels like coming home.
+    <footer className="bg-danholt-obsidian text-white pt-24 pb-12">
+      <div className="max-w-[1400px] mx-auto px-6 md:px-12">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 lg:gap-24 mb-24">
+
+          {/* Brand Column with Gold Line */}
+          <div className="lg:col-span-1 relative pl-6">
+            <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-danholt-gold h-32"></div>
+            <h3 className="text-xl font-light uppercase tracking-widest text-danholt-gold mb-6">DANHOLT SUITES</h3>
+            <p className="text-gray-400 font-light leading-relaxed text-sm max-w-xs">
+              Where every moment is crafted with intention. Experience luxury redefined.
             </p>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-xl font-semibold mb-4">QUICK LINKS</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link href="/" className="text-gray-400 hover:text-gold transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link href="/rooms" className="text-gray-400 hover:text-gold transition-colors">
-                  Rooms
-                </Link>
-              </li>
-              <li>
-                <Link href="/restaurant" className="text-gray-400 hover:text-gold transition-colors">
-                  Restaurant
-                </Link>
-              </li>
-              <li>
-                <Link href="/facilities" className="text-gray-400 hover:text-gold transition-colors">
-                  Facilities
-                </Link>
-              </li>
+          {/* Links Column - Explore */}
+          <div className="lg:pl-8">
+            <h4 className="text-xs font-medium text-gray-500 uppercase tracking-widest mb-8">EXPLORE</h4>
+            <ul className="space-y-4">
+              {['Home', 'Rooms', 'Facilities', 'Dining', 'Contact'].map((item) => (
+                <li key={item}>
+                  <Link href={`/${item.toLowerCase() === 'home' ? '' : item.toLowerCase()}`} className="text-gray-300 hover:text-danholt-gold transition-colors duration-300 text-sm font-light">
+                    {item}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Contact Info */}
+          {/* Links Column - Services */}
           <div>
-            <h4 className="text-xl font-semibold mb-4">CONTACT</h4>
-            <ul className="space-y-3">
-              <li className="flex items-start space-x-3">
-                <MapPin className="w-5 h-5 text-gold flex-shrink-0 mt-1" />
-                <span className="text-gray-400">
-                  #3 Iyabo Okeyode Street<br />
-                  Beside Collinear Hospital<br />
-                  Jikwoyi Phase 3, Abuja
-                </span>
-              </li>
-              <li className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-gold" />
-                <a href="tel:07046080351" className="text-gray-400 hover:text-gold transition-colors">
-                  07046080351
-                </a>
-              </li>
+            <h4 className="text-xs font-medium text-gray-500 uppercase tracking-widest mb-8">SERVICES</h4>
+            <ul className="space-y-4">
+              {['Room Reservations', 'Restaurant Booking', 'Facility Rentals'].map((item) => (
+                <li key={item}>
+                  <Link href="#" className="text-gray-300 hover:text-danholt-gold transition-colors duration-300 text-sm font-light">
+                    {item}
+                  </Link>
+                </li>
+              ))}
             </ul>
+          </div>
+
+          {/* Contact Column */}
+          <div>
+            <h4 className="text-xs font-medium text-gray-500 uppercase tracking-widest mb-8">CONTACT</h4>
+            <div className="space-y-4 text-sm font-light text-gray-300">
+              <p>#3 Iyabo, Obeyode Street<br />Dogbano, Jikwoyi, Abuja</p>
+              <p className="pt-2">0704 608 0351</p>
+              <p className="pt-2 hover:text-danholt-gold cursor-pointer transition-colors">reservations@danholt.com</p>
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>© 2026 Danholt Suites. All rights reserved.</p>
+        {/* Bottom Footer */}
+        <div className="border-t border-white/5 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-xs text-gray-500 font-light">&copy; 2026 Danholt Suites. All rights reserved.</p>
+
+          <div className="flex gap-8 text-xs text-gray-500 font-light">
+            <Link href="#" className="hover:text-danholt-gold transition-colors">Privacy Policy</Link>
+            <Link href="#" className="hover:text-danholt-gold transition-colors">Terms of Service</Link>
+          </div>
         </div>
       </div>
     </footer>

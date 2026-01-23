@@ -1,141 +1,105 @@
 'use client'
 
-import { useState } from 'react'
-import { MapPin, Phone, Mail, Clock } from 'lucide-react'
+import React from 'react'
+import { motion } from 'framer-motion'
+import { MapPin, Phone, Mail } from 'lucide-react'
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: '',
-  })
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    alert('Form submitted! (Integration with Supabase pending)')
-  }
-
   return (
-    <div className="min-h-screen">
-      <section className="relative h-96 flex items-center justify-center bg-gradient-to-br from-dark via-gray-900 to-dark">
-        <div className="relative z-10 text-center px-4">
-          <span className="inline-block px-4 py-2 bg-gold bg-opacity-20 rounded-full mb-4">
-            <span className="text-gold text-sm font-semibold tracking-wider">💬 GET IN TOUCH</span>
+    <main className="bg-black min-h-screen text-white">
+      {/* Hero */}
+      <section className="pt-48 pb-24 px-6 md:px-12 text-center max-w-4xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <span className="text-danholt-gold text-xs font-bold uppercase tracking-[0.4em] mb-6 block">
+            Get in Touch
           </span>
-          <h1 className="text-5xl font-bold text-white mb-4">Contact Us</h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            We'd love to hear from you. Reach out for reservations, inquiries, or feedback.
+          <h1 className="text-5xl md:text-7xl font-serif text-white mb-8">
+            Contact Us
+          </h1>
+          <p className="text-white/60 text-lg font-light">
+            We are here to answer any questions you may have about our services.
           </p>
-        </div>
+        </motion.div>
       </section>
 
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-            <div className="bg-white p-8 rounded-xl shadow-lg text-center">
-              <MapPin className="w-12 h-12 text-gold mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-dark mb-2">Location</h3>
-              <p className="text-gray-600">#3 Iyabo Okeyode Street<br />Jikwoyi Phase 3, Abuja</p>
+      <section className="pb-32 px-6 md:px-12 max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+
+          {/* Contact Info */}
+          <div className="space-y-12">
+            <div className="flex items-start gap-6">
+              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0">
+                <MapPin className="w-5 h-5 text-danholt-gold" />
+              </div>
+              <div>
+                <h3 className="text-xl font-serif text-white mb-2">Visit Us</h3>
+                <p className="text-white/50 leading-relaxed">
+                  #3 Iyabo, Obeyode Street,<br />Dogbano, Jikwoyi, Abuja
+                </p>
+              </div>
             </div>
 
-            <div className="bg-white p-8 rounded-xl shadow-lg text-center">
-              <Phone className="w-12 h-12 text-gold mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-dark mb-2">Phone</h3>
-              <a href="tel:07046080351" className="text-gold hover:underline text-lg">07046080351</a>
-              <p className="text-gray-600 mt-1">Available 24/7</p>
+            <div className="flex items-start gap-6">
+              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0">
+                <Phone className="w-5 h-5 text-danholt-gold" />
+              </div>
+              <div>
+                <h3 className="text-xl font-serif text-white mb-2">Call Us</h3>
+                <p className="text-white/50 leading-relaxed">
+                  0704 608 0351<br />
+                  0812 345 6789
+                </p>
+              </div>
             </div>
 
-            <div className="bg-white p-8 rounded-xl shadow-lg text-center">
-              <Clock className="w-12 h-12 text-gold mx-auto mb-4" />
-              <h3 className="text-xl font-bold text-dark mb-2">Hours</h3>
-              <p className="text-gray-600">Check-in: 2:00 PM<br />Check-out: 12:00 PM</p>
+            <div className="flex items-start gap-6">
+              <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center flex-shrink-0">
+                <Mail className="w-5 h-5 text-danholt-gold" />
+              </div>
+              <div>
+                <h3 className="text-xl font-serif text-white mb-2">Email Us</h3>
+                <p className="text-white/50 leading-relaxed">
+                  reservations@danholt.com
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-white rounded-xl shadow-lg p-8">
-              <h2 className="text-3xl font-bold text-dark mb-6 text-center">Send Us a Message</h2>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-gray-700 mb-2">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                    />
-                  </div>
+          {/* Form */}
+          <div className="bg-white/5 p-8 md:p-12 rounded-lg border border-white/5">
+            <form className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-white/50">Name</label>
+                  <input type="text" className="w-full bg-transparent border-b border-white/20 py-2 text-white focus:border-danholt-gold focus:outline-none transition-colors" placeholder="John Doe" />
                 </div>
-
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
-                    value={formData.email}
-                    onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  />
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-white/50">Phone</label>
+                  <input type="tel" className="w-full bg-transparent border-b border-white/20 py-2 text-white focus:border-danholt-gold focus:outline-none transition-colors" placeholder="+234..." />
                 </div>
+              </div>
 
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
-                    value={formData.subject}
-                    onChange={(e) => setFormData({...formData, subject: e.target.value})}
-                  />
-                </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-white/50">Email</label>
+                <input type="email" className="w-full bg-transparent border-b border-white/20 py-2 text-white focus:border-danholt-gold focus:outline-none transition-colors" placeholder="john@example.com" />
+              </div>
 
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    Message *
-                  </label>
-                  <textarea
-                    required
-                    rows={6}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent"
-                    placeholder="How can we help you?"
-                    value={formData.message}
-                    onChange={(e) => setFormData({...formData, message: e.target.value})}
-                  />
-                </div>
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-white/50">Message</label>
+                <textarea className="w-full bg-transparent border-b border-white/20 py-2 text-white focus:border-danholt-gold focus:outline-none transition-colors min-h-[100px]" placeholder="How can we help you?" />
+              </div>
 
-                <button
-                  type="submit"
-                  className="w-full bg-gold hover:bg-opacity-90 text-white py-4 rounded-lg font-semibold text-lg transition-all"
-                >
-                  Send Message
-                </button>
-              </form>
-            </div>
+              <button type="button" className="px-10 py-4 bg-danholt-gold text-danholt-navy font-bold uppercase tracking-widest text-xs hover:bg-white transition-colors duration-300">
+                Send Message
+              </button>
+            </form>
           </div>
         </div>
       </section>
-    </div>
+    </main>
   )
 }

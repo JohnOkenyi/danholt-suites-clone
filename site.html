@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>Danholt</title>
+	<meta name="description"  content="Danholt Suites" />
+	<meta name="author" content="">
+	<meta name="keywords"  content="" />
+
+	<!-- Mobile Specific Metas
+	================================================== -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="theme-color" content="#212121"/>
+    <meta name="msapplication-navbutton-color" content="#212121"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="#212121"/>
+
+	<!-- Web Fonts
+	================================================== -->
+	<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"/>
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Niconne&display=swap" rel="stylesheet">
+	<!-- CSS
+	================================================== -->
+	<link rel="stylesheet" href="https://danholtsuites.com/assets/css/bootstrap.css"/>
+	<link rel="stylesheet" href="https://danholtsuites.com/assets/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="https://danholtsuites.com/assets/css/ionicons.min.css"/>
+	<link rel="stylesheet" href="https://danholtsuites.com/assets/css/datepicker.css"/>
+	<link rel="stylesheet" href="https://danholtsuites.com/assets/css/jquery.fancybox.min.css"/>
+	<link rel="stylesheet" href="https://danholtsuites.com/assets/css/owl.carousel.css"/>
+	<link rel="stylesheet" href="https://danholtsuites.com/assets/css/owl.transitions.css"/>
+	<link rel="stylesheet" href="https://danholtsuites.com/assets/css/style.css"/>
+	<link rel="stylesheet" href="https://danholtsuites.com/assets/css/colors/color.css"/>
+
+	<!-- Favicons
+	================================================== -->
+	<link rel="icon" type="image/png" href="https://danholtsuites.com/assets/img/logo.png">
+
+</head>
+<body>
+
+	<div class="loader">
+		<div class="loader__figure"></div>
+	</div>
+
+	<svg class="hidden">
+		<svg id="icon-nav" viewBox="0 0 152 63">
+			<title>navarrow</title>
+			<path d="M115.737 29L92.77 6.283c-.932-.92-1.21-2.84-.617-4.281.594-1.443 1.837-1.862 2.765-.953l28.429 28.116c.574.57.925 1.557.925 2.619 0 1.06-.351 2.046-.925 2.616l-28.43 28.114c-.336.327-.707.486-1.074.486-.659 0-1.307-.509-1.69-1.437-.593-1.442-.315-3.362.617-4.284L115.299 35H3.442C2.032 35 .89 33.656.89 32c0-1.658 1.143-3 2.552-3H115.737z"/>
+		</svg>
+	</svg>
+
+
+	<!-- Nav and Logo
+	================================================== -->
+
+	<nav id="menu-wrap" class="menu-back cbp-af-header">
+		<div class="menu-top background-black">
+			<div class="container">
+				<div class="row">
+					<div class="col-6 px-0 px-md-3 pl-1 py-3">
+						<span class="call-top">Call us:</span> <a href="#" class="call-top">07046080351</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="menu">
+			<a href="/" >
+				<div class="logo">
+					<img src="https://danholtsuites.com/assets/img/logo.png" alt="">
+				</div>
+			</a>
+			<ul>
+				<li>
+					<a class="/" href="/" >home</a>
+				</li>
+				<li><a href="https://danholtsuites.com/gallery">gallery</a></li>
+				<li>
+					<a href="https://danholtsuites.com/contact">contact</a>
+				</li>
+				<li>
+					<a href="https://danholtsuites.com/rooms">Rooms</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+
+    
+	<!-- Primary Page Layout
+	================================================== -->
+	<div class="section hero-full-height over-hide">
+
+		<div class="home-moving-image"></div>
+		<div class="dark-over-video"></div>
+
+		<div class="hero-center-section ver-2">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-12 parallax-fade-top">
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="section background-dark z-too-big">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row justify-content-center home-translate">
+						<div class="col-xl-8">
+							<div class="row justify-content-center home-shadow">
+								<div class="col-md-6 px-sm-0">
+									<div class="booking-sep-wrap">
+										<div class="input-daterange input-group" id="flight-datepicker-1">
+											<div class="form-item">
+												<span class="fontawesome-calendar"></span>
+												<input class="input-sm" type="text" autocomplete="off" id="start-date" name="start" placeholder="check-in" data-date-format="DD, MM d"/>
+												<span class="date-text date-depart"></span>
+											</div>
+											<div class="form-item">
+												<span class="fontawesome-calendar"></span>
+												<input class="input-sm" type="text" autocomplete="off" id="end-date" name="end" placeholder="check-out" data-date-format="DD, MM d"/>
+												<span class="date-text date-return"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<div class="col-md-3 px-sm-0">
+									<a class="booking-button-big" href="https://danholtsuites.com/rooms">check<br>availability</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="section padding-top-bottom over-hide">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 align-self-center">
+					<div class="row justify-content-center">
+						<div class="col-10">
+							<div class="subtitle text-center mb-4">Danholt Suites</div>
+							<h2 class="text-center">Here is a tribute to good living!</h2>
+							<p class="text-center mt-5">
+								Danholt Suites is a home away from home where comfort is guaranteed, our services are top-notch. Our luxurious suites are well equipped with modern facilities in a serene environment. We also have a world class 5-aside football pitch, we provide internet service and 24 hour electricity supply, well-spaced conference hall with a sitting capacity of up to 500 people and an affordable children’s playground. We offer delicious cuisines from our restaurant and exotic drinks from our bar. Welcome to DANHOLT SUITES we are located  at #3 Iyabo Okeyode street, beside Collinear hospital, Jikwoyi Phase 3, Abuja.
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 mt-4 mt-md-0">
+					<div class="img-wrap">
+						<img src="https://danholtsuites.com/assets/img/gallery/1.jpg" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="section background-grey over-hide">
+		<div class="container-fluid px-0">
+			<div class="row mx-0">
+				<div class="col-xl-6 px-0">
+					<div class="img-wrap" id="rev-1">
+						<img src="https://danholtsuites.com/assets/img/gallery/13.jpg" alt="">
+						<div class="text-element-over">World Class Sports Facilities</div>
+					</div>
+				</div>
+				<div class="col-xl-6 px-0 mt-4 mt-xl-0 align-self-center">
+					<div class="row justify-content-center">
+						<div class="col-10 col-xl-8 text-center">
+							<h3 class="text-center">World Class Sports Facilities</h3>
+							<p class="text-center mt-4">We have a mini stadium capable of hosting football, lawn tennis and athletics, etc.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row mx-0">
+				<div class="col-xl-6 px-0 mt-4 mt-xl-0 pb-5 pb-xl-0 align-self-center">
+					<div class="row justify-content-center">
+						<div class="col-10 col-xl-8 text-center">
+							<h3 class="text-center">Ultra Modern Furnishing</h3>
+							<p class="text-center mt-4">Danholt Suites is outfitted with best of furnishing, every piece carefully selected to portray luxury and elegance</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-6 px-0 order-first order-xl-last mt-5 mt-xl-0">
+					<div class="img-wrap" id="rev-2">
+						<img src="https://danholtsuites.com/assets/img/gallery/10.jpg" alt="">
+						<div class="text-element-over">Ultra Modern Furnishing</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+    <div class="section padding-top-bottom over-hide">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-8 align-self-center">
+					<div class="subtitle with-line text-center mb-4">Danholt Suites</div>
+					<h3 class="text-center padding-bottom-small">Rooms</h3>
+				</div>
+				<div class="section clearfix"></div>
+			</div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div style="display:flex;flex-direction:column">
+                        <div class="section">
+                            <div class="customNavigation rooms-sinc-1-2">
+                                <a class="prev-rooms-sync-1"></a>
+                                <a class="next-rooms-sync-1"></a>
+                            </div>
+                            <div class="owl-carousel rooms-sync3">
+                                <div class="item">
+                                    <img src="https://danholtsuites.com/assets/img/rooms/deluxe.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding-top:10px;">
+                            <h5>Deluxe</h5>
+                            <h5>&#8358; 15,000.00</h5>
+                            <a href="https://danholtsuites.com/room/1" class="btn btn-warning"><span class="text-white"> Book Now </span></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div style="display:flex;flex-direction:column">
+                        <div class="section">
+                            <div class="customNavigation rooms-sinc-1-2">
+                                <a class="prev-rooms-sync-1"></a>
+                                <a class="next-rooms-sync-1"></a>
+                            </div>
+                            <div  class="owl-carousel rooms-sync3">
+                                <div class="item">
+                                    <img src="https://danholtsuites.com/assets/img/rooms/exective.jpg" alt="">
+                                </div>
+                                <div class="item">
+                                    <img src="https://danholtsuites.com/assets/img/rooms/exective1.jpg" alt="">
+                                </div>
+                                <div class="item">
+                                    <img src="https://danholtsuites.com/assets/img/rooms/exective2.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="padding-top:10px;">
+                            <h5>Executive Deluxe</h5>
+                            <h5>&#8358; 20,000.00</h5>
+                            <a href="https://danholtsuites.com/room/2" class="btn btn-warning"><span class="text-white"> Book Now </span> </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div style="display:flex;flex-direction:column">
+                        <div class="section">
+                            <div class="customNavigation rooms-sinc-1-2">
+                                <a class="prev-rooms-sync-1"></a>
+                                <a class="next-rooms-sync-1"></a>
+                            </div>
+                            <div class="owl-carousel rooms-sync3">
+                                <div class="item">
+                                    <img src="https://danholtsuites.com/assets/img/rooms/standard.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div style="padding-top:10px;">
+                            <h5>Standard</h5>
+                            <h5>&#8358; 10,000.00</h5>
+                            <a href="https://danholtsuites.com/room/3" class="btn btn-warning"> <span class="text-white">  Book Now </span> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</div>
+
+	<div class="section padding-top-bottom over-hide">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-8 align-self-center">
+					<div class="subtitle with-line text-center mb-4">Danholt Suites</div>
+					<h3 class="text-center padding-bottom-small">Unpretentious luxury</h3>
+				</div>
+				<div class="section clearfix"></div>
+				<div class="col-sm-6 col-lg-4">
+					<div class="services-box text-center">
+						<img src="https://danholtsuites.com/assets/img/2.svg" alt="">
+						<h5 class="mt-2">Modern Furnishing</h5>
+						<p class="mt-3">Exquisite furnishing that embody luxury.</p>
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-4 mt-5 mt-sm-0">
+					<div class="services-box text-center">
+						<!--<img src="img/2.svg" alt="">-->
+						<i class="fa fa-wifi" aria-hidden="true"></i>
+						<h5 class="mt-2">Free WIFI</h5>
+						<p class="mt-3">Free uninterrupted WIFI connection.</p>
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-4 mt-5 mt-lg-0">
+					<div class="services-box text-center">
+						<i class="fa fa-pagelines" aria-hidden="true"></i>
+						<!--<img src="img/3.svg" alt="">-->
+						<h5 class="mt-2">Serene</h5>
+						<p class="mt-3">Danholt Suites is located at Jikwoyi, a quiet and peaceful location at the heart of Abuja.</p>
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-4 mt-5">
+					<div class="services-box text-center">
+						<img src="https://danholtsuites.com/assets/img/4.svg" alt="">
+						<h5 class="mt-2">Mini Bar</h5>
+						<p class="mt-3">Outfitted with an Exclusive Mini Bar</p>
+					</div>
+				</div>
+			
+				<div class="col-sm-6 col-lg-4 mt-5">
+					<div class="services-box text-center">
+						<i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+						<!--<img src="img/6.svg" alt="">-->
+						<h5 class="mt-2">24/7 Electricity</h5>
+						<p class="mt-3">Enjoy 24/7 Uninterupted Power Supply.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="margin-top:5rem"></div>
+	<div class="container">
+	<div class="row">
+	<div class="col-lg-9 mt-4 mt-lg-0 mx-auto">
+		<div class="section">
+			<div class="customNavigation rooms-sinc-1-2">
+				<a class="prev-rooms-sync-1"></a>
+				<a class="next-rooms-sync-1"></a>
+			</div>
+			<div id="rooms-sync1" class="owl-carousel">
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/1.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/2.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/3.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/4.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/5.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/6.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/7.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/8.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/9.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/10.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/11.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/12.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/13.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/14.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/15.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/16.jpg" alt="">
+                    </div>
+                			</div>
+		</div>
+		<div class="section">
+			<div id="rooms-sync2" class="owl-carousel">
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/1.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/2.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/3.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/4.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/5.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/6.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/7.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/8.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/9.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/10.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/11.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/12.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/13.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/14.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/15.jpg" alt="">
+                    </div>
+                                    <div class="item">
+                        <img src="https://danholtsuites.com/assets/img/gallery/16.jpg" alt="">
+                    </div>
+                			</div>
+		</div>
+	</div>
+</div>
+</div>
+</div>
+
+
+	<div class="section padding-top z-bigger">
+		<div class="container">
+			<div class="row justify-content-center padding-bottom-smaller">
+				<div class="col-md-8">
+					<div class="subtitle with-line text-center mb-4">get in touch</div>
+					<h3 class="text-center padding-bottom-small">drop us a line</h3>
+				</div>
+				<div class="section clearfix"></div>
+				<div class="col-md-6 col-lg-4">
+					<div class="address">
+						<div class="address-in text-left">
+							<p class="color-black">Address:</p>
+						</div>
+						<div class="address-in text-right">
+							<p>#3 Iyabo, Obeyode Street (Beside Collinear Hospital) Dogbano, Jikwoyi, Phase 3</p>
+						</div>
+					</div>
+					<div class="address">
+						<div class="address-in text-left">
+							<p class="color-black">City:</p>
+						</div>
+						<div class="address-in text-right">
+							<p>Abuja</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="section clearfix"></div>
+				<div class="col-md-8 text-center mt-5" data-scroll-reveal="enter bottom move 50px over 0.7s after 0.2s">
+					<h2 class="text-opacity">07046080351</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div class="section">
+		<div id="owl-sep-2" class="owl-carousel owl-theme">
+                            <div class="item">
+                    <a href="https://danholtsuites.com/assets/img/gallery/1.jpg" data-fancybox="gallery">
+                        <div class="img-wrap gallery-small">
+                            <img src="https://danholtsuites.com/assets/img/gallery/1.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                            <div class="item">
+                    <a href="https://danholtsuites.com/assets/img/gallery/2.jpg" data-fancybox="gallery">
+                        <div class="img-wrap gallery-small">
+                            <img src="https://danholtsuites.com/assets/img/gallery/2.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                            <div class="item">
+                    <a href="https://danholtsuites.com/assets/img/gallery/3.jpg" data-fancybox="gallery">
+                        <div class="img-wrap gallery-small">
+                            <img src="https://danholtsuites.com/assets/img/gallery/3.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                            <div class="item">
+                    <a href="https://danholtsuites.com/assets/img/gallery/4.jpg" data-fancybox="gallery">
+                        <div class="img-wrap gallery-small">
+                            <img src="https://danholtsuites.com/assets/img/gallery/4.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                            <div class="item">
+                    <a href="https://danholtsuites.com/assets/img/gallery/5.jpg" data-fancybox="gallery">
+                        <div class="img-wrap gallery-small">
+                            <img src="https://danholtsuites.com/assets/img/gallery/5.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                            <div class="item">
+                    <a href="https://danholtsuites.com/assets/img/gallery/6.jpg" data-fancybox="gallery">
+                        <div class="img-wrap gallery-small">
+                            <img src="https://danholtsuites.com/assets/img/gallery/6.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                            <div class="item">
+                    <a href="https://danholtsuites.com/assets/img/gallery/7.jpg" data-fancybox="gallery">
+                        <div class="img-wrap gallery-small">
+                            <img src="https://danholtsuites.com/assets/img/gallery/7.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                            <div class="item">
+                    <a href="https://danholtsuites.com/assets/img/gallery/8.jpg" data-fancybox="gallery">
+                        <div class="img-wrap gallery-small">
+                            <img src="https://danholtsuites.com/assets/img/gallery/8.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                            <div class="item">
+                    <a href="https://danholtsuites.com/assets/img/gallery/9.jpg" data-fancybox="gallery">
+                        <div class="img-wrap gallery-small">
+                            <img src="https://danholtsuites.com/assets/img/gallery/9.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                            <div class="item">
+                    <a href="https://danholtsuites.com/assets/img/gallery/10.jpg" data-fancybox="gallery">
+                        <div class="img-wrap gallery-small">
+                            <img src="https://danholtsuites.com/assets/img/gallery/10.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                            <div class="item">
+                    <a href="https://danholtsuites.com/assets/img/gallery/11.jpg" data-fancybox="gallery">
+                        <div class="img-wrap gallery-small">
+                            <img src="https://danholtsuites.com/assets/img/gallery/11.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                            <div class="item">
+                    <a href="https://danholtsuites.com/assets/img/gallery/12.jpg" data-fancybox="gallery">
+                        <div class="img-wrap gallery-small">
+                            <img src="https://danholtsuites.com/assets/img/gallery/12.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                            <div class="item">
+                    <a href="https://danholtsuites.com/assets/img/gallery/13.jpg" data-fancybox="gallery">
+                        <div class="img-wrap gallery-small">
+                            <img src="https://danholtsuites.com/assets/img/gallery/13.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                            <div class="item">
+                    <a href="https://danholtsuites.com/assets/img/gallery/14.jpg" data-fancybox="gallery">
+                        <div class="img-wrap gallery-small">
+                            <img src="https://danholtsuites.com/assets/img/gallery/14.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                            <div class="item">
+                    <a href="https://danholtsuites.com/assets/img/gallery/15.jpg" data-fancybox="gallery">
+                        <div class="img-wrap gallery-small">
+                            <img src="https://danholtsuites.com/assets/img/gallery/15.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                            <div class="item">
+                    <a href="https://danholtsuites.com/assets/img/gallery/16.jpg" data-fancybox="gallery">
+                        <div class="img-wrap gallery-small">
+                            <img src="https://danholtsuites.com/assets/img/gallery/16.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+            		</div>
+	</div>
+
+	<div class="section padding-top-bottom-small background-black over-hide footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 text-center text-md-left">
+
+
+					<img src="https://danholtsuites.com/assets/img/logo.png" alt="Preston">
+					<p class="color-grey mt-4">#3 Iyabo, Obeyode Street  <br/>(Beside Collinear Hospital) Dogbano, Jikwoyi, Phase 3, Abuja</p>
+				</div>
+				<div class="col-md-4 text-center text-md-left">
+					<h6 class="color-white mb-3">information</h6>
+					<a href="https://danholtsuites.com/gallery">Gallery</a>
+					<a href="https://danholtsuites.com/contact">Reach out to us</a>
+
+				</div>
+				<div class="col-md-5 mt-4 mt-md-0 text-center text-md-left logos-footer">
+					<h6 class="color-white mb-3">about us</h6>
+					<p class="color-grey mb-4"></p> Danholt Suites is a home away from home where comfort is guaranteed, our services are top-notch.
+				    </p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="section py-4 background-dark over-hide footer-bottom">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 text-center text-md-left mb-2 mb-md-0">
+					<p>2026 . All rights reserved.</p>
+				</div>
+				<div class="col-md-6 text-center text-md-right">
+					<a href="#" class="social-footer-bottom">facebook</a>
+					<a href="#" class="social-footer-bottom">twitter</a>
+					<a href="#" class="social-footer-bottom">instagram</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="scroll-to-top"></div>
+
+
+	<!-- JAVASCRIPT
+    ================================================== -->
+	<script src="https://danholtsuites.com/assets/js/jquery.min.js"></script>
+	<script src="https://danholtsuites.com/assets/js/popper.min.js"></script>
+	<script src="https://danholtsuites.com/assets/js/bootstrap.min.js"></script>
+	<script src="https://danholtsuites.com/assets/js/plugins.js"></script>
+	<script src="https://danholtsuites.com/assets/js/flip-slider.js"></script>
+	<script src="https://danholtsuites.com/assets/js/reveal-home.js"></script>
+	<script src="https://danholtsuites.com/assets/js/custom.js"></script>
+	<script src="https://danholtsuites.com/assets/js/move-img-effect.js"></script>
+</body>
+</html>

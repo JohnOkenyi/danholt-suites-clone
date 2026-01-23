@@ -1,93 +1,109 @@
+'use client'
+
+import React from 'react'
+import { motion } from 'framer-motion'
+import Image from 'next/image'
+
+const facilities = [
+  {
+    title: "Conference Hall",
+    description: "Our state-of-the-art conference hall is designed for business excellence. Equipped with high-speed internet, modern audio-visual systems, and ergonomic seating, it's the perfect venue for seminars, workshops, and corporate meetings.",
+    image: "/images/hero-slide-1.jpg", // Placeholder
+    features: ["High-speed WiFi", "Projector & Screen", "Sound System", "Catering Available"]
+  },
+  {
+    title: "Sports Facilities",
+    description: "Maintain your active lifestyle with our premium sports facilities. Whether you prefer a competitive game of tennis or a team match on our 5-a-side football pitch, we provide the perfect environment for recreation and fitness.",
+    image: "/images/hero-slide-3.jpg", // Placeholder
+    features: ["5-a-side Football Pitch", "Lawn Tennis Court", "Floodlights for Night Games", "Equipment Rental"]
+  },
+  {
+    title: "Children's Playground",
+    description: "A safe and fun environment for our younger guests. Our playground is equipped with modern play structures and is located within a secure area so parents can relax while the kids have fun.",
+    image: "/images/feature-pool.jpg", // Placeholder
+    features: ["Secure Enclosure", "Modern Play Equipment", "Soft Landing Surfaces", "Supervised Area"]
+  }
+]
+
 export default function FacilitiesPage() {
-  const facilities = [
-    {
-      name: 'Conference Hall',
-      capacity: '500 people',
-      hours: '8:00 AM - 10:00 PM',
-      description: 'A spacious venue perfect for conferences, seminars, and large gatherings with up to 500 people.',
-    },
-    {
-      name: '5-Aside Football Pitch',
-      capacity: '10-20 players',
-      hours: '6:00 AM - 10:00 PM',
-      description: 'World-class mini stadium for football matches, complete with floodlights and premium turf.',
-    },
-    {
-      name: 'Event Space',
-      capacity: '200 guests',
-      hours: '24 hours',
-      description: 'Versatile space for weddings, parties, and special celebrations with customizable setup.',
-    },
-    {
-      name: 'Meeting Room',
-      capacity: '20 people',
-      hours: '8:00 AM - 8:00 PM',
-      description: 'Private meeting rooms equipped with modern tech for business meetings and presentations.',
-    },
-    {
-      name: "Children's Playground",
-      capacity: '30 children',
-      hours: '8:00 AM - 6:00 PM',
-      description: 'Safe and fun playground with various activities for children of all ages.',
-    },
-  ]
-
   return (
-    <div className="min-h-screen">
-      <section className="relative h-96 flex items-center justify-center bg-gradient-to-br from-dark via-gray-900 to-dark">
-        <div className="relative z-10 text-center px-4">
-          <span className="inline-block px-4 py-2 bg-gold bg-opacity-20 rounded-full mb-4">
-            <span className="text-gold text-sm font-semibold tracking-wider">🏢 PREMIUM AMENITIES</span>
+    <main className="bg-black min-h-screen text-white">
+      {/* Hero */}
+      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/hero-slide-3.jpg"
+            alt="Facilities Hero"
+            fill
+            className="object-cover opacity-30 grayscale"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 text-center px-6"
+        >
+          <span className="text-danholt-gold text-xs font-bold uppercase tracking-[0.4em] mb-4 block">
+            Amenities
           </span>
-          <h1 className="text-5xl font-bold text-white mb-4">Our Facilities</h1>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
-            World-class amenities for work, play, and everything in between.
+          <h1 className="text-5xl md:text-7xl font-serif text-white mb-6">
+            World Class Facilities
+          </h1>
+          <p className="text-white/60 max-w-xl mx-auto text-lg font-light leading-relaxed">
+            Designed for both business and leisure, ensuring a complete experience.
           </p>
-        </div>
+        </motion.div>
       </section>
 
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <span className="text-gold text-sm font-semibold tracking-wider uppercase">EXPLORE</span>
-            <h2 className="text-4xl font-bold text-dark mt-2 mb-4">Book Our Facilities</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From conferences to celebrations, we have the perfect space for your needs.
-            </p>
-          </div>
+      {/* Facilities Content */}
+      <section className="py-32 px-6 md:px-12 max-w-[1400px] mx-auto space-y-32">
+        {facilities.map((facility, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8 }}
+            className={`flex flex-col ${i % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-16 md:gap-24`}
+          >
+            {/* Image Side */}
+            <div className="w-full md:w-1/2 relative aspect-[4/3] grayscale hover:grayscale-0 transition-all duration-700">
+              <div className="absolute inset-0 border border-white/10 translate-x-4 translate-y-4 -z-10" />
+              <Image
+                src={facility.image}
+                alt={facility.title}
+                fill
+                className="object-cover"
+              />
+            </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {facilities.map((facility, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all">
-                <div className="bg-gradient-to-br from-gold to-amber-600 h-48 flex items-center justify-center">
-                  <span className="text-white text-2xl font-bold text-center px-4">{facility.name}</span>
-                </div>
-
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-dark mb-4">{facility.name}</h3>
-                  
-                  <div className="space-y-2 mb-4 pb-4 border-b">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Capacity:</span>
-                      <span className="font-semibold text-dark">{facility.capacity}</span>
-                    </div>
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Hours:</span>
-                      <span className="font-semibold text-dark">{facility.hours}</span>
-                    </div>
-                  </div>
-
-                  <p className="text-gray-600 mb-6">{facility.description}</p>
-
-                  <button className="w-full bg-gold hover:bg-opacity-90 text-white py-3 rounded-lg font-semibold transition-all">
-                    Book This Facility
-                  </button>
-                </div>
+            {/* Text Side */}
+            <div className="w-full md:w-1/2 space-y-8">
+              <div>
+                <h2 className="text-3xl md:text-5xl font-serif text-white mb-6 leading-tight">
+                  {facility.title}
+                </h2>
+                <div className="w-20 h-[1px] bg-danholt-gold mb-8" />
+                <p className="text-white/60 leading-loose text-lg font-light">
+                  {facility.description}
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
+
+              <ul className="grid grid-cols-2 gap-4">
+                {facility.features.map((feature, idx) => (
+                  <li key={idx} className="flex items-center gap-3 text-sm text-white/80">
+                    <span className="w-1.5 h-1.5 rounded-full bg-danholt-gold" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </motion.div>
+        ))}
       </section>
-    </div>
+    </main>
   )
 }
