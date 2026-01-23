@@ -69,7 +69,8 @@ body {
   will-change: transform;
   transform: translateZ(0);
   /* Hardware acceleration */
-  animation: noise 0.5s infinite linear;
+  /* animation: noise 0.5s infinite linear; */
+  opacity: 0.02;
 }
 
 @keyframes noise {
