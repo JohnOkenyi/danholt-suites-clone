@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, Send, User, Bot, Sparkles, Coffee, Bed, Building } from 'lucide-react';
+import { MessageCircle, X, Send, Bot, Sparkles, Coffee, Bed, Building } from 'lucide-react';
 
 const quickQuestions = [
     "What are your room rates?",
@@ -58,7 +58,7 @@ export default function LiveChatWidget() {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Array<{ text: string; isUser: boolean; isJoke?: boolean }>>([]);
     const [inputValue, setInputValue] = useState('');
-    const [chatMode, setChatMode] = useState<'ai' | 'human' | 'humor'>('ai');
+    const [chatMode, setChatMode] = useState<'ai' | 'humor'>('ai');
     const [isTyping, setIsTyping] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const [activeJokeCategory, setActiveJokeCategory] = useState<JokeCategory | null>(null);
@@ -82,7 +82,7 @@ export default function LiveChatWidget() {
         } else if (chatMode === 'ai' && messages.length === 0) {
             // Optional: reset if returning to AI and empty
         }
-    }, [chatMode]);
+    }, [chatMode, messages.length]);
 
     const processResponse = (query: string) => {
         setIsTyping(true);
@@ -90,9 +90,7 @@ export default function LiveChatWidget() {
             let response;
             if (chatMode === 'ai') {
                 const answer = findAnswer(query);
-                response = answer || "I apologize, I don't have that specific information. Would you like to speak with a human agent? You can click the 'Human Agent' toggle above or call us at +234 800 000 0000.";
-            } else if (chatMode === 'human') {
-                response = "A human concierge has been notified and will be with you shortly. Your ticket number is #" + Math.floor(Math.random() * 1000) + ".";
+                response = answer || "I apologize, I don't have that specific information. For immediate assistance, please call us at +234 800 000 0000.";
             } else {
                 // Fallback for humor mode text input, though UI drives it mostly
                 response = "I'm best at telling jokes! Click one of the categories below.";
@@ -198,16 +196,6 @@ export default function LiveChatWidget() {
                                 >
                                     <Bot className="w-3 h-3" />
                                     AI Assistant
-                                </button>
-                                <button
-                                    onClick={() => setChatMode('human')}
-                                    className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap ${chatMode === 'human'
-                                        ? 'bg-danholt-dark text-white'
-                                        : 'bg-white/20 text-danholt-dark hover:bg-white/30'
-                                        }`}
-                                >
-                                    <User className="w-3 h-3" />
-                                    Human Agent
                                 </button>
                                 <button
                                     onClick={() => setChatMode('humor')}
