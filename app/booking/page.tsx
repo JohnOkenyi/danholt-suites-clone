@@ -17,7 +17,7 @@ const ADDONS = [
     { id: 'sweet_arrival', label: 'Sweet Arrival', price: 10000, desc: 'Pre-order cake, flowers, or wine.' }
 ]
 
-function BookingForm() {
+export default function BookingPage() {
     const searchParams = useSearchParams()
     const initialRoomId = searchParams.get('room')
 
@@ -439,46 +439,3 @@ function BookingForm() {
     )
 }
 
-export default function BookingPage() {
-    return (
-        <div className="min-h-screen bg-danholt-navy pt-32 pb-20">
-            {/* Back Navigation */}
-            <div className="max-w-[1400px] mx-auto px-6 mb-2">
-                <Link href="/rooms" className="inline-flex items-center gap-2 text-white/60 hover:text-danholt-gold transition-colors group">
-                    <div className="p-2 rounded-full bg-white/5 group-hover:bg-white/10 transition-colors">
-                        <ArrowLeft size={20} />
-                    </div>
-                    <span className="text-sm uppercase tracking-widest font-bold">Back to Rooms</span>
-                </Link>
-            </div>
-
-            {/* Hero Header */}
-            <section className="relative px-6 md:px-12 mb-12 max-w-[1400px] mx-auto text-center">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                >
-                    <span className="text-danholt-gold text-xs font-bold uppercase tracking-[0.4em] mb-4 block">
-                        RESERVATIONS
-                    </span>
-                    <h1 className="text-4xl md:text-5xl font-serif text-white mb-6">
-                        Complete Your Booking
-                    </h1>
-                </motion.div>
-            </section>
-
-            {/* Booking Form Container */}
-            <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="max-w-[1400px] mx-auto px-6"
-            >
-                <Suspense fallback={<div className="text-white text-center">Loading booking details...</div>}>
-                    <BookingForm />
-                </Suspense>
-            </motion.div>
-        </div>
-    )
-}
