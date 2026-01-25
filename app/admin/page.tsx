@@ -155,12 +155,13 @@ export default function AdminDashboard() {
   if (!isAuthenticated) return null
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-danholt-navy via-danholt-navy to-danholt-teal p-6">
+    <div className="min-h-screen bg-gradient-to-br from-danholt-navy via-danholt-navy to-danholt-teal pt-24 p-6">
       {/* Header */}
       <div className="max-w-7xl mx-auto mb-8">
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-4xl font-serif text-white">Bookings Dashboard</h1>
+            <h1 className="text-4xl font-serif text-white">158
+            </h1>
             <p className="text-white/60 mt-2">Manage all guest reservations</p>
           </div>
           <button
