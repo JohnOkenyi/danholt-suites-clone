@@ -421,7 +421,6 @@ export default function BookingPage() {
                                     </p>
                                 </div>
                             </>
-                        )}
                     </div>
 
                     {/* Support Card */}
