@@ -89,11 +89,13 @@ function BookingForm() {
         )
     }
 
-    // Submit boconst handleSubmit = async (e:oking to API     try {       const bookingData = {         guest_name: formData.name,         guest_email: formData.email,         guest_phone: formData.phone,         room_id: formData.roomId,         check_in_date: formData.checkIn,         check_out_date: formData.checkOut,         total_price: stats.total,         special_requests: formData.requests       };       const response = await fetch('/api/bookings', {         method: 'POST',         headers: { 'Content-Type': 'application/json' },         body: JSON.stringify(bookingData)       });       if (response.ok) {         alert('Booking confirmed! Check your email for confirmation details.');         setFormData({ checkIn: '', checkOut: '', guests: 2, roomId: ROOMS[0]?.id || '', name: '', email: '', phone: '', requests: '', addons: [] });       } else {         alert('Booking failed. Please try again.');       }     } catch (error) {       console.error('Booking error:', error);       alert('An error occurred. Please try again.');     } React.FormEvent) => {
-        e.preventDefault()
-        // Here you would handle the submission logic
-        console.log("Booking submitted", { formData, stats })
-        alert("Booking Simulated! In a real app, this would process payment.")
+      const handleSubmit = async (e: React.FormEvent) => {
+              e.preventDefault()
+
+              console.log('Booking submitted', { formData, stats })
+              alert('Booking Simulated! In a real app, this would process payment.')
+            }
+
     }
 
     return (
