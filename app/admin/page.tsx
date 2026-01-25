@@ -1,4 +1,5 @@
-'use client'
+158
+  'use client'
 
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -126,7 +127,7 @@ export default function AdminDashboard() {
 
   if (showLoginForm && !isAuthenticated) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-danholt-navy via-danholt-navy to-danholt-teal flex items-center justify-center p-4">
+      <div className="min-h-screen pt-24 bg-gradient-to-br from-danholt-navy via-danholt-navy to-danholt-teal flex items-center justify-center p-4">
         <div className="w-full max-w-md">
           <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8">
             <h1 className="text-3xl font-serif text-white mb-2">Admin Dashboard</h1>
@@ -155,7 +156,7 @@ export default function AdminDashboard() {
   if (!isAuthenticated) return null
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-danholt-navy via-danholt-navy to-danholt-teal pt-24 p-6">
+    <div className="min-h-screen pt-24 bg-gradient-to-br from-danholt-navy via-danholt-navy to-danholt-teal pt-24 p-6">
       {/* Header */}
       <div className="max-w-7xl mx-auto mb-8">
         <div className="flex items-center justify-between mb-8">
