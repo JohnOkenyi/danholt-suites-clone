@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
-import Header from '@/components/Header';
+import ConditionalHeader from '@/components/ConditionalHeader';
 import Footer from '@/components/Footer';
 import LiveChatWidget from '@/components/LiveChatWidget';
 import SmoothScrolling from '@/components/SmoothScrolling';
@@ -26,7 +26,7 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${playfair.variable} font-sans bg-danholt-navy text-danholt-cream antialiased selection:bg-danholt-gold selection:text-white overflow-x-hidden`}>
         <SmoothScrolling>
-<Header />
+<ConditionalHeader />
           <main className="relative z-10 w-full overflow-x-hidden">{children}</main>
           <Footer />
           <LiveChatWidget />
