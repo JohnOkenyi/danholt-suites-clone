@@ -8,6 +8,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ROOMS } from '@/lib/rooms'
 import { Room } from '@/types/room'
+import { supabase } from '@/lib/supabase'
 
 const ADDONS = [
     { id: 'early_checkin', label: 'Early Check-in Guarantee', price: 2000, desc: 'Secure early check-in (subject to availability).' },
@@ -92,8 +93,37 @@ function BookingForm() {
       const handleSubmit = async (e: React.FormEvent) => {
               e.preventDefault()
 
-              console.log('Booking submitted', { formData, stats })
-              alert('Booking Simulated! In a real app, this would process payment.')
+                                      // Save booking to Supabase
+              try {
+                        const { data, error } = await supabase
+                          .from('bookings')
+                          .insert([{
+                                        room_type: selectedRoom.name,
+                                        check_in: formData.checkIn,
+                                        check_out: formData.checkOut,
+                                        guest_name: formData.name,
+                                        guest_email: formData.email,
+                                        guest_phone: formData.phone,
+                                        special_requests: formData.specialRequests || null,
+                                        total_amount: stats.total,
+                                        nights: stats.nights,
+                                        status: 'pending'
+                                                    }])
+                          .select()
+
+                        if (error) {
+                                    console.error('Error saving booking:', error)
+                                    alert('Failed to save booking. Please try again.')
+                                    return
+                                  }
+
+                        console.log('Booking saved successfully:', data)
+                        alert('Booking submitted successfully! You will receive a confirmation email.')
+                      } catch (err) {
+                        console.error('Unexpected error:', err)
+                        alert('An unexpected error occurred. Please try again.')
+                      }
+
             }
 
     }
