@@ -1,7 +1,6 @@
-'use client';
 ﻿import type { Metadata } from 'next';
 import React from 'react';
-import { usePathname } from 'next/navigation';
+
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import Header from '@/components/Header';
@@ -22,12 +21,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-    const pathname = usePathname();
+  
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${playfair.variable} font-sans bg-danholt-navy text-danholt-cream antialiased selection:bg-danholt-gold selection:text-white overflow-x-hidden`}>
         <SmoothScrolling>
-{!pathname.startsWith('/admin') &&           <Header />}
+<Header />
           <main className="relative z-10 w-full overflow-x-hidden">{children}</main>
           <Footer />
           <LiveChatWidget />
