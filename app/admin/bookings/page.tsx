@@ -11,6 +11,7 @@ import {
     deleteContactMessage
 } from '@/app/actions/admin'
 import DeleteButton from '@/components/admin/DeleteButton'
+import RealtimeBookingsListener from '@/components/admin/RealtimeBookingsListener'
 
 async function getBookings() {
     const supabase = createClient()
@@ -82,6 +83,8 @@ export default async function AdminDashboard() {
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 rounded-full blur-[120px]" />
                 <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-900/10 rounded-full blur-[120px]" />
             </div>
+
+            <RealtimeBookingsListener />
 
             <div className="relative z-10 max-w-7xl mx-auto space-y-6 md:space-y-8">
                 {/* Luxury Header - Mobile Optimized */}
