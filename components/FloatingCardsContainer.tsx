@@ -77,7 +77,7 @@ export default function FloatingCardsContainer() {
     // 0.5 -> 1.0: Settling phase
 
     return (
-        <div ref={containerRef} className="hidden md:block absolute inset-0 pointer-events-none z-50 h-[200vh]">
+        <div ref={containerRef} className="absolute inset-0 pointer-events-none z-50 h-[200vh] top-[100vh]">
             <div className="sticky top-0 h-screen w-full overflow-hidden">
                 {cards.map((card, index) => (
                     <FloatingCard
@@ -102,23 +102,12 @@ function FloatingCard({ card, scrollYProgress, index }: { card: CardData, scroll
         mouseY.set(clientY - top);
     }
 
-    // Scroll Interpolations
-    // Start from random positions and converge to target
-    // We'll simulate "floating all over" by using large ranges for the start
-
-    // Initial floating movement (paralax-like)
     const yFloat = useTransform(scrollYProgress, [0, 0.6], [card.initialY * 10, 0])
     const xFloat = useTransform(scrollYProgress, [0, 0.6], [card.initialX * 10, 0])
 
-    // Convergence to target position
-    // We use CSS calc to interpolate between random spots and the final specific target
-    // Ideally, we want them to be moving "all over" initially. 
-    // Let's create a wandering animation that fades out as we scroll deep.
-
     return (
         <motion.div
-            drag
-            dragConstraints={{ left: -200, right: 200, top: -200, bottom: 200 }}
+            drag={false} // Disable drag on mobile if needed, or keep enabled. Keeping specific user request only.
             whileHover={{ scale: 1.1, zIndex: 100 }}
             onMouseMove={onMouseMove}
             style={{
@@ -132,7 +121,6 @@ function FloatingCard({ card, scrollYProgress, index }: { card: CardData, scroll
             animate={{
                 opacity: 1,
                 scale: 1,
-                // Add a gentle floating animation loop
                 y: [0, -10, 0],
                 x: [0, 5, 0]
             }}
@@ -144,12 +132,15 @@ function FloatingCard({ card, scrollYProgress, index }: { card: CardData, scroll
                     ease: "easeInOut"
                 }
             }}
-            className="pointer-events-auto absolute cursor-move group"
+            // Changed cursor-move to pointer-events-auto. Added md:block logic to container if it was hidden.
+            // Wait, previous container had "hidden md:block". I removed it in the parent.
+            className="pointer-events-auto absolute cursor-default md:cursor-move group"
         >
-            <div className="relative overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl flex flex-col items-center gap-4 w-40 shadow-2xl transition-colors hover:bg-white/10">
-                {/* Shine Effect */}
+            {/* Added bg-danholt-midnight for mobile, md:bg-white/5 for desktop. Removed shadow/glow on mobile implicitly by changing bg? No, user asked for dark blue. */}
+            <div className="relative overflow-hidden bg-danholt-midnight md:bg-white/5 md:backdrop-blur-xl border border-white/10 p-4 md:p-6 rounded-2xl flex flex-col items-center gap-2 md:gap-4 w-32 md:w-40 shadow-2xl transition-colors md:hover:bg-white/10">
+                {/* Shine Effect - Hidden on mobile */}
                 <motion.div
-                    className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
+                    className="hidden md:block pointer-events-none absolute -inset-px rounded-xl opacity-0 transition duration-300 group-hover:opacity-100"
                     style={{
                         background: useMotionTemplate`
                     radial-gradient(
@@ -161,10 +152,10 @@ function FloatingCard({ card, scrollYProgress, index }: { card: CardData, scroll
                     }}
                 />
 
-                <div className="p-3 bg-danholt-gold/10 rounded-full text-danholt-gold mb-1">
-                    <card.icon size={24} />
+                <div className="p-2 md:p-3 bg-danholt-gold/10 rounded-full text-danholt-gold mb-1">
+                    <card.icon size={20} className="w-5 h-5 md:w-6 md:h-6" />
                 </div>
-                <span className="text-sm font-medium text-white/90 tracking-wide text-center">{card.title}</span>
+                <span className="text-xs md:text-sm font-medium text-white/90 tracking-wide text-center">{card.title}</span>
             </div>
         </motion.div>
     )

@@ -34,13 +34,15 @@ export default function CraftedExperiences() {
     return (
         <section className="py-20 bg-danholt-navy relative z-10 border-t border-white/5">
             <div className="max-w-[1400px] mx-auto px-6 md:px-12">
-                <div className="flex flex-col md:flex-row justify-between items-end mb-24">
-                    <div>
-                        <h2 className="text-6xl md:text-8xl font-serif text-danholt-cold-white tracking-tight">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24">
+                    <div className="w-full md:w-auto text-center md:text-left">
+                        <h2 className="text-4xl md:text-8xl font-[300] md:font-serif text-danholt-cold-white tracking-tight mb-6 md:mb-0">
                             Experiences
                         </h2>
+                        {/* Mobile decorative line (matches Philosophy section) */}
+                        <div className="w-24 h-[1px] bg-gradient-to-r from-transparent via-danholt-gold to-transparent mx-auto md:hidden" />
                     </div>
-                    <div className="md:text-right mt-8 md:mt-0">
+                    <div className="hidden md:block md:text-right mt-8 md:mt-0">
                         <p className="text-danholt-cold-white/60 max-w-sm ml-auto text-sm leading-relaxed">
                             DISCOVER A COLLECTION OF MOMENTS, CAREFULLY CURATED TO ELEVATE YOUR STAY BEYOND THE EXPECTED.
                         </p>
@@ -59,7 +61,7 @@ export default function CraftedExperiences() {
                                     src={item.image}
                                     alt={item.title}
                                     fill
-                                    className="object-cover transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                                    className="object-cover transition-transform duration-300 group-hover:scale-110 grayscale group-hover:grayscale-0 group-active:grayscale-0"
                                 />
                                 <div className="absolute inset-0 bg-danholt-midnight/40 group-hover:bg-danholt-midnight/20 transition-colors duration-500" />
 

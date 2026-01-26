@@ -77,7 +77,7 @@ export default function ServiceShowcase() {
                                         src={service.image}
                                         alt={service.title}
                                         fill
-                                        className="object-cover opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 group-hover:scale-110"
+                                        className="object-cover opacity-60 grayscale group-hover:grayscale-0 group-hover:opacity-100 group-active:grayscale-0 group-active:opacity-100 transition-all duration-300 group-hover:scale-110"
                                     />
                                     {/* Scanner Effect Overlay */}
                                     <div className="absolute inset-0 bg-gradient-to-t from-danholt-navy to-transparent opacity-60" />

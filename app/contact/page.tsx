@@ -6,36 +6,43 @@ import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react'
 import { ContactInfoCard } from '@/components/ContactInfoCard'
 import ContactMapLoader from '@/components/ContactMapLoader'
 
+import { useFormStatus } from 'react-dom'
+import { useFormState } from 'react-dom'
+import { submitContactForm } from '@/app/actions/bookings'
+import { useEffect } from 'react'
+
+function SubmitButton() {
+  const { pending } = useFormStatus()
+  return (
+    <button
+      type="submit"
+      disabled={pending}
+      className="w-full py-4 bg-danholt-midnight text-white font-bold uppercase tracking-widest rounded-lg hover:bg-black transition-colors flex items-center justify-center gap-3 disabled:opacity-70"
+    >
+      {pending ? (
+        <span>Sending...</span>
+      ) : (
+        <>
+          <Send className="w-5 h-5" />
+          <span>Send Message</span>
+        </>
+      )}
+    </button>
+  )
+}
+
 export default function ContactPage() {
-  const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  })
+  const [state, formAction] = useFormState(submitContactForm, { message: '', error: '' })
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setFormStatus('submitting')
-
-    // Simulating API call
-    await new Promise(resolve => setTimeout(resolve, 1500))
-
-    // Simple validation check simulation
-    if (formData.name && formData.email && formData.message) {
-      setFormStatus('success')
-      alert("Message Sent! We will contact you shortly.")
-      setFormData({ name: '', email: '', subject: '', message: '' })
-      setFormStatus('idle')
-    } else {
-      setFormStatus('error')
+  useEffect(() => {
+    if (state?.success) {
+      alert(state.message)
+    } else if (state?.error) {
+      alert(state.error)
     }
-  }
+  }, [state])
+
+  // Removed old state and handler
 
   return (
     <main className="min-h-screen bg-danholt-midnight text-white selection:bg-danholt-gold selection:text-danholt-midnight">
@@ -113,7 +120,7 @@ export default function ContactPage() {
                 <p className="text-gray-500">We usually reply within 24 hours.</p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form action={formAction} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="text-sm font-bold text-danholt-midnight block">Name</label>
@@ -122,8 +129,6 @@ export default function ContactPage() {
                       name="name"
                       required
                       placeholder="Your name"
-                      value={formData.name}
-                      onChange={handleInputChange}
                       className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-danholt-midnight placeholder:text-gray-400 focus:outline-none focus:border-danholt-gold focus:ring-1 focus:ring-danholt-gold transition-all"
                     />
                   </div>
@@ -134,8 +139,6 @@ export default function ContactPage() {
                       name="email"
                       required
                       placeholder="your@email.com"
-                      value={formData.email}
-                      onChange={handleInputChange}
                       className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-danholt-midnight placeholder:text-gray-400 focus:outline-none focus:border-danholt-gold focus:ring-1 focus:ring-danholt-gold transition-all"
                     />
                   </div>
@@ -148,8 +151,6 @@ export default function ContactPage() {
                     name="subject"
                     required
                     placeholder="How can we help?"
-                    value={formData.subject}
-                    onChange={handleInputChange}
                     className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-danholt-midnight placeholder:text-gray-400 focus:outline-none focus:border-danholt-gold focus:ring-1 focus:ring-danholt-gold transition-all"
                   />
                 </div>
@@ -161,26 +162,11 @@ export default function ContactPage() {
                     required
                     rows={6}
                     placeholder="Your message..."
-                    value={formData.message}
-                    onChange={handleInputChange}
                     className="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-danholt-midnight placeholder:text-gray-400 focus:outline-none focus:border-danholt-gold focus:ring-1 focus:ring-danholt-gold transition-all resize-none"
                   />
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={formStatus === 'submitting'}
-                  className="w-full py-4 bg-danholt-midnight text-white font-bold uppercase tracking-widest rounded-lg hover:bg-black transition-colors flex items-center justify-center gap-3 disabled:opacity-70"
-                >
-                  {formStatus === 'submitting' ? (
-                    <span>Sending...</span>
-                  ) : (
-                    <>
-                      <Send className="w-5 h-5" />
-                      <span>Send Message</span>
-                    </>
-                  )}
-                </button>
+                <SubmitButton />
               </form>
             </div>
           </div>

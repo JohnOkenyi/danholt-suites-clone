@@ -1,8 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { X, Check } from 'lucide-react'
+import { useFormState, useFormStatus } from 'react-dom'
+import { joinPrivilegeClub } from '@/app/actions/bookings'
 
 interface MembershipModalProps {
     isOpen: boolean;
@@ -10,33 +12,34 @@ interface MembershipModalProps {
     initialTier?: string;
 }
 
-export default function MembershipModal({ isOpen, onClose, initialTier = 'Bronze' }: MembershipModalProps) {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        phone: '',
-        tier: initialTier,
-        contactMethod: 'email'
-    })
-    const [isSubmitted, setIsSubmitted] = useState(false)
+function SubmitButton() {
+    const { pending } = useFormStatus()
+    return (
+        <button
+            type="submit"
+            disabled={pending}
+            className="w-full py-4 bg-danholt-gold text-danholt-midnight font-bold uppercase tracking-widest rounded-lg hover:bg-white transition-colors duration-300 disabled:opacity-70"
+        >
+            {pending ? "Submitting..." : "Request Membership"}
+        </button>
+    )
+}
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        // Simulate API call
-        setTimeout(() => {
-            setIsSubmitted(true)
-        }, 1000)
-    }
+export default function MembershipModal({ isOpen, onClose, initialTier = 'Bronze' }: MembershipModalProps) {
+    const [state, formAction] = useFormState(joinPrivilegeClub, { message: '', error: '' })
+
+    // We can use the state.success to show the success view
+    // But in this modal implementation, we previously had a local `isSubmitted` state.
+    // We will sync them.
+
+    useEffect(() => {
+        if (!isOpen) {
+            // Reset state if possible or just rely on re-mount? 
+            // useFormState doesn't reset easily. We'll handle success viz based on state.success
+        }
+    }, [isOpen])
 
     const handleClose = () => {
-        setIsSubmitted(false)
-        setFormData({
-            name: '',
-            email: '',
-            phone: '',
-            tier: initialTier,
-            contactMethod: 'email'
-        })
         onClose()
     }
 
@@ -72,23 +75,22 @@ export default function MembershipModal({ isOpen, onClose, initialTier = 'Bronze
                         </button>
 
                         <div className="p-8 md:p-10">
-                            {!isSubmitted ? (
+                            {!state?.success ? (
                                 <>
                                     <h2 className="text-2xl font-serif text-white mb-2">Join Privilege Club</h2>
                                     <p className="text-white/60 text-sm mb-8">
                                         Fill in your details below. Our team will contact you shortly to complete your membership.
                                     </p>
 
-                                    <form onSubmit={handleSubmit} className="space-y-6">
+                                    <form action={formAction} className="space-y-6">
                                         <div className="space-y-2">
                                             <label className="text-xs uppercase tracking-widest text-danholt-gold font-bold">Full Name</label>
                                             <input
                                                 type="text"
+                                                name="name"
                                                 required
-                                                value={formData.name}
-                                                onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-danholt-gold/50 transition-colors"
                                                 placeholder="John Doe"
+                                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-danholt-gold/50 transition-colors"
                                             />
                                         </div>
 
@@ -96,11 +98,10 @@ export default function MembershipModal({ isOpen, onClose, initialTier = 'Bronze
                                             <label className="text-xs uppercase tracking-widest text-danholt-gold font-bold">Email Address</label>
                                             <input
                                                 type="email"
+                                                name="email"
                                                 required
-                                                value={formData.email}
-                                                onChange={e => setFormData({ ...formData, email: e.target.value })}
-                                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-danholt-gold/50 transition-colors"
                                                 placeholder="john@example.com"
+                                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-danholt-gold/50 transition-colors"
                                             />
                                         </div>
 
@@ -108,11 +109,10 @@ export default function MembershipModal({ isOpen, onClose, initialTier = 'Bronze
                                             <label className="text-xs uppercase tracking-widest text-danholt-gold font-bold">Phone Number</label>
                                             <input
                                                 type="tel"
+                                                name="phone"
                                                 required
-                                                value={formData.phone}
-                                                onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-danholt-gold/50 transition-colors"
                                                 placeholder="+234..."
+                                                className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-danholt-gold/50 transition-colors"
                                             />
                                         </div>
 
@@ -120,8 +120,8 @@ export default function MembershipModal({ isOpen, onClose, initialTier = 'Bronze
                                             <div className="space-y-2">
                                                 <label className="text-xs uppercase tracking-widest text-danholt-gold font-bold">Preferred Tier</label>
                                                 <select
-                                                    value={formData.tier}
-                                                    onChange={e => setFormData({ ...formData, tier: e.target.value })}
+                                                    name="tier"
+                                                    defaultValue={initialTier}
                                                     className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-danholt-gold/50 transition-colors appearance-none cursor-pointer"
                                                 >
                                                     <option value="Bronze" className="bg-danholt-midnight">Bronze</option>
@@ -132,8 +132,8 @@ export default function MembershipModal({ isOpen, onClose, initialTier = 'Bronze
                                             <div className="space-y-2">
                                                 <label className="text-xs uppercase tracking-widest text-danholt-gold font-bold">Contact Via</label>
                                                 <select
-                                                    value={formData.contactMethod}
-                                                    onChange={e => setFormData({ ...formData, contactMethod: e.target.value })}
+                                                    name="contactMethod"
+                                                    defaultValue="email"
                                                     className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white focus:outline-none focus:border-danholt-gold/50 transition-colors appearance-none cursor-pointer"
                                                 >
                                                     <option value="email" className="bg-danholt-midnight">Email</option>
@@ -143,12 +143,7 @@ export default function MembershipModal({ isOpen, onClose, initialTier = 'Bronze
                                             </div>
                                         </div>
 
-                                        <button
-                                            type="submit"
-                                            className="w-full py-4 bg-danholt-gold text-danholt-midnight font-bold uppercase tracking-widest rounded-lg hover:bg-white transition-colors duration-300"
-                                        >
-                                            Request Membership
-                                        </button>
+                                        <SubmitButton />
                                     </form>
                                 </>
                             ) : (
@@ -158,7 +153,7 @@ export default function MembershipModal({ isOpen, onClose, initialTier = 'Bronze
                                     </div>
                                     <h3 className="text-2xl font-serif text-white mb-4">Request Received</h3>
                                     <p className="text-white/60 mb-8">
-                                        Thank you, {formData.name}. Our team will reach out to you via {formData.contactMethod} shortly to finalize your {formData.tier} membership.
+                                        {state?.message || "Thank you. Our team will reach out to you shortly."}
                                     </p>
                                     <button
                                         onClick={handleClose}

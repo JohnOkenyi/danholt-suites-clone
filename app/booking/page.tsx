@@ -3,6 +3,8 @@
 import { motion } from 'framer-motion'
 import { Calendar, Users, Mail, Phone, User, CreditCard, ChevronDown, CheckCircle, Info, ArrowLeft } from 'lucide-react'
 import { useState, useEffect, Suspense } from 'react'
+import { useFormState } from 'react-dom'
+import { createRoomBooking } from '@/app/actions/bookings'
 import { useSearchParams } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -15,6 +17,7 @@ const ADDONS = [
     { id: 'celebration', label: 'Celebration Setup', price: 5000, desc: 'Room decoration for special occasions.' },
     { id: 'sweet_arrival', label: 'Sweet Arrival', price: 10000, desc: 'Pre-order cake, flowers, or wine.' }
 ]
+
 
 function BookingForm() {
     const searchParams = useSearchParams()
@@ -34,6 +37,9 @@ function BookingForm() {
 
     const [selectedRoom, setSelectedRoom] = useState<Room | null>(null)
     const [stats, setStats] = useState({ nights: 0, subtotal: 0, total: 0 })
+
+    // Server Action Integration
+    const [state, formAction] = useFormState(createRoomBooking, { message: '', error: '' })
 
     // Update selected room when ID changes
     useEffect(() => {
@@ -73,6 +79,15 @@ function BookingForm() {
 
     }, [formData.checkIn, formData.checkOut, selectedRoom, formData.addons])
 
+    // Effect for Server Action Feedback
+    useEffect(() => {
+        if (state.success) {
+            alert(state.message) // In real app, redirect to success page
+        } else if (state.error) {
+            alert("Error: " + state.error)
+        }
+    }, [state])
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target
         setFormData(prev => ({ ...prev, [name]: value }))
@@ -89,13 +104,6 @@ function BookingForm() {
         )
     }
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        // Here you would handle the submission logic
-        console.log("Booking submitted", { formData, stats })
-        alert("Booking Simulated! In a real app, this would process payment.")
-    }
-
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
             {/* Form Column */}
@@ -104,7 +112,7 @@ function BookingForm() {
                     {/* Decorative Glow */}
                     <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-danholt-gold/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
 
-                    <form onSubmit={handleSubmit} className="relative z-10 space-y-12">
+                    <form id="booking-form" action={formAction} className="relative z-10 space-y-12">
 
                         {/* Step 1: Stay Details */}
                         <div className="space-y-6">
@@ -208,6 +216,8 @@ function BookingForm() {
                                         <div className="pt-1">
                                             <input
                                                 type="checkbox"
+                                                name="addons"
+                                                value={addon.id}
                                                 checked={formData.addons.includes(addon.id)}
                                                 onChange={(e) => {
                                                     const isChecked = e.target.checked
@@ -373,9 +383,27 @@ function BookingForm() {
                                         </div>
                                     </div>
 
-                                    {/* Desktop Submit Button */}
+                                    {/* Desktop Submit Button - MUST TRIGGER FORM SUBMISSION */}
                                     <button
-                                        onClick={handleSubmit}
+                                        onClick={(e) => {
+                                            // Programmatically submit the form if outside of it, OR just put this button inside the form?
+                                            // The form is in another column. 
+                                            // Solution: Use HTML form attribute or just use the same server action here?
+                                            // Actually, this button is OUTSIDE the form.
+                                            // Best approach: Move this button inside a form, OR make this sidebar part of the main form.
+                                            // But structure makes that hard.
+                                            // Alternative: "remote" submit via ref or document.getElementById.
+                                            // Or: Wrap the ENTIRE grid in the <form>.
+
+                                            // I will replace `onClick={handleSubmit}` which was doing `e.preventDefault`.
+                                            // Now I need to trigger the form.
+
+                                            // Simpler hack for now: 
+                                            // Let's rely on the form having an ID and this button referring to it.
+                                            // <form id="booking-form"> ... <button form="booking-form">
+                                        }}
+                                        form="booking-form"
+                                        type="submit"
                                         disabled={!isFormValid()}
                                         className={`hidden lg:flex w-full py-4 font-bold uppercase tracking-widest rounded-lg items-center justify-center gap-2 transition-all duration-300 ${isFormValid()
                                             ? 'bg-danholt-teal text-white hover:bg-danholt-teal/90 shadow-lg'
@@ -406,6 +434,7 @@ function BookingForm() {
         </div>
     )
 }
+
 
 export default function BookingPage() {
     return (

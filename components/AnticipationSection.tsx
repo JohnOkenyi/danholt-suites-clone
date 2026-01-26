@@ -63,11 +63,11 @@ export default function AnticipationSection() {
                 {/* Mobile Grid Layout (Simple & Touchable but Premium) */}
                 <div className="md:hidden grid grid-cols-2 gap-4 w-full max-w-sm mx-auto pointer-events-auto px-4">
                     {services.map((service) => (
-                        <div key={service.id} className="group relative bg-[#0B1121]/80 backdrop-blur-md border border-white/10 rounded-2xl p-4 shadow-lg flex flex-col items-center gap-3 active:scale-95 transition-all duration-200">
-                            {/* Glow Effect */}
-                            <div className="absolute inset-0 bg-danholt-gold/5 rounded-2xl opacity-0 group-active:opacity-100 transition-opacity" />
+                        <div key={service.id} className="group relative bg-danholt-navy border border-white/10 rounded-2xl p-4 shadow-md flex flex-col items-center gap-3 active:scale-95 transition-all duration-200">
+                            {/* Glow Effect - Hidden on mobile for performance */}
+                            <div className="hidden md:block absolute inset-0 bg-danholt-gold/5 rounded-2xl opacity-0 group-active:opacity-100 transition-opacity" />
 
-                            <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-danholt-gold/20 to-transparent flex items-center justify-center text-danholt-gold border border-white/5 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                            <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-danholt-gold/20 to-transparent flex items-center justify-center text-danholt-gold border border-white/5">
                                 <service.icon size={24} strokeWidth={1.5} />
                             </div>
                             <span className="text-xs font-medium text-gray-200 text-center uppercase tracking-wide">
@@ -116,9 +116,10 @@ export default function AnticipationSection() {
                                 {/* Card Content - Smaller, Glowing */}
                                 <div className="group relative w-28 h-28 md:w-32 md:h-32">
                                     {/* Multi-layer Intense Glow on Hover */}
-                                    <div className="absolute inset-0 bg-danholt-gold rounded-full blur-[60px] opacity-0 group-hover:opacity-80 transition-all duration-300 scale-150" />
-                                    <div className="absolute inset-0 bg-yellow-400 rounded-full blur-[30px] opacity-0 group-hover:opacity-60 transition-all duration-300 scale-125" />
-                                    <div className="absolute inset-0 bg-white rounded-full blur-[15px] opacity-0 group-hover:opacity-40 transition-all duration-300" />
+                                    {/* Multi-layer Intense Glow on Hover - Drastically Reduced Opacity */}
+                                    <div className="absolute inset-0 bg-danholt-gold rounded-full blur-[60px] opacity-0 group-hover:opacity-20 transition-all duration-300 scale-150" />
+                                    <div className="absolute inset-0 bg-yellow-400 rounded-full blur-[30px] opacity-0 group-hover:opacity-15 transition-all duration-300 scale-125" />
+                                    <div className="absolute inset-0 bg-white rounded-full blur-[15px] opacity-0 group-hover:opacity-5 transition-all duration-300" />
 
                                     <motion.div
                                         className="relative h-full w-full bg-[#0B1121] backdrop-blur-xl border border-white/10 rounded-2xl shadow-[0_8px_32px_0_rgba(0,0,0,0.4)] flex flex-col items-center justify-center gap-3 p-4 transition-all duration-300 group-hover:border-danholt-gold group-hover:bg-[#0a0f1a] group-hover:shadow-[0_0_50px_rgba(212,175,55,0.5),0_0_100px_rgba(212,175,55,0.3)]"

@@ -19,9 +19,8 @@ export default function DiningPage() {
             <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
                 <div className="absolute inset-0 z-0">
                     <Image
-                        src="/images/feature-dining.jpg"
-                        // Note: Using existing image path from previous file content, assuming it exists. 
-                        // If user wants specific new image they can provide it, but for now reusing what was there or a placeholder.
+                        src="/images/nigerian-dish.png"
+                        // Note: Using Jollof Rice image as requested for "The Danholt Kitchen" background.
                         alt="The Danholt Kitchen"
                         fill
                         className="object-cover opacity-50"

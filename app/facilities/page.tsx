@@ -9,13 +9,15 @@ const facilities = [
     title: "Conference Hall",
     description: "Our state-of-the-art conference hall is designed for business excellence. Equipped with high-speed internet, modern audio-visual systems, and ergonomic seating, it's the perfect venue for seminars, workshops, and corporate meetings.",
     image: "/images/conference-hall-custom.jpg",
-    features: ["High-speed WiFi", "Projector & Screen", "Sound System", "Catering Available"]
+    features: ["High-speed WiFi", "Projector & Screen", "Sound System", "Catering Available"],
+    bookingLink: "/facilities/book?facility=Conference%20Hall"
   },
   {
     title: "Sports Facilities",
     description: "Maintain your active lifestyle with our premium sports facilities. Whether you prefer a competitive game of tennis or a team match on our 5-a-side football pitch, we provide the perfect environment for recreation and fitness.",
     image: "/images/sports-pitch-custom.jpg",
-    features: ["5-a-side Football Pitch", "Lawn Tennis Court", "Floodlights for Night Games", "Equipment Rental"]
+    features: ["5-a-side Football Pitch", "Lawn Tennis Court", "Floodlights for Night Games", "Equipment Rental"],
+    bookingLink: "/facilities/book?facility=Sports%20Facilities"
   },
   {
     title: "Children's Playground",
@@ -61,16 +63,18 @@ export default function FacilitiesPage() {
       {/* Facilities Content */}
       <section className="py-32 px-6 md:px-12 max-w-[1400px] mx-auto space-y-32">
         {facilities.map((facility, i) => (
-          <motion.div
+          <div
             key={i}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-            className={`flex flex-col ${i % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-16 md:gap-24`}
+            className={`flex flex-col ${i % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} items-center gap-12 md:gap-24`}
           >
             {/* Image Side */}
-            <div className="w-full md:w-1/2 relative aspect-[4/3] grayscale hover:grayscale-0 transition-all duration-700">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="w-full md:w-1/2 relative aspect-[4/3] grayscale hover:grayscale-0 transition-all duration-700"
+            >
               <div className="absolute inset-0 border border-white/10 translate-x-4 translate-y-4 -z-10" />
               <Image
                 src={facility.image}
@@ -78,10 +82,16 @@ export default function FacilitiesPage() {
                 fill
                 className="object-cover"
               />
-            </div>
+            </motion.div>
 
             {/* Text Side */}
-            <div className="w-full md:w-1/2 space-y-8">
+            <motion.div
+              initial={{ opacity: 0, x: i % 2 === 1 ? -20 : 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="w-full md:w-1/2 space-y-8"
+            >
               <div>
                 <h2 className="text-3xl md:text-5xl font-serif text-white mb-6 leading-tight">
                   {facility.title}
@@ -100,8 +110,31 @@ export default function FacilitiesPage() {
                   </li>
                 ))}
               </ul>
-            </div>
-          </motion.div>
+
+              {/* Booking Button */}
+              {facility.bookingLink && (
+                <div className="pt-8 relative z-30 flex justify-center md:block">
+                  <a
+                    href={facility.bookingLink}
+                    className="group relative inline-flex items-center justify-center gap-2 px-8 py-4 md:gap-3 md:px-10 md:py-5 text-danholt-navy text-base md:text-lg font-bold uppercase tracking-widest rounded-full shadow-xl overflow-hidden transition-all duration-300 transform active:scale-95"
+                    style={{
+                      background: 'linear-gradient(135deg, #FFD700 0%, #D4AF37 50%, #B8860B 100%)',
+                    }}
+                  >
+                    {/* Shine effect */}
+                    <div className="absolute inset-0 bg-white/20 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700 ease-in-out" />
+
+                    <span>Book </span>
+                    {/* Arrow Icon */}
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform group-hover:translate-x-1 md:w-5 md:h-5">
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </a>
+                </div>
+              )}
+            </motion.div>
+          </div>
         ))}
       </section>
     </main>

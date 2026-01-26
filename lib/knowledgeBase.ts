@@ -5,7 +5,7 @@ export const KNOWLEDGE_BASE = [
     },
     {
         keywords: ['price', 'rate', 'cost', 'expensive', 'much'],
-        answer: "Our rates vary by room type and season. Generally, Executive Rooms start at ₦150,000/night, Royal Suites at ₦350,000/night, and the Presidential Suite at ₦800,000/night. Check the 'Rooms' page for live availability."
+        answer: "Our rates vary by room type and season. Please check the 'Rooms' page on our website for the most up-to-date pricing and availability, or contact our staff for assistance."
     },
     {
         keywords: ['check-in', 'check in', 'check-out', 'check out', 'time'],
@@ -25,7 +25,7 @@ export const KNOWLEDGE_BASE = [
     },
     {
         keywords: ['location', 'address', 'where', 'find'],
-        answer: "We are located in the heart of the city's most exclusive district. For security and privacy, the exact address is released upon booking confirmation, but we are near the Central Business District."
+        answer: "We are located in a prime area. Please check the Contact section of our website for location details or call our staff at +234 800 000 0000 for directions."
     },
     {
         keywords: ['contact', 'phone', 'email', 'support', 'help'],

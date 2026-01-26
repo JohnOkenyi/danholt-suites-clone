@@ -86,8 +86,9 @@ export default function LiveChatWidget() {
                 }];
             });
             setActiveJokeCategory(null);
-        } else if (chatMode === 'ai' && messages.length === 0) {
-            // Optional: reset if returning to AI and empty
+        } else if (chatMode === 'ai') {
+            // Strictly reset to Quick Questions (empty history) when returning to AI
+            setMessages([]);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [chatMode]);
@@ -98,7 +99,8 @@ export default function LiveChatWidget() {
             let response;
             if (chatMode === 'ai') {
                 const answer = findAnswer(query);
-                response = answer || "I apologize, I don't have that specific information. For immediate assistance, please call us at +234 800 000 0000.";
+                // Fallback updated to strict "website only" policy
+                response = answer || "I can only answer questions based on the information in the website. If the information is not in the website please speak to staff, that's the hotel phone number: +234 800 000 0000.";
             } else {
                 // Fallback for humor mode text input, though UI drives it mostly
                 response = "I'm best at telling jokes! Click one of the categories below.";

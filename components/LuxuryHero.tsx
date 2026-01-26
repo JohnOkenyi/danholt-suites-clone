@@ -35,7 +35,7 @@ export default function LuxuryHero() {
         <section ref={containerRef} className="relative h-[80vh] min-h-[600px] w-full flex items-center justify-center overflow-hidden">
             {/* Background Image Slideshow with Parallax */}
             <motion.div
-                style={{ y }}
+                style={{ y }}  // We can keep this simple parallax even on mobile, it's usually fine. Key is the Image size.
                 className="absolute inset-0 w-full h-[120%]"
             >
                 <AnimatePresence mode="wait">
@@ -53,7 +53,8 @@ export default function LuxuryHero() {
                             fill
                             priority={currentImageIndex === 0}
                             className="object-cover"
-                            quality={75}
+                            quality={60} // Reduced quality slightly for performance
+                            sizes="100vw" // Helps Next.js serve correct size
                         />
                     </motion.div>
                 </AnimatePresence>
@@ -76,15 +77,18 @@ export default function LuxuryHero() {
                 />
 
                 {/* Main Headline with Staggered Animation */}
-                <div className="overflow-hidden mb-8 md:mb-12">
+                <div className="overflow-hidden mb-8 md:mb-12 min-h-[120px]">
                     <motion.h1
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{
+                            opacity: currentImageIndex === 0 ? 1 : 0,
+                            scale: currentImageIndex === 0 ? 1 : 0.9
+                        }}
+                        transition={{ duration: 0.8 }}
                         className="relative"
                     >
                         {/* Static text without animation or shadow */}
-                        <div className="flex flex-wrap justify-center gap-x-3 gap-y-2 md:gap-x-8 md:gap-y-4 max-w-[90vw] mx-auto">
+                        <div className="flex flex-wrap justify-center gap-x-2 gap-y-2 md:gap-x-8 md:gap-y-4 max-w-[95vw] mx-auto">
                             {["Here", "is", "a", "tribute", "to", "good", "living!"].map((word, index) => (
                                 <span
                                     key={index}
@@ -99,7 +103,6 @@ export default function LuxuryHero() {
                                         transition-transform
                                         duration-300
                                         cursor-default
-                                        ${index === 3 || index === 6 ? 'w-full md:w-auto mt-2 md:mt-0' : ''} 
                                     `}
                                 >
                                     {word}
@@ -110,8 +113,11 @@ export default function LuxuryHero() {
                         {/* Animated underline accent */}
                         <motion.div
                             initial={{ scaleX: 0, opacity: 0 }}
-                            animate={{ scaleX: 1, opacity: 1 }}
-                            transition={{ duration: 1.5, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
+                            animate={{
+                                scaleX: currentImageIndex === 0 ? 1 : 0,
+                                opacity: currentImageIndex === 0 ? 1 : 0
+                            }}
+                            transition={{ duration: 1.5, delay: currentImageIndex === 0 ? 1 : 0, ease: [0.22, 1, 0.36, 1] }}
                             className="h-1 w-24 md:w-48 bg-gradient-to-r from-transparent via-danholt-gold to-transparent mx-auto mt-6 md:mt-8 origin-center"
                         />
                     </motion.h1>

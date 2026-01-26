@@ -2,9 +2,7 @@
 import React from 'react';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import LiveChatWidget from '@/components/LiveChatWidget';
+import PublicLayout from '@/components/PublicLayout';
 import SmoothScrolling from '@/components/SmoothScrolling';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
@@ -24,10 +22,9 @@ export default function RootLayout({
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${playfair.variable} font-sans bg-danholt-navy text-danholt-cream antialiased selection:bg-danholt-gold selection:text-white overflow-x-hidden`}>
         <SmoothScrolling>
-          <Header />
-          <main className="relative z-10 w-full overflow-x-hidden">{children}</main>
-          <Footer />
-          <LiveChatWidget />
+          <PublicLayout>
+            {children}
+          </PublicLayout>
         </SmoothScrolling>
       </body>
     </html>

@@ -57,6 +57,17 @@ body {
 
 .bg-grain::before {
   content: "";
+  display: none;
+  /* Hidden by default for performance */
+}
+
+@media (min-width: 768px) {
+  .bg-grain::before {
+    display: block;
+  }
+}
+
+.bg-grain::before {
   position: fixed;
   inset: -50%;
   width: 200%;
@@ -121,10 +132,18 @@ body {
 
 /* Luxury Utilities */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.02);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.05);
+  /* Increased opacity for mobile fallback */
   border: 1px solid rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
+}
+
+/* Enable blur only on desktop/capable devices to save battery/perf on mobile */
+@media (min-width: 768px) {
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(12px);
+  }
 }
 
 .glass-panel:hover {
@@ -135,9 +154,15 @@ body {
 }
 
 .glass-panel-luxury {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@media (min-width: 768px) {
+  .glass-panel-luxury {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+  }
 }
 
 .text-gold-gradient {

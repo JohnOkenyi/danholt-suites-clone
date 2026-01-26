@@ -1,6 +1,8 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useFormState } from 'react-dom'
+import { createDiningReservation } from '@/app/actions/bookings'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowLeft, Calendar, Clock, User, Mail, Phone, Home, MessageSquare } from 'lucide-react'
@@ -20,21 +22,28 @@ export default function ReservationPage() {
         specialRequests: ''
     })
 
+    // Server Action Integration
+    const [state, formAction] = useFormState(createDiningReservation, { message: '', error: '' })
+
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target
         setFormData(prev => ({ ...prev, [name]: value }))
     }
 
+    // Effect to show success message
+    useEffect(() => {
+        if (state.success) {
+            alert(state.message);
+            // Optional: reset form or redirect
+        } else if (state.error) {
+            alert(state.error);
+        }
+    }, [state]);
+
     const isValid = () => {
         if (!formData.fullName || !formData.email || !formData.partySize || !date || !formData.time) return false
         if (guestType === 'hotel' && !formData.roomNumber) return false
         return true
-    }
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        // Here we would handle the actual submission
-        alert("Reservation Confirmed! (Demo)")
     }
 
     return (
@@ -62,7 +71,11 @@ export default function ReservationPage() {
                         </p>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="space-y-8">
+                    <form action={formAction} className="space-y-8">
+                        {/* Hidden Inputs for special fields */}
+                        <input type="hidden" name="date" value={date ? date.toISOString().split('T')[0] : ''} />
+                        <input type="hidden" name="guestType" value={guestType} />
+
                         {/* Guest Type Selection */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <label
@@ -75,7 +88,7 @@ export default function ReservationPage() {
                             >
                                 <input
                                     type="radio"
-                                    name="guestType"
+                                    name="guestType_visual"
                                     value="hotel"
                                     checked={guestType === 'hotel'}
                                     onChange={() => setGuestType('hotel')}
@@ -86,7 +99,7 @@ export default function ReservationPage() {
                                 </div>
                                 <div>
                                     <span className="block font-bold text-sm text-danholt-midnight">Hotel Guest</span>
-                                    <span className="block text-xs text-gray-500 mt-1">I&apos;m staying at Danholt</span>
+                                    <span className="block text-xs text-gray-500 mt-1">Im staying at Danholt</span>
                                 </div>
                             </label>
 
@@ -100,7 +113,7 @@ export default function ReservationPage() {
                             >
                                 <input
                                     type="radio"
-                                    name="guestType"
+                                    name="guestType_visual"
                                     value="external"
                                     checked={guestType === 'external'}
                                     onChange={() => setGuestType('external')}
