@@ -164,7 +164,7 @@ export default async function AdminDashboard() {
                                 {todaysAgenda.map((item: any, idx: number) => (
                                     <div key={`${item.id}-${idx}`} className="bg-white/[0.03] p-4 rounded-xl border border-white/[0.05] flex items-start gap-4 hover:bg-white/[0.15] hover:border-white/20 hover:scale-[1.02] hover:shadow-xl transition-all duration-300 group cursor-default">
                                         <div className={`
-                                            w-12 h-12 rounded-lg flex items-center justify-center text-lg font-bold
+                                            w-12 h-12 rounded-lg flex items-center justify-center text-xs font-bold
                                             ${item.type === 'Check-in' ? 'bg-danholt-gold/20 text-danholt-gold group-hover:bg-danholt-gold group-hover:text-black' :
                                                 item.type === 'Dining' ? 'bg-orange-500/20 text-orange-400 group-hover:bg-orange-500 group-hover:text-white' :
                                                     'bg-teal-500/20 text-teal-400 group-hover:bg-teal-500 group-hover:text-white'}
