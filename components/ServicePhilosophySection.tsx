@@ -23,15 +23,35 @@ const values = [
 ];
 
 export default function ServicePhilosophySection() {
+    const [isMobile, setIsMobile] = React.useState(true);
+
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768);
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
+    const animationProps = isMobile ? {} : {
+        initial: { opacity: 0, y: 20 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, margin: "-50px" },
+        transition: { duration: 0.6 }
+    };
+
+    const cardAnimationProps = (i: number) => isMobile ? {} : {
+        initial: { opacity: 0, y: 30 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true },
+        transition: { delay: i * 0.2 }
+    };
+
     return (
         <section className="py-20 bg-[#020617] relative overflow-hidden">
             <div className="container mx-auto px-6 z-10 relative">
                 <div className="text-center mb-20">
                     <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-50px" }}
-                        transition={{ duration: 0.6 }}
+                        {...animationProps}
                         className="text-4xl md:text-5xl font-[300] text-white mb-6"
                     >
                         Our Philosophy
@@ -43,10 +63,7 @@ export default function ServicePhilosophySection() {
                     {values.map((val, i) => (
                         <motion.div
                             key={i}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.2 }}
+                            {...cardAnimationProps(i)}
                             className="group p-10 border border-white/5 bg-[#0f172a]/40 rounded-[2rem] backdrop-blur-sm hover:bg-[#0f172a]/60 hover:border-danholt-gold/30 transition-all duration-500"
                         >
                             <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-danholt-gold mb-8 group-hover:scale-110 group-hover:bg-danholt-gold group-hover:text-black transition-all duration-300">

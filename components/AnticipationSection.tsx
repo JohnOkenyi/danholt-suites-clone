@@ -2,6 +2,7 @@
 
 import React, { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { useState, useEffect } from 'react';
 import { BedDouble, Utensils, Dumbbell, ShieldCheck, Wifi } from 'lucide-react';
 import AnimatedText from './AnimatedText';
 
@@ -26,10 +27,19 @@ export default function AnticipationSection() {
     // Parallax background movement
     const bgY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
+    const [isMobile, setIsMobile] = useState(true)
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobile(window.innerWidth < 768)
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
+
     return (
         <section ref={containerRef} className="relative w-full py-24 min-h-[700px] flex items-center justify-center overflow-hidden bg-white">
             {/* Subtle background accents for white theme */}
-            <motion.div style={{ y: bgY }} className="absolute inset-0 pointer-events-none">
+            <motion.div style={{ y: isMobile ? 0 : bgY }} className="absolute inset-0 pointer-events-none">
                 {/* Subtle gold ambient lighting */}
                 <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-danholt-gold/5 blur-[120px] rounded-full pointer-events-none" />
                 <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gray-200/50 blur-[100px] rounded-full pointer-events-none" />
@@ -37,7 +47,7 @@ export default function AnticipationSection() {
 
             {/* Central Typography */}
             <motion.div
-                style={{ y, opacity }}
+                style={isMobile ? {} : { y, opacity }}
                 className="relative z-20 text-center max-w-4xl px-4 pointer-events-none flex flex-col items-center"
             >
                 <div className="mb-6 flex items-center justify-center gap-3 opacity-80">
@@ -48,10 +58,19 @@ export default function AnticipationSection() {
 
                 <div className="mb-8">
                     <h2 className="text-5xl md:text-7xl font-[200] text-gray-900 tracking-tight leading-tight py-4 drop-shadow-sm flex flex-col items-center gap-2">
-                        <AnimatedText text="Where Every Need Is" className="justify-center flex-wrap text-gray-900" delay={0.1} />
+                        {isMobile ? (
+                            <span className="justify-center flex-wrap text-gray-900 flex">Where Every Need Is</span>
+                        ) : (
+                            <AnimatedText text="Where Every Need Is" className="justify-center flex-wrap text-gray-900" delay={0.1} />
+                        )}
+
                         {/* Gradient Text for Maximum Pop */}
                         <span className="font-[400] text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#B8860B] to-[#D4AF37]">
-                            <AnimatedText text="Anticipated." className="justify-center text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#B8860B] to-[#D4AF37]" delay={0.5} />
+                            {isMobile ? (
+                                "Anticipated."
+                            ) : (
+                                <AnimatedText text="Anticipated." className="justify-center text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF37] via-[#B8860B] to-[#D4AF37]" delay={0.5} />
+                            )}
                         </span>
                     </h2>
                 </div>
