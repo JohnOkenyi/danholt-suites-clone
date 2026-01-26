@@ -10,6 +10,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ROOMS } from '@/lib/rooms'
 import { Room } from '@/types/room'
+import { supabase } from '@/lib/supabase'
 
 const ADDONS = [
     { id: 'early_checkin', label: 'Early Check-in Guarantee', price: 2000, desc: 'Secure early check-in (subject to availability).' },
@@ -17,7 +18,6 @@ const ADDONS = [
     { id: 'celebration', label: 'Celebration Setup', price: 5000, desc: 'Room decoration for special occasions.' },
     { id: 'sweet_arrival', label: 'Sweet Arrival', price: 10000, desc: 'Pre-order cake, flowers, or wine.' }
 ]
-
 
 function BookingForm() {
     const searchParams = useSearchParams()
@@ -434,7 +434,6 @@ function BookingForm() {
         </div>
     )
 }
-
 
 export default function BookingPage() {
     return (

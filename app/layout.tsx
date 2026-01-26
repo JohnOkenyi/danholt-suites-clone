@@ -1,5 +1,6 @@
 ﻿import type { Metadata } from 'next';
 import React from 'react';
+
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import PublicLayout from '@/components/PublicLayout';
@@ -18,6 +19,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${playfair.variable} font-sans bg-danholt-navy text-danholt-cream antialiased selection:bg-danholt-gold selection:text-white overflow-x-hidden`}>
