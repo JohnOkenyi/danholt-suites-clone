@@ -147,7 +147,7 @@ export default function LiveChatWidget() {
             {/* Chat Button */}
             <motion.button
                 onClick={() => setIsOpen(!isOpen)}
-                className="fixed z-50 rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300"
+                className="fixed z-[100] rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300"
                 style={{
                     bottom: '40px',
                     right: '40px',
@@ -157,9 +157,8 @@ export default function LiveChatWidget() {
                 }}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
-                initial={{ scale: 0 }}
+                initial={{ scale: 1 }}
                 animate={{ scale: 1 }}
-                transition={{ delay: 1, type: 'spring', stiffness: 260, damping: 20 }}
             >
                 <AnimatePresence mode="wait">
                     {isOpen ? (
