@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, Send, Bot, Sparkles, Coffee, Bed, Building, Mic } from 'lucide-react';
+import { MessageCircle, X, Send, Bot, Sparkles, Coffee, Bed, Building, Mic, PhoneOff } from 'lucide-react';
 import Script from 'next/script';
 
 const quickQuestions = [
@@ -153,57 +153,64 @@ export default function LiveChatWidget() {
 
     return (
         <>
-            {/* Chat Button */}
-            <motion.button
-                onClick={() => setIsOpen(!isOpen)}
-                // Force max z-index to be visible above everything
-                className="fixed z-[2147483647] rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300"
-                style={{
-                    bottom: '40px',
-                    right: '40px',
-                    width: '60px',
-                    height: '60px',
-                    backgroundColor: '#c9a961'
-                }}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ scale: 1 }}
-                animate={{ scale: 1 }}
-            >
-                <AnimatePresence mode="wait">
-                    {isOpen ? (
-                        <motion.div
-                            key="close"
-                            initial={{ rotate: -90, opacity: 0 }}
-                            animate={{ rotate: 0, opacity: 1 }}
-                            exit={{ rotate: 90, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                        >
-                            <X className="w-6 h-6 text-white" />
-                        </motion.div>
-                    ) : (
-                        <motion.div
-                            key="chat"
-                            initial={{ rotate: 90, opacity: 0 }}
-                            animate={{ rotate: 0, opacity: 1 }}
-                            exit={{ rotate: -90, opacity: 0 }}
-                            transition={{ duration: 0.2 }}
-                        >
-                            <MessageCircle className="w-6 h-6 text-white" />
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </motion.button>
+            {/* Chat Button (Only visible if NOT in voice mode, or maybe we hide it too? 
+                User said "chat menu should disappear". Usually the floating button stays to close it, 
+                but let's hide the toggler if we are in voice mode to focus on the 'Cancel' button?
+                Or keep standard toggler? User said "click cancel... golden widget should appear back".
+                This implies the Voice UI is modal. Detailed logic below:
+            */}
 
-            {/* Chat Window */}
+            {/* Standard "Golden Button" - Hidden during Voice Call */}
+            {chatMode !== 'voice' && (
+                <motion.button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="fixed z-[2147483647] rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform duration-300"
+                    style={{
+                        bottom: '40px',
+                        right: '40px',
+                        width: '60px',
+                        height: '60px',
+                        backgroundColor: '#c9a961'
+                    }}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    initial={{ scale: 1 }}
+                    animate={{ scale: 1 }}
+                >
+                    <AnimatePresence mode="wait">
+                        {isOpen ? (
+                            <motion.div
+                                key="close"
+                                initial={{ rotate: -90, opacity: 0 }}
+                                animate={{ rotate: 0, opacity: 1 }}
+                                exit={{ rotate: 90, opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <X className="w-6 h-6 text-white" />
+                            </motion.div>
+                        ) : (
+                            <motion.div
+                                key="chat"
+                                initial={{ rotate: 90, opacity: 0 }}
+                                animate={{ rotate: 0, opacity: 1 }}
+                                exit={{ rotate: -90, opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                <MessageCircle className="w-6 h-6 text-white" />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </motion.button>
+            )}
+
+            {/* Main Chat Window (AI / Humor) - Hidden during Voice Call */}
             <AnimatePresence>
-                {isOpen && (
+                {isOpen && chatMode !== 'voice' && (
                     <motion.div
                         initial={{ opacity: 0, y: 20, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
                         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                        // Ensure window is also on top
                         className="fixed bottom-24 right-6 z-[2147483647] w-96 max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-8rem)] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col"
                     >
                         {/* Header */}
@@ -236,11 +243,7 @@ export default function LiveChatWidget() {
                                 <button
                                     onClick={() => {
                                         setChatMode('voice');
-                                        // Auto-trigger handled by conditional rendering + useEffect or simple click
-                                        // But since conditional rendering mounts it fresh, standard auto-start might be needed
-                                        // We will visually show it, and let the user interact with the native widget or trigger it.
-
-                                        // Delay trigger to allow mount
+                                        // Auto-trigger widget logic
                                         setTimeout(() => {
                                             const widget = document.querySelector('elevenlabs-convai') as HTMLElement;
                                             if (widget) {
@@ -263,19 +266,8 @@ export default function LiveChatWidget() {
                         {/* Messages Area */}
                         <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50 flex flex-col">
 
-                            {/* VOICE MODE CONTENT */}
-                            {chatMode === 'voice' && (
-                                <div className="flex flex-col items-center justify-center h-full text-center space-y-4 opacity-70">
-                                    <div className="w-16 h-16 rounded-full bg-danholt-gold/20 flex items-center justify-center animate-pulse">
-                                        <Mic className="w-8 h-8 text-danholt-gold" />
-                                    </div>
-                                    <p className="text-sm font-medium text-gray-800">Voice Assistant Active</p>
-                                    <p className="text-xs text-gray-500 max-w-[200px]">The widget should appear shortly. Speak naturally to our concierge.</p>
-                                </div>
-                            )}
-
                             {/* Standard Messages (AI & Humor) */}
-                            {chatMode !== 'voice' && messages.map((message, index) => (
+                            {messages.map((message, index) => (
                                 <motion.div
                                     key={index}
                                     initial={{ opacity: 0, y: 10 }}
@@ -295,7 +287,7 @@ export default function LiveChatWidget() {
                             ))}
 
                             {/* Typing Indicator */}
-                            {isTyping && chatMode !== 'voice' && (
+                            {isTyping && (
                                 <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
@@ -410,7 +402,7 @@ export default function LiveChatWidget() {
                         {chatMode !== 'ai' && (
                             <div className="p-4 bg-gray-50 border-t border-gray-200 text-center">
                                 <p className="text-xs text-gray-400 italic">
-                                    {chatMode === 'voice' ? 'Voice activation...' : 'Select an option above to interact'}
+                                    Select an option above to interact
                                 </p>
                             </div>
                         )}
@@ -418,16 +410,31 @@ export default function LiveChatWidget() {
                 )}
             </AnimatePresence>
 
-            {/* CONDITIONAL ElevenLabs Voice Widget 
-                Only rendered when chatMode is 'voice' AND widget is Open. 
-                Unmounting destroys the session/UI, ensuring it disappears completely.
+            {/* EXCLUSIVE VOICE MODE UI
+                Only rendered when chatMode is 'voice'. 
+                Shows a minimal "End Call" button and the ElevenLabs widget container.
             */}
             {isOpen && chatMode === 'voice' && (
-                <div>
-                    {/* @ts-ignore */}
-                    <elevenlabs-convai agent-id="agent_4701kfynh9t9fwsrvabne3hs7f3f"></elevenlabs-convai>
-                    <Script src="https://elevenlabs.io/convai-widget/index.js" strategy="afterInteractive" />
-                </div>
+                <>
+                    {/* The Widget Container */}
+                    <div>
+                        {/* @ts-ignore */}
+                        <elevenlabs-convai agent-id="agent_4701kfynh9t9fwsrvabne3hs7f3f"></elevenlabs-convai>
+                        <Script src="https://elevenlabs.io/convai-widget/index.js" strategy="afterInteractive" />
+                    </div>
+
+                    {/* Custom Cancel Button */}
+                    <motion.button
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 50 }}
+                        onClick={() => setChatMode('ai')} // Return to AI mode (Main Chat)
+                        className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-[2147483647] flex items-center gap-2 px-6 py-3 bg-red-600/90 backdrop-blur-md text-white rounded-full font-bold shadow-2xl hover:bg-red-700 transition-colors"
+                    >
+                        <PhoneOff className="w-4 h-4" />
+                        End Voice Call
+                    </motion.button>
+                </>
             )}
         </>
     );
