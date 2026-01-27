@@ -359,8 +359,8 @@ export default function LiveChatWidget() {
                                 </div>
                             )}
 
-                            {/* Standard AI Controls when empty */}
-                            {chatMode === 'ai' && messages.length === 0 && (
+                            {/* Standard AI Controls when user hasn't messaged yet */}
+                            {chatMode === 'ai' && !messages.some(m => m.isUser) && (
                                 <div className="text-center text-gray-500 mt-2">
                                     <p className="mb-2 text-[10px] uppercase tracking-widest opacity-60">Quick Questions</p>
                                     <div className="grid grid-cols-2 gap-2">
