@@ -353,12 +353,12 @@ export default function LiveChatWidget() {
                             {chatMode === 'ai' && messages.length === 0 && (
                                 <div className="text-center text-gray-500 mt-4">
                                     <p className="mb-4 text-xs uppercase tracking-widest opacity-60">Quick Questions</p>
-                                    <div className="space-y-2">
+                                    <div className="grid grid-cols-2 gap-2">
                                         {quickQuestions.map((question, index) => (
                                             <button
                                                 key={index}
                                                 onClick={() => handleQuickQuestion(question)}
-                                                className="block w-full text-left px-4 py-3 bg-white rounded-lg hover:bg-danholt-gold/5 hover:border-danholt-gold border border-gray-200 transition-all text-sm text-gray-800"
+                                                className="block w-full text-left px-3 py-3 bg-white rounded-lg hover:bg-danholt-gold/5 hover:border-danholt-gold border border-gray-200 transition-all text-xs text-gray-800 h-full flex items-center"
                                             >
                                                 {question}
                                             </button>
