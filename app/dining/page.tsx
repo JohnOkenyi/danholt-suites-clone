@@ -142,16 +142,7 @@ export default function DiningPage() {
                                     </div>
                                 )}
 
-                                {/* Leaf icon also shown statically next to description or name if desired, 
-                                    but design requested "Leaf icon for vegetarian/special items".
-                                    I'll add it visibly next to the name for better visibility as per common menu designs. 
-                                */}
-                                {item.isVeg && (
-                                    <div className="flex items-center gap-2 mt-2">
-                                        <Leaf className="w-4 h-4 text-teal-400" />
-                                        <span className="text-xs text-teal-400 uppercase tracking-wider font-semibold">Vegetarian Friendly</span>
-                                    </div>
-                                )}
+
                             </div>
                         ))}
                     </motion.div>
