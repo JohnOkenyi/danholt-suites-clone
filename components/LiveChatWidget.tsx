@@ -59,7 +59,7 @@ export default function LiveChatWidget() {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Array<{ text: string; isUser: boolean; isJoke?: boolean }>>([]);
     const [inputValue, setInputValue] = useState('');
-    const [chatMode, setChatMode] = useState<'ai' | 'humor'>('ai');
+    const [chatMode, setChatMode] = useState<'ai' | 'humor' | 'voice'>('ai');
     const [isTyping, setIsTyping] = useState(false);
     const [isConnecting, setIsConnecting] = useState(false);
 
@@ -94,9 +94,19 @@ export default function LiveChatWidget() {
         } else if (chatMode === 'ai') {
             // Strictly reset to Quick Questions (empty history) when returning to AI
             setMessages([]);
+        } else if (chatMode === 'voice') {
+            // Clear messages or show a placeholder?
+            setMessages([]);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [chatMode]);
+
+    // Close voice mode if widget closes
+    useEffect(() => {
+        if (!isOpen) {
+            setChatMode('ai'); // Reset to default on close to kill voice session
+        }
+    }, [isOpen]);
 
     const processResponse = (query: string) => {
         setIsTyping(true);
@@ -224,57 +234,27 @@ export default function LiveChatWidget() {
                                     Humor
                                 </button>
                                 <button
-                                    disabled={isTyping || isConnecting}
                                     onClick={() => {
-                                        setIsConnecting(true);
+                                        setChatMode('voice');
+                                        // Auto-trigger handled by conditional rendering + useEffect or simple click
+                                        // But since conditional rendering mounts it fresh, standard auto-start might be needed
+                                        // We will visually show it, and let the user interact with the native widget or trigger it.
 
-                                        // Helper to find and click the launcher
-                                        const tryClick = () => {
+                                        // Delay trigger to allow mount
+                                        setTimeout(() => {
                                             const widget = document.querySelector('elevenlabs-convai') as HTMLElement;
-                                            if (!widget) return false;
-
-                                            // 1. Direct click on host
-                                            widget.click();
-
-                                            // 2. Recursive Shadow DOM search for launcher/button
-                                            if (widget.shadowRoot) {
-                                                const launcher = widget.shadowRoot.querySelector('[part="launcher"]');
-                                                if (launcher instanceof HTMLElement) {
-                                                    launcher.click();
-                                                    return true;
-                                                }
-                                                const internalBtn = widget.shadowRoot.querySelector('button');
-                                                if (internalBtn instanceof HTMLElement) {
-                                                    internalBtn.click();
-                                                    return true;
-                                                }
+                                            if (widget) {
+                                                widget.click();
                                             }
-                                            return false;
-                                        };
-
-                                        // Attempt click immediately and retries
-                                        let attempts = 0;
-                                        const attempt = () => {
-                                            if (tryClick()) {
-                                                // Success
-                                                setTimeout(() => setIsConnecting(false), 2000);
-                                            } else if (attempts < 5) { // Retry for ~2.5 seconds
-                                                attempts++;
-                                                setTimeout(attempt, 500);
-                                            } else {
-                                                // Failed
-                                                setIsConnecting(false);
-                                            }
-                                        };
-                                        attempt();
+                                        }, 100);
                                     }}
-                                    className={`flex flex-col items-center justify-center gap-1 py-2 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${isConnecting
-                                        ? 'bg-danholt-gold text-white animate-pulse'
+                                    className={`flex flex-col items-center justify-center gap-1 py-2 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${chatMode === 'voice'
+                                        ? 'bg-danholt-gold text-white shadow-sm'
                                         : 'text-white/70 hover:bg-white/10 hover:text-white'
                                         }`}
                                 >
                                     <Mic className="w-4 h-4" />
-                                    {isConnecting ? 'Connecting' : 'Voice Call'}
+                                    Voice Call
                                 </button>
                             </div>
 
@@ -282,8 +262,20 @@ export default function LiveChatWidget() {
 
                         {/* Messages Area */}
                         <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50 flex flex-col">
-                            {/* Standard Messages */}
-                            {messages.map((message, index) => (
+
+                            {/* VOICE MODE CONTENT */}
+                            {chatMode === 'voice' && (
+                                <div className="flex flex-col items-center justify-center h-full text-center space-y-4 opacity-70">
+                                    <div className="w-16 h-16 rounded-full bg-danholt-gold/20 flex items-center justify-center animate-pulse">
+                                        <Mic className="w-8 h-8 text-danholt-gold" />
+                                    </div>
+                                    <p className="text-sm font-medium text-gray-800">Voice Assistant Active</p>
+                                    <p className="text-xs text-gray-500 max-w-[200px]">The widget should appear shortly. Speak naturally to our concierge.</p>
+                                </div>
+                            )}
+
+                            {/* Standard Messages (AI & Humor) */}
+                            {chatMode !== 'voice' && messages.map((message, index) => (
                                 <motion.div
                                     key={index}
                                     initial={{ opacity: 0, y: 10 }}
@@ -303,7 +295,7 @@ export default function LiveChatWidget() {
                             ))}
 
                             {/* Typing Indicator */}
-                            {isTyping && (
+                            {isTyping && chatMode !== 'voice' && (
                                 <motion.div
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
@@ -317,14 +309,14 @@ export default function LiveChatWidget() {
                                 </motion.div>
                             )}
 
-                            {/* Humor Mode Controls */}
+                            {/* Humor Mode Controls - FIXED CONTRAST */}
                             {chatMode === 'humor' && !isTyping && (
                                 <div className="mt-auto space-y-3 pt-4">
                                     {!activeJokeCategory ? (
                                         <div className="grid grid-cols-1 gap-2">
                                             <button
                                                 onClick={() => playJoke('hotel')}
-                                                className="flex items-center gap-3 p-3 bg-white hover:bg-danholt-gold/10 border border-gray-200 rounded-xl transition-all text-sm font-medium text-left group"
+                                                className="flex items-center gap-3 p-3 bg-white hover:bg-danholt-gold/10 border border-gray-200 rounded-xl transition-all text-sm font-medium text-left group text-gray-800"
                                             >
                                                 <div className="w-8 h-8 rounded-full bg-danholt-gold/20 flex items-center justify-center text-danholt-dark group-hover:bg-danholt-gold group-hover:text-white transition-colors">
                                                     <Building size={16} />
@@ -333,7 +325,7 @@ export default function LiveChatWidget() {
                                             </button>
                                             <button
                                                 onClick={() => playJoke('rooms_sleep')}
-                                                className="flex items-center gap-3 p-3 bg-white hover:bg-danholt-gold/10 border border-gray-200 rounded-xl transition-all text-sm font-medium text-left group"
+                                                className="flex items-center gap-3 p-3 bg-white hover:bg-danholt-gold/10 border border-gray-200 rounded-xl transition-all text-sm font-medium text-left group text-gray-800"
                                             >
                                                 <div className="w-8 h-8 rounded-full bg-danholt-gold/20 flex items-center justify-center text-danholt-dark group-hover:bg-danholt-gold group-hover:text-white transition-colors">
                                                     <Bed size={16} />
@@ -342,7 +334,7 @@ export default function LiveChatWidget() {
                                             </button>
                                             <button
                                                 onClick={() => playJoke('food_dining')}
-                                                className="flex items-center gap-3 p-3 bg-white hover:bg-danholt-gold/10 border border-gray-200 rounded-xl transition-all text-sm font-medium text-left group"
+                                                className="flex items-center gap-3 p-3 bg-white hover:bg-danholt-gold/10 border border-gray-200 rounded-xl transition-all text-sm font-medium text-left group text-gray-800"
                                             >
                                                 <div className="w-8 h-8 rounded-full bg-danholt-gold/20 flex items-center justify-center text-danholt-dark group-hover:bg-danholt-gold group-hover:text-white transition-colors">
                                                     <Coffee size={16} />
@@ -363,7 +355,7 @@ export default function LiveChatWidget() {
                                                     setActiveJokeCategory(null);
                                                     setChatMode('ai');
                                                 }}
-                                                className="px-4 py-2 bg-white border border-gray-300 text-gray-600 rounded-full text-xs font-bold uppercase tracking-wide hover:bg-gray-50 transition-colors"
+                                                className="px-4 py-2 bg-white border border-gray-300 text-gray-800 rounded-full text-xs font-bold uppercase tracking-wide hover:bg-gray-50 transition-colors"
                                             >
                                                 Back to AI Assistant
                                             </button>
@@ -381,7 +373,7 @@ export default function LiveChatWidget() {
                                             <button
                                                 key={index}
                                                 onClick={() => handleQuickQuestion(question)}
-                                                className="block w-full text-left px-4 py-3 bg-white rounded-lg hover:bg-danholt-gold/5 hover:border-danholt-gold border border-gray-200 transition-all text-sm"
+                                                className="block w-full text-left px-4 py-3 bg-white rounded-lg hover:bg-danholt-gold/5 hover:border-danholt-gold border border-gray-200 transition-all text-sm text-gray-800"
                                             >
                                                 {question}
                                             </button>
@@ -393,8 +385,8 @@ export default function LiveChatWidget() {
                             <div ref={messagesEndRef} />
                         </div>
 
-                        {/* Input Area (Hidden for humor mode usually, but kept for consistency/escape) */}
-                        {chatMode !== 'humor' && (
+                        {/* Input Area */}
+                        {chatMode === 'ai' && (
                             <div className="p-4 bg-white border-t border-gray-200">
                                 <div className="flex gap-2">
                                     <input
@@ -414,22 +406,29 @@ export default function LiveChatWidget() {
                                 </div>
                             </div>
                         )}
-                        {/* Simplified Input for Humor Mode (optional: or just hide) */}
-                        {chatMode === 'humor' && (
+                        {/* Hidden/Placeholder Input for other modes */}
+                        {chatMode !== 'ai' && (
                             <div className="p-4 bg-gray-50 border-t border-gray-200 text-center">
-                                <p className="text-xs text-gray-400 italic">Select an option above to interact</p>
+                                <p className="text-xs text-gray-400 italic">
+                                    {chatMode === 'voice' ? 'Voice activation...' : 'Select an option above to interact'}
+                                </p>
                             </div>
                         )}
                     </motion.div>
                 )}
             </AnimatePresence>
-            {/* ElevenLabs Voice Widget (Standard) - Hidden trigger, activated via custom button */}
-            {/* ElevenLabs Voice Widget (Standard) - hidden via globals.css launcher styling, but container must be visible for call UI */}
-            <div>
-                {/* @ts-ignore */}
-                <elevenlabs-convai agent-id="agent_4701kfynh9t9fwsrvabne3hs7f3f"></elevenlabs-convai>
-                <Script src="https://elevenlabs.io/convai-widget/index.js" strategy="afterInteractive" />
-            </div>
+
+            {/* CONDITIONAL ElevenLabs Voice Widget 
+                Only rendered when chatMode is 'voice' AND widget is Open. 
+                Unmounting destroys the session/UI, ensuring it disappears completely.
+            */}
+            {isOpen && chatMode === 'voice' && (
+                <div>
+                    {/* @ts-ignore */}
+                    <elevenlabs-convai agent-id="agent_4701kfynh9t9fwsrvabne3hs7f3f"></elevenlabs-convai>
+                    <Script src="https://elevenlabs.io/convai-widget/index.js" strategy="afterInteractive" />
+                </div>
+            )}
         </>
     );
 }
