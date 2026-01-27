@@ -61,6 +61,72 @@ export default function LiveChatWidget() {
     const [inputValue, setInputValue] = useState('');
     const [chatMode, setChatMode] = useState<'ai' | 'humor'>('ai');
     const [isTyping, setIsTyping] = useState(false);
+    const [isConnecting, setIsConnecting] = useState(false);
+
+    // ... existing code ...
+
+    return (
+        // ... existing JSX ...
+        <button
+            disabled={isTyping || isConnecting}
+            onClick={() => {
+                setIsConnecting(true);
+
+                // Helper to find and click the launcher
+                const tryClick = () => {
+                    const widget = document.querySelector('elevenlabs-convai') as HTMLElement;
+                    if (!widget) return false;
+
+                    // 1. Direct click on host
+                    widget.click();
+
+                    // 2. Recursive Shadow DOM search for launcher/button
+                    if (widget.shadowRoot) {
+                        const launcher = widget.shadowRoot.querySelector('[part="launcher"]');
+                        if (launcher instanceof HTMLElement) {
+                            launcher.click();
+                            return true;
+                        }
+                        const internalBtn = widget.shadowRoot.querySelector('button');
+                        if (internalBtn instanceof HTMLElement) {
+                            internalBtn.click();
+                            return true;
+                        }
+                    }
+                    return false;
+                };
+
+                // Attempt click immediately and retries
+                let attempts = 0;
+                const attempt = () => {
+                    if (tryClick()) {
+                        // Success
+                        setTimeout(() => setIsConnecting(false), 2000);
+                    } else if (attempts < 5) { // Retry for ~2.5 seconds
+                        attempts++;
+                        setTimeout(attempt, 500);
+                    } else {
+                        // Failed
+                        setIsConnecting(false);
+                        // Optional: Could show error toast here
+                    }
+                };
+                attempt();
+            }}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all shadow-md border border-white/10 ${isConnecting
+                ? 'bg-gray-800 text-gray-300'
+                : 'bg-black text-white hover:bg-gray-800'
+                }`}
+        >
+            {isConnecting ? (
+                <span className="animate-pulse">Connecting...</span>
+            ) : (
+                <>
+                    <Mic className="w-3 h-3" />
+                    Voice Call
+                </>
+            )}
+        </button>
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const [activeJokeCategory, setActiveJokeCategory] = useState<JokeCategory | null>(null);
 
@@ -219,7 +285,12 @@ export default function LiveChatWidget() {
                                     Humor Mode
                                 </button>
                                 <button
-                                    onClick={() => {
+                                    disabled={isTyping} // Re-using isTyping or add new state? Let's add local state for now or use isTyping visual
+                                    onClick={(e) => {
+                                        const btn = e.currentTarget;
+                                        const originalText = btn.innerHTML;
+                                        btn.innerHTML = '<span class="animate-pulse">Connecting...</span>';
+
                                         // Helper to find and click the launcher
                                         const tryClick = () => {
                                             const widget = document.querySelector('elevenlabs-convai') as HTMLElement;
@@ -235,23 +306,37 @@ export default function LiveChatWidget() {
                                                     launcher.click();
                                                     return true;
                                                 }
-                                                const btn = widget.shadowRoot.querySelector('button');
-                                                if (btn instanceof HTMLElement) {
-                                                    btn.click();
+                                                const internalBtn = widget.shadowRoot.querySelector('button');
+                                                if (internalBtn instanceof HTMLElement) {
+                                                    internalBtn.click();
                                                     return true;
                                                 }
                                             }
                                             return false;
                                         };
 
-                                        // Attempt click immediately
-                                        if (!tryClick()) {
-                                            // Retry after short delay if widget wasn't ready
-                                            setTimeout(tryClick, 500);
-                                            setTimeout(tryClick, 1500);
-                                        }
+                                        // Attempt click immediately and retries
+                                        let attempts = 0;
+                                        const attempt = () => {
+                                            if (tryClick()) {
+                                                // Success: Reset button text after a moment
+                                                setTimeout(() => {
+                                                    btn.innerHTML = originalText;
+                                                }, 2000);
+                                            } else if (attempts < 5) { // Retry for ~2.5 seconds
+                                                attempts++;
+                                                setTimeout(attempt, 500);
+                                            } else {
+                                                // Failed
+                                                btn.innerHTML = 'Error Loading';
+                                                setTimeout(() => {
+                                                    btn.innerHTML = originalText;
+                                                }, 2000);
+                                            }
+                                        };
+                                        attempt();
                                     }}
-                                    className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all bg-white/20 text-danholt-dark hover:bg-white/30"
+                                    className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all bg-black text-white hover:bg-gray-800 shadow-md border border-white/10"
                                 >
                                     <Mic className="w-3 h-3" />
                                     Voice Call
