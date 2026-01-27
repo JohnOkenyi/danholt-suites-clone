@@ -203,7 +203,7 @@ export default function LiveChatWidget() {
 
                             {/* Mode Toggle */}
                             {/* Mode Toggle Tabs */}
-                            <div className="grid grid-cols-3 gap-1 mt-4 p-1 bg-black/20 rounded-lg backdrop-blur-sm">
+                            <div className="grid grid-cols-2 gap-2 mt-4 p-1 bg-black/20 rounded-lg backdrop-blur-sm">
                                 <button
                                     onClick={() => setChatMode('ai')}
                                     className={`flex flex-col items-center justify-center gap-1 py-2 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${chatMode === 'ai'
