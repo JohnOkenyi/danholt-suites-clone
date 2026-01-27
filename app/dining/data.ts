@@ -7,6 +7,10 @@ export type MenuItem = {
 
 export const MENU_CATEGORIES = ["Main Dishes & Sides", "Swallow Meals"];
 
+export const CATEGORY_DESCRIPTIONS = {
+    "Swallow Meals": "These meals include soup and protein:"
+};
+
 export const MENU_ITEMS: Record<string, MenuItem[]> = {
     "Main Dishes & Sides": [
         { name: "Jollof Rice", price: 4000, description: "Classic Nigerian smoky rice dish.", isVeg: true },
