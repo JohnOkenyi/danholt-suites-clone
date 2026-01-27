@@ -340,4 +340,8 @@ p {
   100% {
     background-position: -200% 0;
   }
-}
+
+  /* ElevenLabs Customization */
+  elevenlabs-convai::part(launcher) {
+    display: none !important;
+  }

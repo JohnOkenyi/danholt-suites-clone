@@ -377,7 +377,8 @@ export default function LiveChatWidget() {
                 )}
             </AnimatePresence>
             {/* ElevenLabs Voice Widget (Standard) - Hidden trigger, activated via custom button */}
-            <div className="fixed opacity-0 pointer-events-none">
+            {/* ElevenLabs Voice Widget (Standard) - hidden via globals.css launcher styling, but container must be visible for call UI */}
+            <div>
                 {/* @ts-ignore */}
                 <elevenlabs-convai agent-id="agent_4701kfynh9t9fwsrvabne3hs7f3f"></elevenlabs-convai>
                 <Script src="https://elevenlabs.io/convai-widget/index.js" strategy="afterInteractive" />
