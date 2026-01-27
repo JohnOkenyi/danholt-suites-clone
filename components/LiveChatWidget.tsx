@@ -220,20 +220,35 @@ export default function LiveChatWidget() {
                                 </button>
                                 <button
                                     onClick={() => {
-                                        const widget = document.querySelector('elevenlabs-convai') as HTMLElement;
-                                        if (widget) {
-                                            // 1. Try clicking the host
+                                        // Helper to find and click the launcher
+                                        const tryClick = () => {
+                                            const widget = document.querySelector('elevenlabs-convai') as HTMLElement;
+                                            if (!widget) return false;
+
+                                            // 1. Direct click on host
                                             widget.click();
-                                            // 2. Try accessing shadow DOM launcher
+
+                                            // 2. Recursive Shadow DOM search for launcher/button
                                             if (widget.shadowRoot) {
                                                 const launcher = widget.shadowRoot.querySelector('[part="launcher"]');
                                                 if (launcher instanceof HTMLElement) {
                                                     launcher.click();
+                                                    return true;
                                                 }
-                                                // 3. Fallback: try finding a button inside
                                                 const btn = widget.shadowRoot.querySelector('button');
-                                                if (btn) btn.click();
+                                                if (btn instanceof HTMLElement) {
+                                                    btn.click();
+                                                    return true;
+                                                }
                                             }
+                                            return false;
+                                        };
+
+                                        // Attempt click immediately
+                                        if (!tryClick()) {
+                                            // Retry after short delay if widget wasn't ready
+                                            setTimeout(tryClick, 500);
+                                            setTimeout(tryClick, 1500);
                                         }
                                     }}
                                     className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all bg-white/20 text-danholt-dark hover:bg-white/30"
