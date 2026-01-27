@@ -5,30 +5,28 @@ export type MenuItem = {
     isVeg: boolean;
 }
 
-export const MENU_CATEGORIES = ["Appetizers", "Main Courses", "Desserts", "Beverages", "Wine Selection"];
+export const MENU_CATEGORIES = ["Main Dishes & Sides", "Swallow Meals"];
 
 export const MENU_ITEMS: Record<string, MenuItem[]> = {
-    "Appetizers": [
-        { name: "Suya Platter", price: 5500, description: "Spicy grilled beef skewers served with onions, tomatoes, and dried pepper.", isVeg: false },
-        { name: "Pepper Soup", price: 4500, description: "Hot and spicy broth with assorted meats and traditional spices.", isVeg: false },
-        { name: "Moi Moi", price: 3000, description: "Steamed bean pudding made from black-eyed peas, onions, and fresh ground peppers.", isVeg: true },
+    "Main Dishes & Sides": [
+        { name: "Jollof Rice", price: 4000, description: "Classic Nigerian smoky rice dish.", isVeg: true },
+        { name: "White Rice", price: 4000, description: "Steamed white rice.", isVeg: true },
+        { name: "Spicy Chicken", price: 2000, description: "Succulent chicken piece with spicy sauce.", isVeg: false },
+        { name: "Indomie Spicy", price: 2500, description: "Spicy noodles prepared with vegetables and seasoning.", isVeg: true },
+        { name: "Chicken Peppersoup", price: 2500, description: "Hot and spicy broth with chicken.", isVeg: false },
+        { name: "Yam and Egg Sauce", price: 3000, description: "Boiled yam served with savory egg sauce.", isVeg: true },
+        { name: "Afang Soup / Chicken", price: 4000, description: "Rich vegetable soup with chicken.", isVeg: false },
+        { name: "Vegetable Soup / Chicken", price: 4000, description: "Fresh vegetable soup served with chicken.", isVeg: false },
+        { name: "Shawarma / Chicken", price: 2500, description: "Wrap with chicken filling and creamy sauce.", isVeg: false },
+        { name: "Special Fried Rice", price: 4000, description: "Fried rice with mixed vegetables and special seasoning.", isVeg: false },
+        { name: "Spicy Chicken (Large)", price: 2500, description: "Large portion of spicy chicken.", isVeg: false },
+        { name: "Fried 2 pieces Egg", price: 1000, description: "Two fried eggs.", isVeg: true },
     ],
-    "Main Courses": [
-        { name: "Jollof Rice with Chicken", price: 8500, description: "The legendary Nigerian smoked rice served with fried plantains and grilled chicken.", isVeg: false },
-        { name: "Egusi Soup with Pounded Yam", price: 9000, description: "Ground melon seed soup with leaf vegetables and assorted meat, served with soft pounded yam.", isVeg: false },
-        { name: "Efo Riro with Eba", price: 7500, description: "Rich vegetable soup stirred in palm oil with crayfish and locust beans, served with cassava flour dough.", isVeg: false },
-        { name: "Fried Rice with Chicken", price: 8000, description: "Stir-fried rice with mixed vegetables, liver, and prawns, paired with succulent chicken.", isVeg: false },
-    ],
-    "Desserts": [
-        { name: "Chin Chin", price: 2000, description: "Crunchy fried dough nuggets, a beloved Nigerian snack.", isVeg: true },
-        { name: "Puff Puff", price: 1500, description: "Soft, spongy, deep-fried dough balls dusted with sugar.", isVeg: true },
-    ],
-    "Beverages": [
-        { name: "Chapman", price: 2500, description: "Nigeria's signature fruity mocktail with cucumber, lemon, and grenadine.", isVeg: true },
-        { name: "Zobo Drink", price: 1800, description: "Refreshing hibiscus flower drink infused with ginger and pineapple.", isVeg: true },
-        { name: "Nigerian Beer Selection", price: 2000, description: "Chilled selection of popular local lagers and stouts.", isVeg: true },
-    ],
-    "Wine Selection": [
-        { name: "Palm Wine", price: 3500, description: "Traditional sweet, milky accents, tapped fresh from the palm tree.", isVeg: true },
+    "Swallow Meals": [
+        { name: "Garri & Egusi", price: 4000, description: "Cassava flakes dough served with melon seed soup and protein.", isVeg: false },
+        { name: "Garri & Afang", price: 4000, description: "Cassava flakes dough served with Afang soup and protein.", isVeg: false },
+        { name: "Semo & Soup", price: 4000, description: "Semolina dough served with your choice of soup (Egusi, Afang, Okra) and protein.", isVeg: false },
+        { name: "Pounded Yam & Soup", price: 4000, description: "Soft pounded yam served with soup and protein.", isVeg: false },
+        { name: "Amala & Soup", price: 4000, description: "Yam flour dough served with soup and protein.", isVeg: false },
     ]
 };
