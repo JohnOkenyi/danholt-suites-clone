@@ -34,7 +34,7 @@ export default function DiningPage() {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.2 }}
-                        className="inline-block text-danholt-gold text-sm font-bold tracking-[0.3em] uppercase mb-6 border border-danholt-gold/30 px-6 py-2 rounded-full backdrop-blur-sm bg-danholt-midnight/30 md:mt-32"
+                        className="inline-block text-danholt-gold text-sm font-bold tracking-[0.3em] uppercase mb-6 border border-danholt-gold/30 px-6 py-2 rounded-full backdrop-blur-sm bg-danholt-midnight/30"
                     >
                         Fine Dining
                     </motion.span>
