@@ -247,10 +247,7 @@ export default function LiveChatWidget() {
                                             }
                                         }, 100);
                                     }}
-                                    className={`flex flex-col items-center justify-center gap-1 py-2 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${chatMode === 'voice'
-                                        ? 'bg-danholt-gold text-white shadow-sm'
-                                        : 'text-white/70 hover:bg-white/10 hover:text-white'
-                                        }`}
+                                    className="flex flex-col items-center justify-center gap-1 py-2 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all text-white/70 hover:bg-white/10 hover:text-white"
                                 >
                                     <Mic className="w-4 h-4" />
                                     Voice Call
