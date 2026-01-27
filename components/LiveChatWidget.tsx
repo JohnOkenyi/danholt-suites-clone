@@ -77,7 +77,7 @@ export default function LiveChatWidget() {
         scrollToBottom();
     }, [messages, isTyping, chatMode]);
 
-    // Handle initial greeting when switching to Humor Mode
+    // Handle initial greeting when switching to Humor Mode or AI Mode
     useEffect(() => {
         if (chatMode === 'humor') {
             setMessages(prev => {
@@ -92,10 +92,12 @@ export default function LiveChatWidget() {
             });
             setActiveJokeCategory(null);
         } else if (chatMode === 'ai') {
-            // Strictly reset to Quick Questions (empty history) when returning to AI
-            setMessages([]);
+            // Reset to AI Welcome Message
+            setMessages([{
+                text: "Welcome to AI Assist Mode. I’m your dedicated digital concierge. How may I ensure your stay is exceptional today?",
+                isUser: false
+            }]);
         } else if (chatMode === 'voice') {
-            // Clear messages or show a placeholder?
             setMessages([]);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -129,13 +131,13 @@ export default function LiveChatWidget() {
     const handleSendMessage = () => {
         if (!inputValue.trim()) return;
         const msg = inputValue;
-        setMessages([...messages, { text: msg, isUser: true }]);
+        setMessages(prev => [...prev, { text: msg, isUser: true }]);
         setInputValue('');
         processResponse(msg);
     };
 
     const handleQuickQuestion = (question: string) => {
-        setMessages([...messages, { text: question, isUser: true }]);
+        setMessages(prev => [...prev, { text: question, isUser: true }]);
         processResponse(question);
     };
 
@@ -210,7 +212,15 @@ export default function LiveChatWidget() {
                         className="fixed bottom-4 right-4 z-[2147483647] w-96 max-w-[calc(100vw-2rem)] min-h-[400px] h-auto max-h-[85vh] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col"
                     >
                         {/* Header - Compact */}
-                        <div className="bg-gradient-to-r from-danholt-gold to-yellow-500 p-5 text-danholt-dark shrink-0">
+                        <div className="bg-gradient-to-r from-danholt-gold to-yellow-500 p-5 text-danholt-dark shrink-0 relative">
+                            {/* Close Button in Header */}
+                            <button
+                                onClick={() => setIsOpen(false)}
+                                className="absolute top-4 right-4 p-1 rounded-full hover:bg-black/10 transition-colors text-danholt-dark"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+
                             <h3 className="text-lg font-bold mb-1">Danholt Concierge</h3>
                             <p className="text-xs opacity-90">How may we assist you today?</p>
 
