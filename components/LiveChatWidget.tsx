@@ -153,14 +153,10 @@ export default function LiveChatWidget() {
 
     return (
         <>
-            {/* Chat Button (Only visible if NOT in voice mode, or maybe we hide it too? 
-                User said "chat menu should disappear". Usually the floating button stays to close it, 
-                but let's hide the toggler if we are in voice mode to focus on the 'Cancel' button?
-                Or keep standard toggler? User said "click cancel... golden widget should appear back".
-                This implies the Voice UI is modal. Detailed logic below:
-            */}
+            {/* Load ElevenLabs Script Once */}
+            <Script src="https://elevenlabs.io/convai-widget/index.js" strategy="afterInteractive" />
 
-            {/* Standard "Golden Button" - Hidden during Voice Call */}
+            {/* Chat Button (Only visible if NOT in voice mode) */}
             {chatMode !== 'voice' && (
                 <motion.button
                     onClick={() => setIsOpen(!isOpen)}
@@ -420,7 +416,7 @@ export default function LiveChatWidget() {
                     <div>
                         {/* @ts-ignore */}
                         <elevenlabs-convai agent-id="agent_4701kfynh9t9fwsrvabne3hs7f3f"></elevenlabs-convai>
-                        <Script src="https://elevenlabs.io/convai-widget/index.js" strategy="afterInteractive" />
+                        {/* Script moved to top level */}
                     </div>
 
                     {/* Custom Cancel Button */}
