@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, Send, Bot, Sparkles, Coffee, Bed, Building } from 'lucide-react';
+import { MessageCircle, X, Send, Bot, Sparkles, Coffee, Bed, Building, Mic } from 'lucide-react';
+import Script from 'next/script';
 
 const quickQuestions = [
     "What are your room rates?",
@@ -217,6 +218,18 @@ export default function LiveChatWidget() {
                                     <Sparkles className="w-3 h-3" />
                                     Humor Mode
                                 </button>
+                                <button
+                                    onClick={() => {
+                                        const widget = document.querySelector('elevenlabs-convai');
+                                        if (widget) {
+                                            (widget as HTMLElement).click();
+                                        }
+                                    }}
+                                    className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap bg-white/20 text-danholt-dark hover:bg-white/30"
+                                >
+                                    <Mic className="w-3 h-3" />
+                                    Voice Call
+                                </button>
                             </div>
                         </div>
 
@@ -363,6 +376,12 @@ export default function LiveChatWidget() {
                     </motion.div>
                 )}
             </AnimatePresence>
+            {/* ElevenLabs Voice Widget (Standard) - Hidden trigger, activated via custom button */}
+            <div className="fixed opacity-0 pointer-events-none">
+                {/* @ts-ignore */}
+                <elevenlabs-convai agent-id="agent_4701kfynh9t9fwsrvabne3hs7f3f"></elevenlabs-convai>
+                <Script src="https://elevenlabs.io/convai-widget/index.js" strategy="afterInteractive" />
+            </div>
         </>
     );
 }

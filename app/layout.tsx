@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import React from 'react';
-import Script from 'next/script';
 import { Inter, Playfair_Display } from 'next/font/google';
 import './globals.css';
 import PublicLayout from '@/components/PublicLayout';
@@ -27,11 +26,6 @@ export default function RootLayout({
             {children}
           </PublicLayout>
         </SmoothScrolling>
-
-        {/* ElevenLabs Voice Agent Widget */}
-        {/* @ts-ignore */}
-        <elevenlabs-convai agent-id="agent_4701kfynh9t9fwsrvabne3hs7f3f"></elevenlabs-convai>
-        <Script src="https://elevenlabs.io/convai-widget/index.js" strategy="afterInteractive" />
       </body>
     </html>
   );
