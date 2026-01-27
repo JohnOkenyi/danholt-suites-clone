@@ -207,33 +207,33 @@ export default function LiveChatWidget() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 20, scale: 0.95 }}
                         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                        className="fixed bottom-32 right-2 z-[2147483647] w-96 max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-8rem)] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col"
+                        className="fixed bottom-24 right-4 z-[2147483647] w-96 max-w-[calc(100vw-3rem)] h-[600px] max-h-[calc(100vh-6rem)] bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col"
                     >
-                        {/* Header */}
-                        <div className="bg-gradient-to-r from-danholt-gold to-yellow-500 p-6 text-danholt-dark">
-                            <h3 className="text-xl font-bold mb-2">Danholt Concierge</h3>
-                            <p className="text-sm opacity-90">How may we assist you today?</p>
+                        {/* Header - Compact */}
+                        <div className="bg-gradient-to-r from-danholt-gold to-yellow-500 p-5 text-danholt-dark shrink-0">
+                            <h3 className="text-lg font-bold mb-1">Danholt Concierge</h3>
+                            <p className="text-xs opacity-90">How may we assist you today?</p>
 
                             {/* Mode Toggle Tabs */}
-                            <div className="grid grid-cols-3 gap-1 mt-4 p-1 bg-black/20 rounded-lg backdrop-blur-sm">
+                            <div className="grid grid-cols-3 gap-1 mt-3 p-1 bg-black/20 rounded-lg backdrop-blur-sm">
                                 <button
                                     onClick={() => setChatMode('ai')}
-                                    className={`flex flex-col items-center justify-center gap-1 py-2 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${chatMode === 'ai'
+                                    className={`flex flex-col items-center justify-center gap-1 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${chatMode === 'ai'
                                         ? 'bg-white text-danholt-dark shadow-sm'
                                         : 'text-white/70 hover:bg-white/10 hover:text-white'
                                         }`}
                                 >
-                                    <Bot className="w-4 h-4" />
+                                    <Bot className="w-3.5 h-3.5" />
                                     AI Assist
                                 </button>
                                 <button
                                     onClick={() => setChatMode('humor')}
-                                    className={`flex flex-col items-center justify-center gap-1 py-2 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${chatMode === 'humor'
+                                    className={`flex flex-col items-center justify-center gap-1 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${chatMode === 'humor'
                                         ? 'bg-white text-danholt-dark shadow-sm'
                                         : 'text-white/70 hover:bg-white/10 hover:text-white'
                                         }`}
                                 >
-                                    <Sparkles className="w-4 h-4" />
+                                    <Sparkles className="w-3.5 h-3.5" />
                                     Humor
                                 </button>
                                 <button
@@ -247,17 +247,17 @@ export default function LiveChatWidget() {
                                             }
                                         }, 100);
                                     }}
-                                    className="flex flex-col items-center justify-center gap-1 py-2 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all text-white/70 hover:bg-white/10 hover:text-white"
+                                    className="flex flex-col items-center justify-center gap-1 py-1.5 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all text-white/70 hover:bg-white/10 hover:text-white"
                                 >
-                                    <Mic className="w-4 h-4" />
+                                    <Mic className="w-3.5 h-3.5" />
                                     Voice Call
                                 </button>
                             </div>
 
                         </div>
 
-                        {/* Messages Area */}
-                        <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-gray-50 flex flex-col">
+                        {/* Messages Area - Flexible */}
+                        <div className="flex-1 overflow-y-auto p-4 space-y-3 bg-gray-50 flex flex-col">
 
                             {/* Standard Messages (AI & Humor) */}
                             {messages.map((message, index) => (
@@ -269,12 +269,12 @@ export default function LiveChatWidget() {
                                     className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
                                 >
                                     <div
-                                        className={`max-w-[85%] px-4 py-3 rounded-2xl ${message.isUser
+                                        className={`max-w-[85%] px-3 py-2 rounded-xl ${message.isUser
                                             ? 'bg-danholt-gold text-danholt-dark'
                                             : 'bg-white text-gray-800 border border-gray-200'
                                             } ${message.isJoke ? 'border-l-4 border-l-danholt-gold shadow-sm' : ''}`}
                                     >
-                                        <p className="text-sm leading-relaxed">{message.text}</p>
+                                        <p className="text-xs leading-relaxed">{message.text}</p>
                                     </div>
                                 </motion.div>
                             ))}
@@ -286,7 +286,7 @@ export default function LiveChatWidget() {
                                     animate={{ opacity: 1 }}
                                     className="flex justify-start"
                                 >
-                                    <div className="bg-white px-4 py-3 rounded-2xl border border-gray-200 flex gap-1">
+                                    <div className="bg-white px-3 py-2 rounded-xl border border-gray-200 flex gap-1">
                                         <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
                                         <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
                                         <span className="w-1.5 h-1.5 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
@@ -294,35 +294,35 @@ export default function LiveChatWidget() {
                                 </motion.div>
                             )}
 
-                            {/* Humor Mode Controls - FIXED CONTRAST */}
+                            {/* Humor Mode Controls - COMPACT */}
                             {chatMode === 'humor' && !isTyping && (
-                                <div className="mt-auto space-y-3 pt-4">
+                                <div className="mt-auto space-y-2 pt-2">
                                     {!activeJokeCategory ? (
                                         <div className="grid grid-cols-1 gap-2">
                                             <button
                                                 onClick={() => playJoke('hotel')}
-                                                className="flex items-center gap-3 p-3 bg-white hover:bg-danholt-gold/10 border border-gray-200 rounded-xl transition-all text-sm font-medium text-left group text-gray-800"
+                                                className="flex items-center gap-3 p-3 bg-white hover:bg-danholt-gold/10 border border-gray-200 rounded-lg transition-all text-xs font-bold uppercase tracking-wide text-left group text-gray-800"
                                             >
                                                 <div className="w-8 h-8 rounded-full bg-danholt-gold/20 flex items-center justify-center text-danholt-dark group-hover:bg-danholt-gold group-hover:text-white transition-colors">
-                                                    <Building size={16} />
+                                                    <Building size={14} />
                                                 </div>
                                                 Hotel Jokes
                                             </button>
                                             <button
                                                 onClick={() => playJoke('rooms_sleep')}
-                                                className="flex items-center gap-3 p-3 bg-white hover:bg-danholt-gold/10 border border-gray-200 rounded-xl transition-all text-sm font-medium text-left group text-gray-800"
+                                                className="flex items-center gap-3 p-3 bg-white hover:bg-danholt-gold/10 border border-gray-200 rounded-lg transition-all text-xs font-bold uppercase tracking-wide text-left group text-gray-800"
                                             >
                                                 <div className="w-8 h-8 rounded-full bg-danholt-gold/20 flex items-center justify-center text-danholt-dark group-hover:bg-danholt-gold group-hover:text-white transition-colors">
-                                                    <Bed size={16} />
+                                                    <Bed size={14} />
                                                 </div>
                                                 Room & Sleep Jokes
                                             </button>
                                             <button
                                                 onClick={() => playJoke('food_dining')}
-                                                className="flex items-center gap-3 p-3 bg-white hover:bg-danholt-gold/10 border border-gray-200 rounded-xl transition-all text-sm font-medium text-left group text-gray-800"
+                                                className="flex items-center gap-3 p-3 bg-white hover:bg-danholt-gold/10 border border-gray-200 rounded-lg transition-all text-xs font-bold uppercase tracking-wide text-left group text-gray-800"
                                             >
                                                 <div className="w-8 h-8 rounded-full bg-danholt-gold/20 flex items-center justify-center text-danholt-dark group-hover:bg-danholt-gold group-hover:text-white transition-colors">
-                                                    <Coffee size={16} />
+                                                    <Coffee size={14} />
                                                 </div>
                                                 Food & Dining Jokes
                                             </button>
@@ -351,14 +351,14 @@ export default function LiveChatWidget() {
 
                             {/* Standard AI Controls when empty */}
                             {chatMode === 'ai' && messages.length === 0 && (
-                                <div className="text-center text-gray-500 mt-4">
-                                    <p className="mb-4 text-xs uppercase tracking-widest opacity-60">Quick Questions</p>
+                                <div className="text-center text-gray-500 mt-2">
+                                    <p className="mb-2 text-[10px] uppercase tracking-widest opacity-60">Quick Questions</p>
                                     <div className="grid grid-cols-2 gap-2">
                                         {quickQuestions.map((question, index) => (
                                             <button
                                                 key={index}
                                                 onClick={() => handleQuickQuestion(question)}
-                                                className="block w-full text-left px-3 py-3 bg-white rounded-lg hover:bg-danholt-gold/5 hover:border-danholt-gold border border-gray-200 transition-all text-xs text-gray-800 h-full flex items-center"
+                                                className="block w-full text-left px-3 py-2 bg-white rounded-lg hover:bg-danholt-gold/5 hover:border-danholt-gold border border-gray-200 transition-all text-[11px] leading-tight text-gray-800 h-full flex items-center"
                                             >
                                                 {question}
                                             </button>
@@ -372,7 +372,7 @@ export default function LiveChatWidget() {
 
                         {/* Input Area */}
                         {chatMode === 'ai' && (
-                            <div className="p-4 bg-white border-t border-gray-200">
+                            <div className="p-3 bg-white border-t border-gray-200 shrink-0">
                                 <div className="flex gap-2">
                                     <input
                                         type="text"
@@ -380,21 +380,21 @@ export default function LiveChatWidget() {
                                         onChange={(e) => setInputValue(e.target.value)}
                                         onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
                                         placeholder="Type your message..."
-                                        className="flex-1 px-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:border-danholt-gold text-gray-800 text-sm"
+                                        className="flex-1 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-danholt-gold text-gray-800 text-sm"
                                     />
                                     <button
                                         onClick={handleSendMessage}
-                                        className="w-12 h-12 bg-danholt-gold rounded-full flex items-center justify-center hover:bg-yellow-500 transition-colors"
+                                        className="w-10 h-10 bg-danholt-gold rounded-full flex items-center justify-center hover:bg-yellow-500 transition-colors"
                                     >
-                                        <Send className="w-5 h-5 text-danholt-dark" />
+                                        <Send className="w-4 h-4 text-danholt-dark" />
                                     </button>
                                 </div>
                             </div>
                         )}
                         {/* Hidden/Placeholder Input for other modes */}
                         {chatMode !== 'ai' && (
-                            <div className="p-4 bg-gray-50 border-t border-gray-200 text-center">
-                                <p className="text-xs text-gray-400 italic">
+                            <div className="p-2 bg-gray-50 border-t border-gray-200 text-center shrink-0">
+                                <p className="text-[10px] text-gray-400 italic">
                                     Select an option above to interact
                                 </p>
                             </div>
