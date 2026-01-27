@@ -271,7 +271,7 @@ body {
 
 /* Smooth Scroll */
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; - Disabled to prevent conflict with Lenis */
 }
 
 /* Enhanced Typography */

@@ -39,10 +39,10 @@ export default function AnticipationSection() {
     return (
         <section ref={containerRef} className="relative w-full py-24 min-h-[700px] flex items-center justify-center overflow-hidden bg-white">
             {/* Subtle background accents for white theme */}
-            <motion.div style={{ y: isMobile ? 0 : bgY }} className="absolute inset-0 pointer-events-none">
-                {/* Subtle gold ambient lighting */}
-                <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-danholt-gold/5 blur-[120px] rounded-full pointer-events-none" />
-                <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-gray-200/50 blur-[100px] rounded-full pointer-events-none" />
+            {/* Subtle background accents - Optimized with Radial Gradients instead of Blur filters for performance */}
+            <motion.div style={{ y: isMobile ? 0 : bgY }} className="absolute inset-0 pointer-events-none opacity-50">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(212,175,55,0.03),transparent_50%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_bottom_left,rgba(229,231,235,0.1),transparent_50%)]" />
             </motion.div>
 
             {/* Central Typography */}
