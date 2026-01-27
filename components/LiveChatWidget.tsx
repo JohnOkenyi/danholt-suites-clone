@@ -65,68 +65,7 @@ export default function LiveChatWidget() {
 
     // ... existing code ...
 
-    return (
-        // ... existing JSX ...
-        <button
-            disabled={isTyping || isConnecting}
-            onClick={() => {
-                setIsConnecting(true);
 
-                // Helper to find and click the launcher
-                const tryClick = () => {
-                    const widget = document.querySelector('elevenlabs-convai') as HTMLElement;
-                    if (!widget) return false;
-
-                    // 1. Direct click on host
-                    widget.click();
-
-                    // 2. Recursive Shadow DOM search for launcher/button
-                    if (widget.shadowRoot) {
-                        const launcher = widget.shadowRoot.querySelector('[part="launcher"]');
-                        if (launcher instanceof HTMLElement) {
-                            launcher.click();
-                            return true;
-                        }
-                        const internalBtn = widget.shadowRoot.querySelector('button');
-                        if (internalBtn instanceof HTMLElement) {
-                            internalBtn.click();
-                            return true;
-                        }
-                    }
-                    return false;
-                };
-
-                // Attempt click immediately and retries
-                let attempts = 0;
-                const attempt = () => {
-                    if (tryClick()) {
-                        // Success
-                        setTimeout(() => setIsConnecting(false), 2000);
-                    } else if (attempts < 5) { // Retry for ~2.5 seconds
-                        attempts++;
-                        setTimeout(attempt, 500);
-                    } else {
-                        // Failed
-                        setIsConnecting(false);
-                        // Optional: Could show error toast here
-                    }
-                };
-                attempt();
-            }}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all shadow-md border border-white/10 ${isConnecting
-                ? 'bg-gray-800 text-gray-300'
-                : 'bg-black text-white hover:bg-gray-800'
-                }`}
-        >
-            {isConnecting ? (
-                <span className="animate-pulse">Connecting...</span>
-            ) : (
-                <>
-                    <Mic className="w-3 h-3" />
-                    Voice Call
-                </>
-            )}
-        </button>
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const [activeJokeCategory, setActiveJokeCategory] = useState<JokeCategory | null>(null);
 
@@ -331,8 +270,8 @@ export default function LiveChatWidget() {
                                         attempt();
                                     }}
                                     className={`flex flex-col items-center justify-center gap-1 py-2 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${isConnecting
-                                            ? 'bg-danholt-gold text-white animate-pulse'
-                                            : 'text-white/70 hover:bg-white/10 hover:text-white'
+                                        ? 'bg-danholt-gold text-white animate-pulse'
+                                        : 'text-white/70 hover:bg-white/10 hover:text-white'
                                         }`}
                                 >
                                     <Mic className="w-4 h-4" />
