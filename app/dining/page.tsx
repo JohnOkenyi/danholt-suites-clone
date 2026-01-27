@@ -136,11 +136,7 @@ export default function DiningPage() {
                                     {item.description}
                                 </p>
 
-                                {item.isVeg && (
-                                    <div className="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300" title="Vegetarian / Special Item">
-                                        <Leaf className="w-5 h-5 text-teal-400" />
-                                    </div>
-                                )}
+
 
 
                             </div>
