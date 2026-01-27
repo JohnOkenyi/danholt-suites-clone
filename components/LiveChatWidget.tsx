@@ -263,33 +263,32 @@ export default function LiveChatWidget() {
                             <p className="text-sm opacity-90">How may we assist you today?</p>
 
                             {/* Mode Toggle */}
-                            <div className="flex flex-wrap gap-2 mt-4 pb-2">
+                            {/* Mode Toggle Tabs */}
+                            <div className="grid grid-cols-3 gap-1 mt-4 p-1 bg-black/20 rounded-lg backdrop-blur-sm">
                                 <button
                                     onClick={() => setChatMode('ai')}
-                                    className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${chatMode === 'ai'
-                                        ? 'bg-danholt-dark text-white'
-                                        : 'bg-white/20 text-danholt-dark hover:bg-white/30'
+                                    className={`flex flex-col items-center justify-center gap-1 py-2 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${chatMode === 'ai'
+                                        ? 'bg-white text-danholt-dark shadow-sm'
+                                        : 'text-white/70 hover:bg-white/10 hover:text-white'
                                         }`}
                                 >
-                                    <Bot className="w-3 h-3" />
-                                    AI Assistant
+                                    <Bot className="w-4 h-4" />
+                                    AI Assist
                                 </button>
                                 <button
                                     onClick={() => setChatMode('humor')}
-                                    className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${chatMode === 'humor'
-                                        ? 'bg-danholt-dark text-white'
-                                        : 'bg-white/20 text-danholt-dark hover:bg-white/30'
+                                    className={`flex flex-col items-center justify-center gap-1 py-2 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${chatMode === 'humor'
+                                        ? 'bg-white text-danholt-dark shadow-sm'
+                                        : 'text-white/70 hover:bg-white/10 hover:text-white'
                                         }`}
                                 >
-                                    <Sparkles className="w-3 h-3" />
-                                    Humor Mode
+                                    <Sparkles className="w-4 h-4" />
+                                    Humor
                                 </button>
                                 <button
-                                    disabled={isTyping} // Re-using isTyping or add new state? Let's add local state for now or use isTyping visual
-                                    onClick={(e) => {
-                                        const btn = e.currentTarget;
-                                        const originalText = btn.innerHTML;
-                                        btn.innerHTML = '<span class="animate-pulse">Connecting...</span>';
+                                    disabled={isTyping || isConnecting}
+                                    onClick={() => {
+                                        setIsConnecting(true);
 
                                         // Helper to find and click the launcher
                                         const tryClick = () => {
@@ -319,29 +318,28 @@ export default function LiveChatWidget() {
                                         let attempts = 0;
                                         const attempt = () => {
                                             if (tryClick()) {
-                                                // Success: Reset button text after a moment
-                                                setTimeout(() => {
-                                                    btn.innerHTML = originalText;
-                                                }, 2000);
+                                                // Success
+                                                setTimeout(() => setIsConnecting(false), 2000);
                                             } else if (attempts < 5) { // Retry for ~2.5 seconds
                                                 attempts++;
                                                 setTimeout(attempt, 500);
                                             } else {
                                                 // Failed
-                                                btn.innerHTML = 'Error Loading';
-                                                setTimeout(() => {
-                                                    btn.innerHTML = originalText;
-                                                }, 2000);
+                                                setIsConnecting(false);
                                             }
                                         };
                                         attempt();
                                     }}
-                                    className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all bg-black text-white hover:bg-gray-800 shadow-md border border-white/10"
+                                    className={`flex flex-col items-center justify-center gap-1 py-2 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${isConnecting
+                                            ? 'bg-danholt-gold text-white animate-pulse'
+                                            : 'text-white/70 hover:bg-white/10 hover:text-white'
+                                        }`}
                                 >
-                                    <Mic className="w-3 h-3" />
-                                    Voice Call
+                                    <Mic className="w-4 h-4" />
+                                    {isConnecting ? 'Connecting' : 'Voice Call'}
                                 </button>
                             </div>
+
                         </div>
 
                         {/* Messages Area */}
