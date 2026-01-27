@@ -429,7 +429,7 @@ export default function LiveChatWidget() {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 50 }}
                         onClick={() => setChatMode('ai')} // Return to AI mode (Main Chat)
-                        className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-[2147483647] flex items-center gap-2 px-6 py-3 bg-red-600/90 backdrop-blur-md text-white rounded-full font-bold shadow-2xl hover:bg-red-700 transition-colors"
+                        className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-[2147483647] flex items-center gap-2 px-8 py-4 bg-danholt-gold text-danholt-dark rounded-full font-bold shadow-2xl hover:bg-yellow-500 transition-colors uppercase tracking-widest text-xs"
                     >
                         <PhoneOff className="w-4 h-4" />
                         End Voice Call
