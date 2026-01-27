@@ -16,7 +16,7 @@ export default function DiningPage() {
     return (
         <main className="min-h-screen bg-danholt-midnight text-white selection:bg-danholt-gold selection:text-danholt-midnight">
             {/* Hero Section */}
-            <section className="relative h-[80vh] flex items-center justify-center overflow-hidden">
+            <section className="relative min-h-[80vh] h-auto flex items-center justify-center overflow-hidden py-20">
                 <div className="absolute inset-0 z-0">
                     <Image
                         src="/images/nigerian-dish.png"
