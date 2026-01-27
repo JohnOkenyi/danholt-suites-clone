@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, X, Send, Bot, Sparkles, Coffee, Bed, Building, Mic } from 'lucide-react';
+import { MessageCircle, X, Send, Bot, Sparkles, Coffee, Bed, Building } from 'lucide-react';
 import Script from 'next/script';
 
 const quickQuestions = [
@@ -222,60 +222,7 @@ export default function LiveChatWidget() {
                                         }`}
                                 >
                                     <Sparkles className="w-4 h-4" />
-                                    Humor
-                                </button>
-                                <button
-                                    disabled={isTyping || isConnecting}
-                                    onClick={() => {
-                                        setIsConnecting(true);
-
-                                        // Helper to find and click the launcher
-                                        const tryClick = () => {
-                                            const widget = document.querySelector('elevenlabs-convai') as HTMLElement;
-                                            if (!widget) return false;
-
-                                            // 1. Direct click on host
-                                            widget.click();
-
-                                            // 2. Recursive Shadow DOM search for launcher/button
-                                            if (widget.shadowRoot) {
-                                                const launcher = widget.shadowRoot.querySelector('[part="launcher"]');
-                                                if (launcher instanceof HTMLElement) {
-                                                    launcher.click();
-                                                    return true;
-                                                }
-                                                const internalBtn = widget.shadowRoot.querySelector('button');
-                                                if (internalBtn instanceof HTMLElement) {
-                                                    internalBtn.click();
-                                                    return true;
-                                                }
-                                            }
-                                            return false;
-                                        };
-
-                                        // Attempt click immediately and retries
-                                        let attempts = 0;
-                                        const attempt = () => {
-                                            if (tryClick()) {
-                                                // Success
-                                                setTimeout(() => setIsConnecting(false), 2000);
-                                            } else if (attempts < 5) { // Retry for ~2.5 seconds
-                                                attempts++;
-                                                setTimeout(attempt, 500);
-                                            } else {
-                                                // Failed
-                                                setIsConnecting(false);
-                                            }
-                                        };
-                                        attempt();
-                                    }}
-                                    className={`flex flex-col items-center justify-center gap-1 py-2 rounded-md text-[10px] font-bold uppercase tracking-wider transition-all ${isConnecting
-                                        ? 'bg-danholt-gold text-white animate-pulse'
-                                        : 'text-white/70 hover:bg-white/10 hover:text-white'
-                                        }`}
-                                >
-                                    <Mic className="w-4 h-4" />
-                                    {isConnecting ? 'Connecting' : 'Voice Call'}
+                                    Humor Mode
                                 </button>
                             </div>
 
