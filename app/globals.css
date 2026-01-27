@@ -63,7 +63,8 @@ body {
 
 @media (min-width: 768px) {
   .bg-grain::before {
-    display: block;
+    display: none;
+    /* Disabled for performance: root cause of scroll lag */
   }
 }
 
