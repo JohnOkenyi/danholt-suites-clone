@@ -28,6 +28,14 @@ export default function RootLayout({
             {children}
           </PublicLayout>
         </SmoothScrolling>
+
+                {/* ElevenLabs Voice Agent Widget */}
+                <elevenlabs-convai agent-id="agent_4701kfynh9t9fwsrvabne3hs7f3f"></elevenlabs-convai>
+                <script
+                            src="https://elevenlabs.io/convai-widget/index.js"
+                            async
+                            type="text/javascript"
+                          ></script>
       </body>
     </html>
   );
