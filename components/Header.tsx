@@ -52,6 +52,22 @@ export default function Header() {
                 {item}
               </Link>
             ))}
+            <button
+              onClick={() => {
+                const widget = document.querySelector('elevenlabs-convai') as HTMLElement;
+                if (widget) {
+                  widget.click();
+                  if (widget.shadowRoot) {
+                    const launcher = widget.shadowRoot.querySelector('[part="launcher"]') as HTMLElement;
+                    if (launcher) launcher.click();
+                  }
+                }
+              }}
+              className="text-danholt-gold text-xs font-bold uppercase tracking-widest hover:text-white transition-colors flex items-center gap-2"
+            >
+              <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+              Voice Call
+            </button>
             <Link
               href="/membership"
               className="text-danholt-gold text-xs font-bold uppercase tracking-widest hover:text-white transition-colors mr-4"
@@ -100,6 +116,23 @@ export default function Header() {
                 {item === 'Membership' ? 'Privilege Club' : item}
               </Link>
             ))}
+            <button
+              onClick={() => {
+                setIsMobileMenuOpen(false);
+                const widget = document.querySelector('elevenlabs-convai') as HTMLElement;
+                if (widget) {
+                  widget.click();
+                  if (widget.shadowRoot) {
+                    const launcher = widget.shadowRoot.querySelector('[part="launcher"]') as HTMLElement;
+                    if (launcher) launcher.click();
+                  }
+                }
+              }}
+              className="text-3xl font-serif text-danholt-gold hover:text-white transition-colors tracking-widest flex items-center gap-3"
+            >
+              <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
+              Voice Call
+            </button>
             <Link
               href="/booking"
               onClick={() => setIsMobileMenuOpen(false)}
