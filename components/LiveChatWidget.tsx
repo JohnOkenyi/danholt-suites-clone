@@ -197,10 +197,10 @@ export default function LiveChatWidget() {
                             <p className="text-sm opacity-90">How may we assist you today?</p>
 
                             {/* Mode Toggle */}
-                            <div className="flex gap-2 mt-4 overflow-x-auto pb-2 scrollbar-hide">
+                            <div className="flex flex-wrap gap-2 mt-4 pb-2">
                                 <button
                                     onClick={() => setChatMode('ai')}
-                                    className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap ${chatMode === 'ai'
+                                    className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${chatMode === 'ai'
                                         ? 'bg-danholt-dark text-white'
                                         : 'bg-white/20 text-danholt-dark hover:bg-white/30'
                                         }`}
@@ -210,7 +210,7 @@ export default function LiveChatWidget() {
                                 </button>
                                 <button
                                     onClick={() => setChatMode('humor')}
-                                    className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap ${chatMode === 'humor'
+                                    className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all ${chatMode === 'humor'
                                         ? 'bg-danholt-dark text-white'
                                         : 'bg-white/20 text-danholt-dark hover:bg-white/30'
                                         }`}
@@ -220,12 +220,23 @@ export default function LiveChatWidget() {
                                 </button>
                                 <button
                                     onClick={() => {
-                                        const widget = document.querySelector('elevenlabs-convai');
+                                        const widget = document.querySelector('elevenlabs-convai') as HTMLElement;
                                         if (widget) {
-                                            (widget as HTMLElement).click();
+                                            // 1. Try clicking the host
+                                            widget.click();
+                                            // 2. Try accessing shadow DOM launcher
+                                            if (widget.shadowRoot) {
+                                                const launcher = widget.shadowRoot.querySelector('[part="launcher"]');
+                                                if (launcher instanceof HTMLElement) {
+                                                    launcher.click();
+                                                }
+                                                // 3. Fallback: try finding a button inside
+                                                const btn = widget.shadowRoot.querySelector('button');
+                                                if (btn) btn.click();
+                                            }
                                         }
                                     }}
-                                    className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap bg-white/20 text-danholt-dark hover:bg-white/30"
+                                    className="flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium transition-all bg-white/20 text-danholt-dark hover:bg-white/30"
                                 >
                                     <Mic className="w-3 h-3" />
                                     Voice Call
