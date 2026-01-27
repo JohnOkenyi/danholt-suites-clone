@@ -416,16 +416,15 @@ export default function LiveChatWidget() {
                         {/* Script moved to top level */}
                     </div>
 
-                    {/* Custom Cancel Button */}
+                    {/* Custom Close Button (Top Right to avoid covering UI) */}
                     <motion.button
-                        initial={{ opacity: 0, y: 50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 50 }}
-                        onClick={() => setChatMode('ai')} // Return to AI mode (Main Chat)
-                        className="fixed bottom-10 left-1/2 transform -translate-x-1/2 z-[2147483647] flex items-center gap-2 px-8 py-4 bg-danholt-gold text-danholt-dark rounded-full font-bold shadow-2xl hover:bg-yellow-500 transition-colors uppercase tracking-widest text-xs"
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.8 }}
+                        onClick={() => setChatMode('ai')} // Return to AI mode
+                        className="fixed top-28 right-4 z-[2147483647] p-3 bg-danholt-gold text-danholt-dark rounded-full shadow-2xl hover:bg-yellow-500 transition-colors"
                     >
-                        <PhoneOff className="w-4 h-4" />
-                        End Voice Call
+                        <X className="w-6 h-6" />
                     </motion.button>
                 </>
             )}
