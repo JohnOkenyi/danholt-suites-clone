@@ -422,9 +422,9 @@ export default function LiveChatWidget() {
                         animate={{ opacity: 1, scale: 1 }}
                         exit={{ opacity: 0, scale: 0.8 }}
                         onClick={() => setChatMode('ai')} // Return to AI mode
-                        className="fixed top-28 right-4 z-[2147483647] p-3 bg-danholt-gold text-danholt-dark rounded-full shadow-2xl hover:bg-yellow-500 transition-colors"
+                        className="fixed bottom-28 right-5 z-[2147483647] p-2 bg-danholt-gold text-danholt-dark rounded-full shadow-2xl hover:bg-yellow-500 transition-colors"
                     >
-                        <X className="w-6 h-6" />
+                        <X className="w-5 h-5" />
                     </motion.button>
                 </>
             )}
