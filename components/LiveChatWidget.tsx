@@ -87,21 +87,20 @@ export default function LiveChatWidget() {
 
     const scrollToBottom = () => {
         if (messages.length === 0) return;
-
-        const lastMessage = messages[messages.length - 1];
-        // In humor mode, if it's a joke, scroll to the top of the message so the user can read from the start
-        if (chatMode === 'humor' && lastMessage?.isJoke) {
-            const lastMsgElement = document.getElementById(`message-${messages.length - 1}`);
-            if (lastMsgElement) {
-                lastMsgElement.scrollIntoView({ behavior: "smooth", block: "start" });
-                return;
-            }
-        }
-
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
     useEffect(() => {
+        // If switching to humor mode, we want to see the welcome message at the top
+        if (chatMode === 'humor' && messages.length === 1 && !messages[0].isUser) {
+            const messageList = messagesEndRef.current?.parentElement;
+            if (messageList) {
+                // Force scroll to top instantly
+                messageList.scrollTo({ top: 0, behavior: 'auto' });
+                return;
+            }
+        }
+
         scrollToBottom();
         // Check for scroll indicator on new messages
         checkScrollIndicator();
