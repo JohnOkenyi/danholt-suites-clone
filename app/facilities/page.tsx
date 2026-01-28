@@ -20,6 +20,13 @@ const facilities = [
     bookingLink: "/facilities/book?facility=Sports%20Facilities"
   },
   {
+    title: "Swimming Pool",
+    description: "Dive into relaxation in our crystal-clear swimming pool. Perfect for a refreshing dip or lounging by the water. Access to pool: ₦2,000.",
+    image: "/images/swimming-pool.jpg", // Assuming this exists or will be added. If not, I'll need to use a generic one or ask.
+    features: ["Adult & Kids Sections", "Poolside Bar", "Sun Loungers", "Towel Service", "Access: ₦2,000"],
+    bookingLink: "/facilities/book?facility=Swimming%20Pool"
+  },
+  {
     title: "Children's Playground",
     description: "A safe and fun environment for our younger guests. Our playground is equipped with modern play structures and is located within a secure area so parents can relax while the kids have fun.",
     image: "/images/playground-custom.jpg",
