@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowLeft, Plus, Minus, Check, ChevronRight } from 'lucide-react'
+import { ArrowLeft, Plus, Minus, Check, ChevronRight, Calendar, Clock } from 'lucide-react'
 import { MENU_CATEGORIES, MENU_ITEMS } from '../data'
 import { TabButton } from '@/components/ui/TabButton'
 
@@ -199,14 +199,36 @@ export default function PreOrderPage() {
                                     <select name="partySize" value={formData.partySize} onChange={handleFormChange} className="w-full p-3 bg-gray-50 border rounded-lg focus:border-danholt-gold focus:outline-none">
                                         {[1, 2, 3, 4, 5, 6].map(n => <option key={n} value={`${n} Guests`}>{n} Guests</option>)}
                                     </select>
-                                    <div className="grid grid-cols-2 gap-2">
-                                        <input type="date" name="date" value={formData.date} onChange={handleFormChange} className="w-full p-3 bg-gray-50 border rounded-lg focus:border-danholt-gold focus:outline-none text-sm" />
-                                        <select name="time" value={formData.time} onChange={handleFormChange} className="w-full p-3 bg-gray-50 border rounded-lg focus:border-danholt-gold focus:outline-none">
-                                            <option value="">Time</option>
-                                            <option value="18:00">18:00</option>
-                                            <option value="19:00">19:00</option>
-                                            <option value="20:00">20:00</option>
-                                        </select>
+                                    <div className="space-y-2">
+                                        <label className="text-xs font-bold uppercase text-gray-400 tracking-wider">Date</label>
+                                        <div className="relative">
+                                            <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                                            <input
+                                                type="date"
+                                                name="date"
+                                                value={formData.date}
+                                                onChange={handleFormChange}
+                                                className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-danholt-gold focus:ring-1 focus:ring-danholt-gold transition-all text-sm"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-2">
+                                        <label className="text-xs font-bold uppercase text-gray-400 tracking-wider">Time</label>
+                                        <div className="relative">
+                                            <Clock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+                                            <select
+                                                name="time"
+                                                value={formData.time}
+                                                onChange={handleFormChange}
+                                                className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-danholt-gold focus:ring-1 focus:ring-danholt-gold transition-all appearance-none cursor-pointer"
+                                            >
+                                                <option value="">Select time</option>
+                                                {["17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00"].map(t => (
+                                                    <option key={t} value={t}>{t}</option>
+                                                ))}
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                             </motion.div>
