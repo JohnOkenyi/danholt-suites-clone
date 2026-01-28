@@ -12,6 +12,7 @@ import Link from 'next/link'
 const FACILITIES = [
     { id: 'Conference Hall', name: 'Conference Hall' },
     { id: 'Sports Facilities', name: 'Sports Facilities' },
+    { id: 'Swimming Pool', name: 'Swimming Pool' },
     { id: 'Children\'s Playground', name: 'Children\'s Playground' },
     { id: 'Other', name: 'Other / Custom Event' }
 ]
