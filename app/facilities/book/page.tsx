@@ -248,6 +248,45 @@ function FacilityBookingForm() {
                             </div>
                         </div>
 
+                        {/* Step 4: Payment Information */}
+                        <div className="space-y-6">
+                            <h2 className="text-2xl font-serif text-white border-b border-white/10 pb-4 flex items-center gap-3">
+                                <span className="bg-danholt-gold text-danholt-navy w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold">4</span>
+                                Payment Information
+                            </h2>
+
+                            <div className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-8">
+                                <div className="flex justify-between items-center mb-6 border-b border-white/10 pb-6">
+                                    <span className="text-white/60">Estimated Cost</span>
+                                    <span className="text-2xl font-serif text-danholt-gold font-bold">
+                                        {formData.facility === 'Swimming Pool' ? '₦2,000' :
+                                            formData.facility === 'Sports Facilities' ? '₦1,500' :
+                                                'Custom Quote'}
+                                    </span>
+                                </div>
+
+                                <h3 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">Bank Transfer Details</h3>
+                                <div className="space-y-3 font-mono text-sm bg-black/20 p-4 rounded-lg">
+                                    <div className="flex justify-between">
+                                        <span className="text-white/40">Bank Name:</span>
+                                        <span className="text-white">Zenith Bank</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span className="text-white/40">Account Name:</span>
+                                        <span className="text-white">Danholt Suites Ltd</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span className="text-white/40">Account Number:</span>
+                                        <span className="text-danholt-gold font-bold text-lg">1010000000</span>
+                                    </div>
+                                </div>
+                                <p className="text-xs text-white/40 mt-4 text-center">
+                                    Please verify the account name before making any transfer.
+                                    Use your name as the payment reference.
+                                </p>
+                            </div>
+                        </div>
+
                         {/* Submit Button */}
                         <div className="pt-6">
                             <button
