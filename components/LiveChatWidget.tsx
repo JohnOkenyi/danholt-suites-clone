@@ -47,7 +47,21 @@ const JOKES = {
         "We can’t fix your whole week, but we can fix your dinner.",
         "Room service motto: good things come to guests who stay in bed.",
         "Our coffee has a simple job: turn ‘check-in face’ into ‘vacation face’.",
-        "Some guests come for a night and stay for the dessert menu."
+        "Some guests come for a night and stay for the dessert menu.",
+        "Menu write:\n“Smoked free-range chicken reduction with seasonal elements.”\nI say:\n“Speak English.”\nWaiter: “Grilled chicken sir.”\n😭😭😭\nSo all that grammar just to say CHICKEN??",
+        "You order food.\nWaiter say: “10 minutes sir.”\n20 minutes pass.\n30 minutes pass.\nNow every waiter wey pass you dey vex you.\nEven people wey dey chop dey annoy you.\nYou just dey look kitchen like:\n“Who them dey cook for since?? President??” 😭😂",
+        "When Food Is Too Expensive You Start Acting Mature\nNormally you go lick plate.\nBut because na luxury place…\nYou dey act responsible:\nCut small piece.\nChew slow.\nSip water.\nPause.",
+        "Menu:\n“Signature herb-crusted chicken with infused reduction.”\nFood come.\nNa normal chicken + stew.\nI say:\n“So una just rename chicken to confuse poor people abi??",
+        "When You Pretend to Understand Fine Dining\nWaiter:\n“Our chef recommends the truffle-infused reduction with a balsamic glaze.”\nYou:\n“Mmm yes… perfect.”\nInside your head:\n“I have no idea what this man just said but I refuse to look poor today",
+        "Food Taking Forever Makes You Delusional\nAfter 40 minutes waiting…\nEvery plate that passes you looks like yours.\nSomeone walks by with salad:\n“That’s mine.”\nSteak:\n“That’s mine.”\nBirthday cake:\n“Yeah that’s probably mine too.”\nHunger removes logic completely.",
+        "I ordered “light breakfast.” Bill came heavy.",
+        "The food at Danholt is so good,\nyou stop talking mid-conversation like\n“Wait… hold on… let me focus on this bite.” 😂\nI don’t choose food at Danholt.\nMy heart chooses.\nMy stomach approves.\nMy brain shows up later.",
+        "Some people book Danholt for the rooms.\nSome for the service.\nMe?\nI’m just here for the food and pretending I have self-control",
+        "I said I wasn’t hungry.\nThen the waiter walked past with someone else’s food.\nImmediately I was starving.\nWhy does other people’s food always look better?? 😭\nAt Danholt I don’t even rush my food.\nI chew slow like a food critic.\nNodding like:\n“Yes… excellent texture… 10/10… would destroy again.” 😂\nRoom service sweet die.\nYou just lie down like king…\nFood just appear for your door.\nI say:\n“Na so rich people dey live be this??” 😭😂",
+        "Truth be told…\nSome people book Danholt for room.\nMe?\nNa food carry me come back again and again 😭🍽️",
+        "Before restaurant:\n“I’m not really hungry.”\nBut once I smell Danholt food…\nMy stomach shout:\n“WHO TALK THAT RUBBISH??” 😭\nHunger just resurrect.",
+        "Even when you FULL…\nYou still dey look food like:\n“Make I carry one more… just in case.”\nIN CASE OF WHAT???\nFlood?? 😭😂",
+        "After eating well for Danholt…\nYou reach house.\nOpen your fridge.\nSee bread and egg.\nYou just close am back quietly.\nBecause life don downgrade 😭😭😂"
     ]
 };
 
@@ -152,10 +166,35 @@ export default function LiveChatWidget() {
         processResponse(question);
     };
 
+    const [shownJokes, setShownJokes] = useState<Record<JokeCategory, number[]>>({
+        hotel: [],
+        rooms_sleep: [],
+        food_dining: []
+    });
+
     const playJoke = (category: JokeCategory) => {
         setActiveJokeCategory(category);
         const categoryJokes = JOKES[category];
-        const randomJoke = categoryJokes[Math.floor(Math.random() * categoryJokes.length)];
+
+        let availableIndices = categoryJokes.map((_, index) => index).filter(index => !shownJokes[category].includes(index));
+
+        // Reset if all jokes shown
+        if (availableIndices.length === 0) {
+            availableIndices = categoryJokes.map((_, index) => index);
+            setShownJokes(prev => ({
+                ...prev,
+                [category]: []
+            }));
+        }
+
+        const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+        const randomJoke = categoryJokes[randomIndex];
+
+        // Update shown jokes
+        setShownJokes(prev => ({
+            ...prev,
+            [category]: [...(availableIndices.length === categoryJokes.length ? [] : prev[category]), randomIndex]
+        }));
 
         setIsTyping(true);
         setTimeout(() => {
@@ -298,7 +337,7 @@ export default function LiveChatWidget() {
                                             : 'bg-white text-gray-800 border border-gray-200'
                                             } ${message.isJoke ? 'border-l-4 border-l-danholt-gold shadow-sm' : ''}`}
                                     >
-                                        <p className="text-sm leading-relaxed font-medium">{message.text}</p>
+                                        <p className="text-sm leading-relaxed font-medium whitespace-pre-wrap">{message.text}</p>
                                     </div>
                                 </motion.div>
                             ))}
