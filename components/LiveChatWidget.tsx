@@ -57,7 +57,7 @@ const JOKES = {
         "I don’t choose food at Danholt.\nMy heart chooses.\nMy stomach approves.\nMy brain shows up later.",
         "Some people book Danholt for the rooms.\nSome for the service.\nMe?\nI’m just here for the food and pretending I have self-control",
         "I said I wasn’t hungry.\nThen the waiter walked past with someone else’s food.\nImmediately I was starving.",
-        "Why does other people’s food always look better?? 😭\nAt Danholt I don’t even rush my food.\nI chew slow like a food critic.\nNodding like:\n“Yes… excellent texture… 10/10… would destroy again.” 😂",
+        "At Danholt I don’t even rush my food.\nI chew slow like a food critic.\nNodding like:\n“Yes… excellent texture… 10/10… would destroy again.” 😂",
         "Room service sweet die.\nYou just lie down like king…\nFood just appear for your door.\nI say:\n“Na so rich people dey live be this??” 😭😂",
         "Truth be told…\nSome people book Danholt for room.\nMe?\nNa food carry me come back again and again 😭🍽️",
         "Before restaurant:\n“I’m not really hungry.”\nBut once I smell Danholt food…\nMy stomach shout:\n“WHO TALK THAT RUBBISH??” 😭\nHunger just resurrect.",
