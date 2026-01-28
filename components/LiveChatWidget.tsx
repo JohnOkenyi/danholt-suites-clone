@@ -86,6 +86,18 @@ export default function LiveChatWidget() {
     const [activeJokeCategory, setActiveJokeCategory] = useState<JokeCategory | null>(null);
 
     const scrollToBottom = () => {
+        if (messages.length === 0) return;
+
+        const lastMessage = messages[messages.length - 1];
+        // In humor mode, if it's a joke, scroll to the top of the message so the user can read from the start
+        if (chatMode === 'humor' && lastMessage?.isJoke) {
+            const lastMsgElement = document.getElementById(`message-${messages.length - 1}`);
+            if (lastMsgElement) {
+                lastMsgElement.scrollIntoView({ behavior: "smooth", block: "start" });
+                return;
+            }
+        }
+
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
@@ -327,6 +339,7 @@ export default function LiveChatWidget() {
                             {messages.map((message, index) => (
                                 <motion.div
                                     key={index}
+                                    id={`message-${index}`}
                                     initial={{ opacity: 0, y: 10 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.3 }}
