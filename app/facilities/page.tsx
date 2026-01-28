@@ -14,9 +14,9 @@ const facilities = [
   },
   {
     title: "Sports Facilities",
-    description: "Maintain your active lifestyle with our premium sports facilities. Whether you prefer a competitive game of tennis or a team match on our 5-a-side football pitch, we provide the perfect environment for recreation and fitness.",
+    description: "Maintain your active lifestyle with our premium sports facilities. Whether you prefer a competitive game of tennis or a team match on our 5-a-side football pitch, we provide the perfect environment for recreation and fitness. Access to the football pitch: ₦1,500.",
     image: "/images/sports-pitch-custom.jpg",
-    features: ["5-a-side Football Pitch", "Lawn Tennis Court", "Floodlights for Night Games", "Equipment Rental"],
+    features: ["5-a-side Football Pitch", "Lawn Tennis Court", "Floodlights for Night Games", "Access: ₦1,500"],
     bookingLink: "/facilities/book?facility=Sports%20Facilities"
   },
   {
