@@ -22,7 +22,7 @@ const facilities = [
   {
     title: "Swimming Pool",
     description: "Dive into relaxation in our crystal-clear swimming pool. Perfect for a refreshing dip or lounging by the water. Access to pool: ₦2,000.",
-    image: "/images/swimming-pool.jpg", // Assuming this exists or will be added. If not, I'll need to use a generic one or ask.
+    image: "/images/swimming-pool-custom.jpg",
     features: ["Adult & Kids Sections", "Poolside Bar", "Sun Loungers", "Towel Service", "Access: ₦2,000"],
     bookingLink: "/facilities/book?facility=Swimming%20Pool"
   },
