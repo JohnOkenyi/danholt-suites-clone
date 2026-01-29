@@ -1,43 +1,55 @@
 export const KNOWLEDGE_BASE = [
     {
-        keywords: ['room', 'suite', 'accommodation', 'stay', 'sleep', 'booking', 'reservation'],
-        answer: "We offer several luxurious room options: The Presidential Suite, Royal Suite, and Executive Rooms. You can book directly through our website by clicking the 'Book Now' button."
+        keywords: ['brand', 'philosophy', 'vision', 'about', 'values'],
+        answer: "Danholt Suites operates on the philosophy 'Here is a tribute to good living!'. Our vision is Evolved Hospitality, creating curated moments and unrivaled excellence. We value intuitive service and designing spaces that disconnect you from noise and reconnect you with perfection."
     },
     {
-        keywords: ['price', 'rate', 'cost', 'expensive', 'much'],
-        answer: "Our rates vary by room type and season. Please check the 'Rooms' page on our website for the most up-to-date pricing and availability, or contact our staff for assistance."
+        keywords: ['room', 'suite', 'accommodation', 'stay', 'sleep', 'standard', 'deluxe', 'executive', 'price', 'cost', 'rate'],
+        answer: "We offer three luxury room types:\n1. STANDARD ROOM (₦10,000/night): 2 Guests, 25m², cozy retreat.\n2. DELUXE ROOM (₦15,000/night): 2 Guests, 35m², spacious elegance.\n3. EXECUTIVE DELUXE (₦20,000/night): 3 Guests, 45m², the pinnacle of luxury."
     },
     {
-        keywords: ['check-in', 'check in', 'check-out', 'check out', 'time'],
-        answer: "Standard Check-in is at 2:00 PM and Check-out is at 12:00 PM. Early check-in and late check-out can be added to your booking for a small fee during the reservation process."
+        keywords: ['location', 'address', 'where', 'find', 'landmark'],
+        answer: "We are located at #3 Iyabo, Obeyode Street (Beside Collinear Hospital), Dogbano, Jikwoyi, Phase 3, Abuja, Nigeria."
     },
     {
-        keywords: ['food', 'dining', 'restaurant', 'eat', 'menu', 'breakfast', 'dinner'],
-        answer: "Danholt Suites features world-class dining. We offer a complimentary gourmet breakfast for all guests. Our restaurant serves local and international cuisine 24/7."
+        keywords: ['contact', 'phone', 'call', 'email', 'reach', 'number', 'support'],
+        answer: "You can reach us at 0704 608 0351 / 07046080351 or +234 800 000 0000.\nEmails: reservations@danholt.com (Bookings), concierge@danholt.com (Special requests)."
     },
     {
-        keywords: ['amenities', 'pool', 'gym', 'wifi', 'internet', 'parking'],
-        answer: "All guests enjoy access to our infinity pool, state-of-the-art fitness center, high-speed Wi-Fi, and secure underground parking."
+        keywords: ['food', 'dining', 'eat', 'restaurant', 'kitchen', 'menu', 'meal', 'breakfast', 'lunch', 'dinner', 'drink', 'rice', 'chicken', 'soup'],
+        answer: "The Danholt Kitchen serves delicious Nigerian cuisines. Menu highlights:\n- Jollof/White Rice: ₦4,000\n- Spicy Chicken: ₦2,000 - ₦2,500\n- Swallow Meals (Pounded Yam, Semo, Garri, Amala) with Soup: ₦4,000\n- Drinks: Water (₦400), Sodas (₦600), Beers (₦1,000+), Wines (₦10,000+)."
     },
     {
-        keywords: ['membership', 'privilege', 'club', 'loyalty', 'rewards'],
-        answer: "The Danholt Privilege Club offers exclusive benefits like room upgrades, priority booking, and dining discounts. You can join by visiting the 'Membership' page or clicking 'Join Privilege Club' in the menu."
+        keywords: ['facility', 'amenities', 'hall', 'conference', 'sport', 'gym', 'tennis', 'football', 'pool', 'swim', 'playground', 'kids'],
+        answer: "Our facilities include:\n1. Conference Hall: Projector, Sound System, WiFi.\n2. Sports Facilities (₦1,500): 5-a-side Football, Tennis.\n3. Swimming Pool (₦2,000): Adult & Kids sections, Poolside Bar.\n4. Children's Playground: Free access, secure and supervised."
     },
     {
-        keywords: ['location', 'address', 'where', 'find'],
-        answer: "We are located in a prime area. Please check the Contact section of our website for location details or call our staff at +234 800 000 0000 for directions."
+        keywords: ['membership', 'club', 'privilege', 'loyalty', 'bronze', 'silver', 'gold', 'join'],
+        answer: "Join the Danholt Privilege Club:\n- BRONZE (₦1,000/mo): 5% off dining.\n- SILVER (₦3,000/mo): 10% off rooms, priority late checkout.\n- GOLD (₦5,000+/mo): 15% off rooms, upgrades, private events.\nAll tiers get monthly rewards!"
     },
     {
-        keywords: ['contact', 'phone', 'email', 'support', 'help'],
-        answer: "You can reach our 24/7 concierge at +234 800 000 0000 or email us at concierge@danholtsuites.com."
+        keywords: ['booking', 'reserve', 'reservation', 'payment', 'credit card'],
+        answer: "Booking is seamless online. No credit card is required. Payment options? Contact reservations@danholt.com. We accept 1-6 guests depending on capacity."
     },
     {
-        keywords: ['event', 'wedding', 'conference', 'meeting', 'party'],
-        answer: "Yes! We have elegant venues for weddings, corporate meetings, and private events. Please contact us directly for a custom quote."
+        keywords: ['check-in', 'check in', 'check-out', 'check out', 'time', 'early', 'late'],
+        answer: "Reception is open 24/7. Early check-in and Late checkout guarantees are available for ₦2,000 each (subject to availability)."
+    },
+    {
+        keywords: ['wifi', 'internet', 'security', 'safety'],
+        answer: "Yes, we provide free high-speed WiFi throughout the property and ensure your safety with 24/7 security."
+    },
+    {
+        keywords: ['package', 'offer', 'deal', 'promo', 'romantic', 'couple', 'business', 'wedding'],
+        answer: "Check out our packages:\n1. Romantic Escape: Dinner for two, late checkout.\n2. Weekend Reset: 2-night stay, breakfast, facility access.\n3. Business Traveler Pass: Work-friendly room, priority laundry."
+    },
+    {
+        keywords: ['referral', 'friend', 'invite', 'code'],
+        answer: "Our 'Friends of Danholt' referral program is in Beta. Share your code after a stay to earn rewards when friends book!"
     },
     {
         keywords: ['airport', 'pickup', 'shuttle', 'transport'],
-        answer: "We offer luxury airport pickup services. This can be arranged as an add-on during your booking or by contacting the concierge."
+        answer: "Yes, airport pickup is available as an add-on, especially recommended for our Business Traveler Pass holders."
     }
 ];
 
@@ -45,9 +57,14 @@ export function findAnswer(query: string): string | null {
     const lowerQuery = query.toLowerCase();
 
     // Find the best match based on keyword presence
-    const match = KNOWLEDGE_BASE.find(item =>
-        item.keywords.some(keyword => lowerQuery.includes(keyword))
-    );
+    // Sort by number of matching keywords to find the most specific answer
+    const match = KNOWLEDGE_BASE
+        .map(item => ({
+            item,
+            score: item.keywords.filter(keyword => lowerQuery.includes(keyword)).length
+        }))
+        .filter(result => result.score > 0)
+        .sort((a, b) => b.score - a.score)[0];
 
-    return match ? match.answer : null;
+    return match ? match.item.answer : null;
 }

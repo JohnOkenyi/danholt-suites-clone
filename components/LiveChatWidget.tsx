@@ -153,8 +153,8 @@ export default function LiveChatWidget() {
             let response;
             if (chatMode === 'ai') {
                 const answer = findAnswer(query);
-                // Fallback updated to strict "website only" policy
-                response = answer || "I can only answer questions based on the information in the website. If the information is not in the website please speak to staff, that's the hotel phone number: +234 800 000 0000.";
+                // Fallback updated to strict "website only" policy with user specific numbers
+                response = answer || "I can only answer questions based on the information in the website. If the information is not in the website please speak to staff, that's the hotel phone number: 0704 608 0351 / 07046080351 or +234 800 000 0000.";
             } else {
                 // Fallback for humor mode text input, though UI drives it mostly
                 response = "I'm best at telling jokes! Click one of the categories below.";
