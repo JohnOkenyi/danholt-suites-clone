@@ -3,7 +3,7 @@
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
-import { cookies } from 'next/headers'
+import { cookies, headers } from 'next/headers'
 
 export async function login(prevState: any, formData: FormData) {
     const email = formData.get('email') as string
@@ -66,9 +66,11 @@ export async function requestPasswordReset(email: string) {
         return { error: 'No administrator found with this email address.' }
     }
 
+    const host = headers().get('origin') || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+
     const supabase = createClient()
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/admin/reset-password`,
+        redirectTo: `${host}/auth/callback?next=/admin/reset-password`,
     })
 
     if (error) {

@@ -58,7 +58,7 @@ export async function updateSession(request: NextRequest) {
 
     // Protected routes guard
     if (request.nextUrl.pathname.startsWith('/admin') &&
-        !['/admin', '/admin/reset-password'].includes(request.nextUrl.pathname)) {
+        !['/admin', '/admin/reset-password', '/auth/callback'].includes(request.nextUrl.pathname)) {
 
         if (authError || !user) {
             return NextResponse.redirect(new URL('/admin', request.url))
