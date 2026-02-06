@@ -8,6 +8,7 @@ interface StatusUpdateButtonsProps {
     id: string;
     currentStatus: string;
     updateAction: (id: string, status: string) => Promise<{ success?: boolean; error?: string }>;
+    direction?: 'up' | 'down';
 }
 
 const statusConfig: Record<string, { icon: any, color: string, label: string }> = {
@@ -16,7 +17,7 @@ const statusConfig: Record<string, { icon: any, color: string, label: string }> 
     cancelled: { icon: X, color: 'text-red-400', label: 'Cancelled' }
 }
 
-export default function StatusUpdateButtons({ id, currentStatus, updateAction }: StatusUpdateButtonsProps) {
+export default function StatusUpdateButtons({ id, currentStatus, updateAction, direction = 'down' }: StatusUpdateButtonsProps) {
     const [isUpdating, setIsUpdating] = useState(false)
     const [showOptions, setShowOptions] = useState(false)
 
@@ -55,10 +56,11 @@ export default function StatusUpdateButtons({ id, currentStatus, updateAction }:
                             onClick={() => setShowOptions(false)}
                         />
                         <motion.div
-                            initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                            initial={{ opacity: 0, scale: 0.95, y: direction === 'down' ? -10 : 10 }}
                             animate={{ opacity: 1, scale: 1, y: 0 }}
-                            exit={{ opacity: 0, scale: 0.95, y: -10 }}
-                            className="absolute right-0 top-full mt-2 z-[70] bg-danholt-midnight border border-white/10 rounded-xl shadow-2xl p-2 min-w-[140px] backdrop-blur-xl"
+                            exit={{ opacity: 0, scale: 0.95, y: direction === 'down' ? -10 : 10 }}
+                            className={`absolute right-0 z-[70] bg-danholt-midnight border border-white/10 rounded-xl shadow-2xl p-2 min-w-[140px] backdrop-blur-xl ${direction === 'down' ? 'top-full mt-2' : 'bottom-full mb-2'
+                                }`}
                         >
                             {Object.entries(statusConfig).map(([status, config]) => (
                                 <button

@@ -197,7 +197,7 @@ export default async function AdminDashboard() {
                 </section>
 
                 {/* 1. ROOM BOOKINGS - Premium Table */}
-                <section className="bg-white/[0.03] border border-white/[0.08] rounded-2xl overflow-hidden backdrop-blur-xl shadow-2xl">
+                <section className="bg-white/[0.03] border border-white/[0.08] rounded-2xl backdrop-blur-xl shadow-2xl">
                     <div className="p-6 md:p-8 border-b border-white/[0.08] flex justify-between items-center bg-gradient-to-r from-white/[0.02] to-transparent">
                         <div className="flex items-center gap-4">
                             <div>
@@ -266,6 +266,7 @@ export default async function AdminDashboard() {
                                                         id={booking.id}
                                                         currentStatus={booking.status}
                                                         updateAction={updateBookingStatus}
+                                                        direction="down"
                                                     />
                                                     <DeleteButton
                                                         id={booking.id}
@@ -335,6 +336,7 @@ export default async function AdminDashboard() {
                                                         id={res.id}
                                                         currentStatus={res.status}
                                                         updateAction={updateReservationStatus}
+                                                        direction="up"
                                                     />
                                                     <DeleteButton
                                                         id={res.id}
@@ -400,6 +402,7 @@ export default async function AdminDashboard() {
                                                             id={res.id}
                                                             currentStatus={res.status}
                                                             updateAction={updateReservationStatus}
+                                                            direction="up"
                                                         />
                                                         <DeleteButton
                                                             id={res.id}
@@ -455,6 +458,7 @@ export default async function AdminDashboard() {
                                             id={m.id}
                                             currentStatus={m.status || 'pending'}
                                             updateAction={updateMembershipStatus}
+                                            direction="up"
                                         />
                                         <DeleteButton
                                             id={m.id}
