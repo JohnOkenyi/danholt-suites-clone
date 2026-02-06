@@ -27,8 +27,8 @@ export default function StatusUpdateButtons({ id, currentStatus, updateAction }:
         if (buttonRef.current) {
             const rect = buttonRef.current.getBoundingClientRect()
             setCoords({
-                top: rect.bottom + window.scrollY,
-                left: rect.right + window.scrollX - 140, // Assuming min-width 140px, align to right
+                top: rect.bottom,
+                left: rect.right - 140,
                 width: 140
             })
         }
@@ -37,12 +37,9 @@ export default function StatusUpdateButtons({ id, currentStatus, updateAction }:
     useEffect(() => {
         if (showOptions) {
             updateCoords()
-            // Close on scroll or resize as coordinates will change
-            window.addEventListener('scroll', () => setShowOptions(false))
             window.addEventListener('resize', () => setShowOptions(false))
         }
         return () => {
-            window.removeEventListener('scroll', () => setShowOptions(false))
             window.removeEventListener('resize', () => setShowOptions(false))
         }
     }, [showOptions])
@@ -79,13 +76,13 @@ export default function StatusUpdateButtons({ id, currentStatus, updateAction }:
             </button>
 
             {showOptions && typeof document !== 'undefined' && createPortal(
-                <div className="fixed inset-0 z-[9999] pointer-events-none">
+                <div className="fixed inset-0 z-[10000]">
                     <div
-                        className="absolute inset-0 pointer-events-auto"
+                        className="fixed inset-0 bg-transparent"
                         onClick={() => setShowOptions(false)}
                     />
                     <AnimatePresence>
-                        {showOptions && coords && (
+                        {coords && (
                             <motion.div
                                 initial={{ opacity: 0, scale: 0.95, y: -10 }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -94,9 +91,9 @@ export default function StatusUpdateButtons({ id, currentStatus, updateAction }:
                                     top: coords.top + 8,
                                     left: coords.left,
                                     width: coords.width,
-                                    position: 'absolute'
+                                    position: 'fixed'
                                 }}
-                                className="z-[10000] pointer-events-auto bg-[#0f172a] border border-white/10 rounded-xl shadow-2xl p-2 backdrop-blur-xl"
+                                className="z-[10001] bg-[#0f172a] border border-white/10 rounded-xl shadow-2xl p-2 backdrop-blur-xl"
                             >
                                 {Object.entries(statusConfig).map(([status, config]) => (
                                     <button
