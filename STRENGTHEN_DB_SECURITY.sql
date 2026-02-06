@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS admin_users (
 
 -- Enable RLS on admin_users
 ALTER TABLE admin_users ENABLE ROW LEVEL SECURITY;
+DROP POLICY IF EXISTS "Admin users are viewable by authenticated users" ON admin_users;
 CREATE POLICY "Admin users are viewable by authenticated users" ON admin_users
   FOR SELECT TO authenticated USING (true);
 
