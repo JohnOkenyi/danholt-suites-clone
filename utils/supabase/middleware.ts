@@ -58,8 +58,22 @@ export async function updateSession(request: NextRequest) {
 
     // Protected routes guard
     if (request.nextUrl.pathname.startsWith('/admin') &&
-        request.nextUrl.pathname !== '/admin') {
+        !['/admin', '/admin/reset-password'].includes(request.nextUrl.pathname)) {
+
         if (authError || !user) {
+            return NextResponse.redirect(new URL('/admin', request.url))
+        }
+
+        // Secondary check: is the user in the admin_users table?
+        const { data: isAdmin } = await supabase
+            .from('admin_users')
+            .select('email')
+            .eq('email', user.email)
+            .single()
+
+        if (!isAdmin) {
+            // Sign out if they snuck in somehow
+            await supabase.auth.signOut()
             return NextResponse.redirect(new URL('/admin', request.url))
         }
     }
