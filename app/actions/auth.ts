@@ -66,11 +66,13 @@ export async function requestPasswordReset(email: string) {
         return { error: 'No administrator found with this email address.' }
     }
 
-    const host = headers().get('origin') || process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
+    const host = headers().get('host')
+    const protocol = headers().get('x-forwarded-proto') || 'http'
+    const siteUrl = host ? `${protocol}://${host}` : process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
 
     const supabase = createClient()
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${host}/auth/callback?next=/admin/reset-password`,
+        redirectTo: `${siteUrl}/auth/callback?next=/admin/reset-password`,
     })
 
     if (error) {
