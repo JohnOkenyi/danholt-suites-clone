@@ -5,6 +5,9 @@ import { revalidatePath } from 'next/cache'
 
 export async function deleteBooking(id: string) {
     const supabase = createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return { error: 'Unauthorized' }
+
     const { error } = await supabase.from('bookings').delete().eq('id', id)
 
     if (error) {
@@ -18,6 +21,9 @@ export async function deleteBooking(id: string) {
 
 export async function updateBookingStatus(id: string, status: string) {
     const supabase = createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return { error: 'Unauthorized' }
+
     const { error } = await supabase.from('bookings').update({ status }).eq('id', id)
 
     if (error) {
@@ -31,6 +37,9 @@ export async function updateBookingStatus(id: string, status: string) {
 
 export async function deleteDiningReservation(id: string) {
     const supabase = createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return { error: 'Unauthorized' }
+
     const { error } = await supabase.from('restaurant_reservations').delete().eq('id', id)
 
     if (error) {
@@ -44,6 +53,9 @@ export async function deleteDiningReservation(id: string) {
 
 export async function deleteFacilityBooking(id: string) {
     const supabase = createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return { error: 'Unauthorized' }
+
     // Facility bookings are just restaurant_reservations with specific metadata
     const { error } = await supabase.from('restaurant_reservations').delete().eq('id', id)
 
@@ -58,6 +70,9 @@ export async function deleteFacilityBooking(id: string) {
 
 export async function deleteMembershipRequest(id: string) {
     const supabase = createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return { error: 'Unauthorized' }
+
     const { error } = await supabase.from('membership_requests').delete().eq('id', id)
 
     if (error) {
@@ -71,6 +86,9 @@ export async function deleteMembershipRequest(id: string) {
 
 export async function deleteContactMessage(id: string) {
     const supabase = createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return { error: 'Unauthorized' }
+
     const { error } = await supabase.from('contact_messages').delete().eq('id', id)
 
     if (error) {
@@ -84,6 +102,9 @@ export async function deleteContactMessage(id: string) {
 
 export async function updateReservationStatus(id: string, status: string) {
     const supabase = createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return { error: 'Unauthorized' }
+
     const { error } = await supabase.from('restaurant_reservations').update({ status }).eq('id', id)
 
     if (error) {
@@ -97,6 +118,9 @@ export async function updateReservationStatus(id: string, status: string) {
 
 export async function updateMembershipStatus(id: string, status: string) {
     const supabase = createClient()
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) return { error: 'Unauthorized' }
+
     const { error } = await supabase.from('membership_requests').update({ status }).eq('id', id)
 
     if (error) {

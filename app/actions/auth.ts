@@ -1,25 +1,30 @@
 'use server'
 
-import { cookies } from 'next/headers'
+import { createClient } from '@/utils/supabase/server'
+import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 export async function login(prevState: any, formData: FormData) {
+    const email = formData.get('email') as string
     const password = formData.get('password') as string
 
-    // Simple hardcoded check for demo
-    if (password === 'admin123') {
-        cookies().set('admin_session', 'true', {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === 'production',
-            maxAge: 60 * 60 * 24 // 1 day
-        })
-        redirect('/admin/bookings')
+    const supabase = createClient()
+
+    const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+    })
+
+    if (error) {
+        return { error: error.message }
     }
 
-    return { error: 'Invalid password' }
+    revalidatePath('/', 'layout')
+    redirect('/admin/bookings')
 }
 
 export async function logout() {
-    cookies().delete('admin_session')
+    const supabase = createClient()
+    await supabase.auth.signOut()
     redirect('/admin')
 }

@@ -16,6 +16,18 @@ function getSupabase() {
 export async function GET(request: NextRequest) {
   try {
     const supabase = getSupabase();
+
+    // Auth check for viewing bookings
+    const authHeader = request.headers.get('Authorization');
+    if (!authHeader) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const { data: { user }, error: authError } = await supabase.auth.getUser(authHeader.replace('Bearer ', ''));
+    if (authError || !user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { data, error } = await supabase
       .from('bookings')
       .select('*')

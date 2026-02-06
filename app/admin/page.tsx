@@ -34,11 +34,22 @@ export default function AdminLoginPage() {
 
         <form action={formAction} className="space-y-6">
           <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="admin@danholtsuites.com"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-danholt-gold focus:border-transparent outline-none transition-all text-black"
+              required
+            />
+          </div>
+
+          <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
             <input
               type="password"
               name="password"
-              placeholder="Enter admin password"
+              placeholder="••••••••"
               className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-danholt-gold focus:border-transparent outline-none transition-all text-black"
               required
             />
@@ -51,10 +62,6 @@ export default function AdminLoginPage() {
           )}
 
           <SubmitButton />
-
-          <p className="text-center text-xs text-gray-400 mt-4">
-            (Hint for Demo: admin123)
-          </p>
         </form>
       </div>
     </div>

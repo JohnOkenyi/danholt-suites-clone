@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice - Ed Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --text-dark: #111827;
+            --text-muted: #6b7280;
+            --border: #e5e7eb;
+            --primary: #c2410c;
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: #f3f4f6;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .invoice-container {
+            width: 210mm;
+            min-height: 297mm;
+            margin: 40px auto;
+            background: #fff;
+            padding: 2.5rem;
+            box-sizing: border-box;
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.05);
+        }
+
+        @media print {
+            body {
+                background: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            .invoice-container {
+                margin: 0;
+                box-shadow: none;
+                width: 210mm;
+                min-height: 297mm;
+            }
+        }
+
+        /* Logo Styling */
+        .logo-section {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-section img {
+            width: 440px;
+            height: auto;
+            display: inline-block;
+            image-rendering: -webkit-optimize-contrast;
+            clip-path: circle(48.5%);
+            /* Mask out the outer black square perfectly */
+        }
+
+        /* Title */
+        .invoice-title {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            color: var(--text-dark);
+            margin: 2rem 0 3rem 0;
+        }
+
+        /* Info Section */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .info-block h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 0 0 12px 0;
+        }
+
+        .info-block p {
+            font-size: 14px;
+            color: var(--text-dark);
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 12px 24px;
+        }
+
+        .meta-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .meta-value {
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        /* Table Section */
+        .table-section {
+            margin-bottom: 3rem;
+        }
+
+        .grid-header {
+            display: grid;
+            grid-template-columns: 1.5fr 2fr 1.2fr;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--text-dark);
+            margin-bottom: 1rem;
+            gap: 20px;
+        }
+
+        .grid-header span {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .grid-row {
+            display: grid;
+            grid-template-columns: 1.5fr 2fr 1.2fr;
+            padding: 1.5rem 0;
+            gap: 20px;
+            border-bottom: 1px solid transparent;
+            /* Keeps spacing consistent */
+        }
+
+        .service-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.4;
+        }
+
+        .service-detail {
+            font-size: 14px;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .service-amount {
+            font-size: 15px;
+            color: var(--text-dark);
+            text-align: right;
+            font-weight: 600;
+        }
+
+        /* Summary Section */
+        .summary-section {
+            margin-top: 2rem;
+            padding-top: 1rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+        }
+
+        .summary-label {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .summary-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .total-hr {
+            border: none;
+            border-top: 2px solid var(--text-dark);
+            margin: 5px 0;
+        }
+
+        .total-row {
+            padding: 16px 0;
+        }
+
+        .total-label {
+            font-size: 16px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--text-dark);
+        }
+
+        .total-value {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="invoice-container">
+        <!-- Logo -->
+        <div class="logo-section">
+            <img src="public/images/ed_explore_logo_original.jpg" alt="Ed Explore Logo">
+        </div>
+
+        <div class="invoice-title">INVOICE</div>
+
+        <div class="info-grid">
+            <div class="info-block">
+                <h3>From:</h3>
+                <p>Ed Tech</p>
+                <p>Ottawa, Canada</p>
+                <p>+1 (343) 324-5657</p>
+            </div>
+
+            <div class="info-block">
+                <div class="meta-grid">
+                    <span class="meta-label">Invoice No:</span>
+                    <span class="meta-value">DS-001</span>
+
+                    <span class="meta-label">Issue Date:</span>
+                    <span class="meta-value">06/02/2026</span>
+
+                    <span class="meta-label">Due Date:</span>
+                    <span class="meta-value">-</span>
+
+                    <span class="meta-label">Payment Terms:</span>
+                    <span class="meta-value">-</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-section">
+            <div class="grid-header">
+                <span>Billable Services</span>
+                <span>Details</span>
+                <span style="text-align: right;">Amount (₦)</span>
+            </div>
+
+            <div class="grid-row">
+                <div class="service-title">Website Design & Frontend Development</div>
+                <div class="service-detail">Responsive UI/UX design, Home, Rooms, Booking, Gallery,</div>
+                <div class="service-amount">₦ 400,000</div>
+            </div>
+
+            <div class="grid-row">
+                <div class="service-title">Booking & Reservation System (Backend)</div>
+                <div class="service-detail">Room availability logic, reservation forms and database setup built with
+                    Supabase</div>
+                <div class="service-amount">₦ 350,000</div>
+            </div>
+
+            <div class="grid-row">
+                <div class="service-title">Payment Gateway Integration</div>
+                <div class="service-detail">Secure card/bank payment setup using Paystack or Stripe.</div>
+                <div class="service-amount">₦ 180,000</div>
+            </div>
+
+            <div class="grid-row">
+                <div class="service-title">Deployment & Hosting Configuration</div>
+                <div class="service-detail">Production deployment via Vercel, domain connection, optimization & security
+                    setup, Codebase managed with GitHub</div>
+                <div class="service-amount">₦ 120,000</div>
+            </div>
+        </div>
+
+        <div class="summary-section">
+            <div class="summary-row">
+                <div class="summary-label">Summary</div>
+                <div class="summary-value">₦ 1,050,000</div>
+            </div>
+            <hr class="total-hr">
+            <div class="summary-row">
+                <div class="summary-label">Subtotal</div>
+                <div class="summary-value">₦ 1,050,000</div>
+            </div>
+            <hr class="total-hr">
+            <div class="summary-row total-row">
+                <div class="total-label">Total Amount Due</div>
+                <div class="total-value">₦ 1,050,000</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
