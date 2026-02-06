@@ -52,10 +52,11 @@ export async function logout() {
 }
 
 export async function requestPasswordReset(email: string) {
-    const supabase = createClient()
+    // Create a service role client to bypass RLS since the user is NOT logged in yet
+    // and we need to verify their email exists in the admin_users table
+    const supabaseAdmin = createClient(true)
 
-    // Check if user is an admin first (optional but good for safety)
-    const { data: adminUser } = await supabase
+    const { data: adminUser } = await supabaseAdmin
         .from('admin_users')
         .select('email')
         .eq('email', email)
@@ -65,6 +66,7 @@ export async function requestPasswordReset(email: string) {
         return { error: 'No administrator found with this email address.' }
     }
 
+    const supabase = createClient()
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
         redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/admin/reset-password`,
     })
