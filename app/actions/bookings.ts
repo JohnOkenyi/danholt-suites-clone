@@ -2,6 +2,7 @@
 
 import { createClient } from "@/utils/supabase/server";
 import { revalidatePath } from "next/cache";
+import { sendEmail, getBookingTemplate } from "@/utils/email";
 
 export type ActionState = {
     success?: boolean;
@@ -10,67 +11,95 @@ export type ActionState = {
 };
 
 export async function createRoomBooking(prevState: ActionState, formData: FormData): Promise<ActionState> {
-    const supabase = createClient();
-
-    const rawData = {
-        guest_name: formData.get("name") as string,
-        guest_email: formData.get("email") as string,
-        guest_phone: formData.get("phone") as string,
-        check_in: formData.get("checkIn") as string,
-        check_out: formData.get("checkOut") as string,
-        guests: parseInt(formData.get("guests") as string),
-        room_id: formData.get("roomId") as string,
-        special_requests: formData.get("requests") as string,
-        status: 'pending'
-    };
-
-    if (!rawData.guest_name || !rawData.guest_email || !rawData.check_in || !rawData.check_out) {
-        return { error: "Please fill in all required fields." };
-    }
-
     try {
+        const supabase = createClient();
+
+        const rawData = {
+            guest_name: formData.get("name") as string,
+            guest_email: formData.get("email") as string,
+            guest_phone: formData.get("phone") as string,
+            check_in: formData.get("checkIn") as string,
+            check_out: formData.get("checkOut") as string,
+            guests: parseInt(formData.get("guests") as string || '1'),
+            room_id: formData.get("roomId") as string, // This is the slug (e.g., 'standard')
+            special_requests: formData.get("requests") as string,
+            status: 'pending'
+        };
+
+        if (!rawData.guest_name || !rawData.guest_email || !rawData.check_in || !rawData.check_out || !rawData.room_id) {
+            return { error: "Please fill in all required fields." };
+        }
+
         // 1. Look up room by slug
         const { data: roomData, error: roomError } = await supabase
             .from('rooms')
-            .select('id, price')
+            .select('id, price, name')
             .eq('slug', rawData.room_id)
             .single();
 
         if (roomError || !roomData) {
-            console.error("Room lookup failed:", roomError);
-            return { error: `Room configuration error: Could not find room '${rawData.room_id}'. Please contact support.` };
+            return { error: "Room selection error. Please refresh and try again." };
         }
 
-        // Calculate price
+        // 2. Overlap Check
+        const { data: existing } = await supabase
+            .from('bookings')
+            .select('id')
+            .eq('room_id', roomData.id)
+            .neq('status', 'cancelled')
+            .lt('check_in', rawData.check_out)
+            .gt('check_out', rawData.check_in);
+
+        if (existing && existing.length > 0) {
+            return { error: "The selected dates are no longer available for this room." };
+        }
+
+        // 3. Price Calculation
         const start = new Date(rawData.check_in);
         const end = new Date(rawData.check_out);
-        const diffDays = Math.max(1, Math.ceil(Math.abs(end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)));
-        const totalPrice = diffDays * Number(roomData.price);
+        const nights = Math.max(1, Math.ceil(Math.abs(end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)));
+        const totalPrice = nights * Number(roomData.price);
 
         const bookingData = {
-            ...rawData,
-            room_id: roomData.id, // Use the UUID from the DB
-            total_price: totalPrice
+            room_id: roomData.id,
+            guest_name: rawData.guest_name,
+            guest_email: rawData.guest_email,
+            guest_phone: rawData.guest_phone,
+            check_in: rawData.check_in,
+            check_out: rawData.check_out,
+            guests: rawData.guests,
+            total_price: totalPrice,
+            special_requests: rawData.special_requests,
+            status: 'pending'
         };
 
-        const { error } = await supabase
-            .from("bookings")
-            .insert(bookingData);
-
-        if (error) {
-            console.error("Supabase Booking Error:", error);
-            // Check for specific RLS errors
-            if (error.code === '42501') {
-                return { error: "Permission denied. Please ensure database policies are set up." };
-            }
-            return { error: "Failed to submit booking: " + error.message };
-        }
+        // 4. Insert
+        const { error: insertError } = await supabase.from("bookings").insert(bookingData);
+        if (insertError) throw insertError;
 
         revalidatePath("/admin/bookings");
-        return { success: true, message: "Booking request submitted successfully! We will contact you shortly." };
-    } catch (err) {
-        console.error("Unexpected Booking Error:", err);
-        return { error: "An unexpected system error occurred. Please try again." };
+
+        // 5. Send Email (Non-blocking)
+        try {
+            await sendEmail({
+                to: rawData.guest_email,
+                subject: `Reservation Confirmed - ${roomData.name}`,
+                html: getBookingTemplate(
+                    rawData.guest_name,
+                    roomData.name,
+                    rawData.check_in,
+                    rawData.check_out,
+                    totalPrice
+                )
+            });
+        } catch (e) {
+            console.error("Email warning:", e);
+        }
+
+        return { success: true, message: "Your luxury stay is being prepared! We have sent a confirmation email." };
+    } catch (err: any) {
+        console.error("Booking Final Error:", err);
+        return { error: "Reservation process failed. Please contact the concierge if this persists." };
     }
 }
 

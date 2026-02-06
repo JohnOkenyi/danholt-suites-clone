@@ -265,11 +265,11 @@ function FacilityBookingForm() {
                                     </span>
                                 </div>
 
-                                <h3 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">Bank Transfer Details</h3>
+                                <h3 className="text-white font-bold mb-4 uppercase tracking-wider text-sm">Payment Details (Moniepoint)</h3>
                                 <div className="space-y-3 font-mono text-sm bg-black/20 p-4 rounded-lg">
                                     <div className="flex justify-between">
                                         <span className="text-white/40">Bank Name:</span>
-                                        <span className="text-white">Zenith Bank</span>
+                                        <span className="text-white">Moniepoint</span>
                                     </div>
                                     <div className="flex justify-between">
                                         <span className="text-white/40">Account Name:</span>
@@ -277,7 +277,7 @@ function FacilityBookingForm() {
                                     </div>
                                     <div className="flex justify-between">
                                         <span className="text-white/40">Account Number:</span>
-                                        <span className="text-danholt-gold font-bold text-lg">1010000000</span>
+                                        <span className="text-danholt-gold font-bold text-lg">6564614352</span>
                                     </div>
                                 </div>
                                 <p className="text-xs text-white/40 mt-4 text-center">

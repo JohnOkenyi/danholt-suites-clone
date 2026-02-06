@@ -1,0 +1,70 @@
+# DANHOLT SUITES - GROUND TRUTH KNOWLEDGE SUMMARY
+
+## BRAND PHILOSOPHY
+- Motto: "Here is a tribute to good living!"
+- Vision: "Evolved Hospitality"
+- Mission: To anticipate guest needs, creating curated moments in a sanctuary designed to disconnect from noise and reconnect with perfection and excellence.
+
+## CONTACT INFORMATION
+- Phone: 0704 608 0351 / 07046080351 or +234 800 000 0000
+- Address: #3 Iyabo, Obeyode Street (Beside Collinear Hospital), Dogbano, Jikwoyi, Phase 3, Abuja, Nigeria.
+- Emails: reservations@danholt.com (for bookings), concierge@danholt.com (for special requests).
+
+## ACCOMMODATIONS (ROOMS)
+1. STANDARD ROOM (₦10,000/night): 2 Guests, 25m², Queen Bed. A cozy retreat for short stays.
+2. DELUXE ROOM (₦15,000/night): 2 Guests, 35m², King Bed. Spacious elegance.
+3. EXECUTIVE DELUXE (₦20,000/night): 3 Guests, 45m², Super King Bed. The pinnacle of luxury.
+- Amenities (All rooms): Free WiFi, Air Conditioning, 24/7 Electricity, Flat Screen TV, Mini Bar, En-suite Bathroom.
+
+## DINING (THE DANHOLT KITCHEN)
+- Focus: Authentic Nigerian cuisines.
+- Highlights:
+  - Jollof Rice, White Rice, Special Fried Rice: ₦4,000
+  - Swallow Meals (Pounded Yam, Semo, Garri, Amala, Afang) with Soup: ₦4,000
+  - Spicy Chicken: ₦2,000 - ₦2,500
+  - Indomie Spicy, Shawarma: ₦2,500
+  - Yam & Egg Sauce: ₦3,000
+- Drinks:
+  - Water: ₦400
+  - Sodas (Coke, Fanta, Sprite): ₦600
+  - Malt, Schweppes, Fayrouz: ₦800
+  - Energy Drinks (Fearless, Predator): ₦1,000
+  - Beers (Hero, Trophy, Goldberg, Castle Lite): ₦1,000
+  - Premium Beers (Heineken, Desperado, Smirnoff Double Black): ₦1,300
+  - Wines: 4th Street (₦10,000/bottle), Robertson Wine (₦12,000/bottle).
+
+## FACILITIES & AMENITIES
+- Conference Hall: State-of-the-art with high-speed WiFi, Projector, and Sound System.
+- Sports Facilities: ₦1,500 access. Includes 5-a-side Football Pitch and Lawn Tennis Court.
+- Swimming Pool: ₦2,000 access. Adult and Kids sections, Poolside Bar, Sun Loungers.
+- Children's Playground: Free access, secure enclosure, supervised area.
+
+## MEMBERSHIP (PRIVILEGE CLUB)
+1. BRONZE (₦1,000/mo): 5% off dining, complimentary soft drink with meals, birthday dessert.
+2. SILVER (₦3,000/mo): 10% off weekday rooms, priority late checkout, welcome drink.
+3. GOLD (₦5,000+/mo): 15% off rooms, priority upgrades, event invitations.
+
+## BOOKING & PAYMENT
+- Booking: Online at /booking. No credit card required.
+- Payment Method: Moniepoint (Bank Transfer/POS).
+- Account Details:
+  - Bank: Moniepoint
+  - Account Name: Danholt Suites Ltd
+  - Account Number: 6564614352
+- Add-ons:
+  - Early Check-in Guarantee: ₦2,000
+  - Late Checkout Guarantee: ₦2,000
+  - Celebration Setup (Room Decoration): ₦5,000
+  - Sweet Arrival (Cake, Wine, Flowers): ₦10,000
+- Guests: 1–6 guests per booking depending on capacity.
+
+## PACKAGES
+- Romantic Escape: 1-night stay, dinner for two, welcome drink, late checkout.
+- Weekend Reset: 2-night stay (Fri–Sun or Sat–Mon), breakfast for two, fitness access.
+- Business Traveler Pass: Work-friendly space, priority laundry, airport pickup option.
+- Transport: Airport pickup is available. We also offer car rentals for guests who wish to have a vehicle during their stay. Contact concierge@danholt.com.
+- AI Assistant: Smart availability checks. The AI distinguishes between room availability (real-time data) and other amenities (static knowledge). Queries must be contextual (e.g., "is the room available?") to trigger live checks.
+
+## REFERRALS & EVENTS
+- Referral Program: "Friends of Danholt" (Beta). Share code to earn dining credit or late checkouts.
+- Events: Tailored rates for wedding guests and business travelers (use "Unlock Rates" feature).

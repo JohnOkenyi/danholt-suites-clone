@@ -69,6 +69,7 @@ const JOKES = {
 type JokeCategory = keyof typeof JOKES;
 
 import { findAnswer } from '@/lib/knowledgeBase';
+import { getRoomAvailabilitySummary } from '@/app/actions/ai';
 
 export default function LiveChatWidget() {
     const [isOpen, setIsOpen] = useState(false);
@@ -147,22 +148,46 @@ export default function LiveChatWidget() {
         }
     }, [isOpen]);
 
-    const processResponse = (query: string) => {
+    const processResponse = async (query: string) => {
         setIsTyping(true);
-        setTimeout(() => {
-            let response;
-            if (chatMode === 'ai') {
+
+        // Let the CSS animation play for a moment for "thinking" feel
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        let response;
+        if (chatMode === 'ai') {
+            const lowerQuery = query.toLowerCase();
+
+            // Availability keywords (typo tolerant)
+            const availabilityKeywords = ['available', 'availability', 'booked', 'full', 'free', 'empty', 'vacant', 'open', 'avalable', 'availble', 'availablity', 'vancancy', 'vacancy'];
+
+            // Room context keywords
+            const roomKeywords = ['room', 'suite', 'stay', 'accommodation', 'sleep', 'standard', 'deluxe', 'executive', 'reservation', 'booking', 'check'];
+
+            const hasAvailabilityWord = availabilityKeywords.some(k => lowerQuery.includes(k));
+            const hasRoomWord = roomKeywords.some(k => lowerQuery.includes(k));
+
+            // Only trigger LIVE booking data if it's CLEARLY about rooms/stay
+            // Or if they just ask "what is available?" without context (we assume rooms)
+            const isIntentionalRoomAvailability = (hasAvailabilityWord && hasRoomWord) ||
+                (hasAvailabilityWord && lowerQuery.length < 15); // extremely short queries like "is it full?"
+
+            if (isIntentionalRoomAvailability && !lowerQuery.includes('food') && !lowerQuery.includes('drink') && !lowerQuery.includes('menu')) {
+                // Fetch LIVE data
+                const liveStatus = await getRoomAvailabilitySummary();
+                response = liveStatus;
+            } else {
                 const answer = findAnswer(query);
                 // Fallback updated to strict "website only" policy with user specific numbers
                 response = answer || "I can only answer questions based on the information in the website. If the information is not in the website please speak to staff, that's the hotel phone number: 0704 608 0351 / 07046080351 or +234 800 000 0000.";
-            } else {
-                // Fallback for humor mode text input, though UI drives it mostly
-                response = "I'm best at telling jokes! Click one of the categories below.";
             }
+        } else {
+            // Fallback for humor mode text input, though UI drives it mostly
+            response = "I'm best at telling jokes! Click one of the categories below.";
+        }
 
-            setMessages(prev => [...prev, { text: response, isUser: false }]);
-            setIsTyping(false);
-        }, 1000);
+        setMessages(prev => [...prev, { text: response, isUser: false }]);
+        setIsTyping(false);
     };
 
     const handleSendMessage = () => {

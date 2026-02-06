@@ -8,9 +8,13 @@ import {
     deleteDiningReservation,
     deleteFacilityBooking,
     deleteMembershipRequest,
-    deleteContactMessage
+    deleteContactMessage,
+    updateBookingStatus,
+    updateReservationStatus,
+    updateMembershipStatus
 } from '@/app/actions/admin'
 import DeleteButton from '@/components/admin/DeleteButton'
+import StatusUpdateButtons from '@/components/admin/StatusUpdateButtons'
 import RealtimeBookingsListener from '@/components/admin/RealtimeBookingsListener'
 
 async function getBookings() {
@@ -257,7 +261,12 @@ export default async function AdminDashboard() {
                                                 </span>
                                             </td>
                                             <td className="p-4 md:p-6 text-right">
-                                                <div className="flex justify-end">
+                                                <div className="flex justify-end items-center gap-2">
+                                                    <StatusUpdateButtons
+                                                        id={booking.id}
+                                                        currentStatus={booking.status}
+                                                        updateAction={updateBookingStatus}
+                                                    />
                                                     <DeleteButton
                                                         id={booking.id}
                                                         itemName="Booking"
@@ -283,7 +292,8 @@ export default async function AdminDashboard() {
                             </h2>
                         </div>
                         {/* Mobile: Full Height, Desktop: Fixed Height Scroll */}
-                        <div className="md:max-h-[400px] md:overflow-y-auto">
+                        {/* Mobile: Full Height, Desktop: Fixed Height Scroll */}
+                        <div className="md:max-h-[400px] md:overflow-y-auto pb-32">
                             <table className="w-full text-left text-sm min-w-[500px] md:min-w-0">
                                 <tbody className="divide-y divide-white/[0.04]">
                                     {dining.length === 0 ? (
@@ -305,10 +315,27 @@ export default async function AdminDashboard() {
                                                 </div>
                                             </td>
                                             <td className="p-5 text-xs text-gray-400 italic font-serif group-hover:text-gray-200">
+                                                <div className="mb-2">
+                                                    <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider
+                                                        ${res.status === 'confirmed' ? 'bg-green-500/10 text-green-400 border border-green-500/20' :
+                                                            res.status === 'cancelled' ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
+                                                                'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20'}
+                                                    `}>
+                                                        <span className={`w-1 h-1 rounded-full ${res.status === 'confirmed' ? 'bg-green-400' :
+                                                            res.status === 'cancelled' ? 'bg-red-400' : 'bg-yellow-400'
+                                                            }`}></span>
+                                                        {res.status || 'pending'}
+                                                    </span>
+                                                </div>
                                                 &quot;{res.special_requests || 'No specific requests'}&quot;
                                             </td>
                                             <td className="p-5 text-right">
-                                                <div className="flex justify-end">
+                                                <div className="flex justify-end items-center gap-2">
+                                                    <StatusUpdateButtons
+                                                        id={res.id}
+                                                        currentStatus={res.status}
+                                                        updateAction={updateReservationStatus}
+                                                    />
                                                     <DeleteButton
                                                         id={res.id}
                                                         itemName="Reservation"
@@ -332,7 +359,7 @@ export default async function AdminDashboard() {
                             </h2>
                         </div>
                         {/* Mobile: Full Height, Desktop: Fixed Height Scroll */}
-                        <div className="md:max-h-[400px] md:overflow-y-auto">
+                        <div className="md:max-h-[400px] md:overflow-y-auto pb-32">
                             <table className="w-full text-left text-sm min-w-[500px] md:min-w-0">
                                 <tbody className="divide-y divide-white/[0.04]">
                                     {facilities.length === 0 ? (
@@ -353,10 +380,27 @@ export default async function AdminDashboard() {
                                                     </div>
                                                 </td>
                                                 <td className="p-5 text-xs text-gray-400 max-w-[200px] group-hover:text-gray-200">
+                                                    <div className="mb-2">
+                                                        <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-bold uppercase tracking-wider
+                                                            ${res.status === 'confirmed' ? 'bg-green-500/10 text-green-400 border border-green-500/20' :
+                                                                res.status === 'cancelled' ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
+                                                                    'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20'}
+                                                        `}>
+                                                            <span className={`w-1 h-1 rounded-full ${res.status === 'confirmed' ? 'bg-green-400' :
+                                                                res.status === 'cancelled' ? 'bg-red-400' : 'bg-yellow-400'
+                                                                }`}></span>
+                                                            {res.status || 'pending'}
+                                                        </span>
+                                                    </div>
                                                     {details}
                                                 </td>
                                                 <td className="p-5 text-right">
-                                                    <div className="flex justify-end">
+                                                    <div className="flex justify-end items-center gap-2">
+                                                        <StatusUpdateButtons
+                                                            id={res.id}
+                                                            currentStatus={res.status}
+                                                            updateAction={updateReservationStatus}
+                                                        />
                                                         <DeleteButton
                                                             id={res.id}
                                                             itemName="Event"
@@ -394,7 +438,24 @@ export default async function AdminDashboard() {
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3">
-                                        <span className="px-2.5 py-1 rounded text-[10px] uppercase font-bold bg-purple-500/10 text-purple-300 border border-purple-500/20 group-hover:bg-purple-500 group-hover:text-white transition-colors">{m.membership_tier}</span>
+                                        <div className="flex flex-col items-end gap-2">
+                                            <span className="px-2.5 py-1 rounded text-[10px] uppercase font-bold bg-purple-500/10 text-purple-300 border border-purple-500/20 group-hover:bg-purple-500 group-hover:text-white transition-colors">{m.membership_tier}</span>
+                                            <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-wider
+                                                ${m.status === 'confirmed' ? 'bg-green-500/10 text-green-400 border border-green-500/20' :
+                                                    m.status === 'cancelled' ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
+                                                        'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20'}
+                                            `}>
+                                                <span className={`w-1 h-1 rounded-full ${m.status === 'confirmed' ? 'bg-green-400' :
+                                                    m.status === 'cancelled' ? 'bg-red-400' : 'bg-yellow-400'
+                                                    }`}></span>
+                                                {m.status || 'pending'}
+                                            </span>
+                                        </div>
+                                        <StatusUpdateButtons
+                                            id={m.id}
+                                            currentStatus={m.status || 'pending'}
+                                            updateAction={updateMembershipStatus}
+                                        />
                                         <DeleteButton
                                             id={m.id}
                                             itemName="Member"

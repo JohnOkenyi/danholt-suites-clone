@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Users, Move, ArrowRight } from 'lucide-react';
+import Link from 'next/link';
 import { Room } from '@/types/room';
 
 interface RoomCardProps {
@@ -53,12 +54,12 @@ export default function RoomCard({ room, onViewDetails, onBookNow }: RoomCardPro
 
                 {/* Buttons - Stacked on Mobile */}
                 <div className="mt-auto flex flex-col sm:flex-row gap-3">
-                    <button
-                        onClick={() => onViewDetails(room)}
-                        className="w-full sm:flex-1 py-3 px-4 border border-danholt-navy text-danholt-navy rounded-md text-sm font-bold uppercase tracking-wider hover:bg-danholt-navy hover:text-white transition-colors"
+                    <Link
+                        href={`/rooms/${room.id}`}
+                        className="w-full sm:flex-1 py-3 px-4 border border-danholt-navy text-danholt-navy rounded-md text-sm font-bold uppercase tracking-wider hover:bg-danholt-navy hover:text-white transition-colors text-center"
                     >
                         View Details
-                    </button>
+                    </Link>
                     <button
                         onClick={() => onBookNow(room)}
                         className="w-full sm:flex-1 py-3 px-4 bg-danholt-navy text-white rounded-md text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-danholt-navy/90 transition-colors"

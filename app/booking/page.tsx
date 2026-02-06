@@ -11,6 +11,9 @@ import Link from 'next/link'
 import { ROOMS } from '@/lib/rooms'
 import { Room } from '@/types/room'
 import { supabase } from '@/lib/supabase'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css"
+import { addDays, eachDayOfInterval, parseISO, isBefore, startOfDay } from 'date-fns'
 
 const ADDONS = [
     { id: 'early_checkin', label: 'Early Check-in Guarantee', price: 2000, desc: 'Secure early check-in (subject to availability).' },
@@ -37,15 +40,50 @@ function BookingForm() {
 
     const [selectedRoom, setSelectedRoom] = useState<Room | null>(null)
     const [stats, setStats] = useState({ nights: 0, subtotal: 0, total: 0 })
+    const [bookedDates, setBookedDates] = useState<Date[]>([])
+    const [isLoadingDates, setIsLoadingDates] = useState(false)
 
     // Server Action Integration
     const [state, formAction] = useFormState(createRoomBooking, { message: '', error: '' })
 
-    // Update selected room when ID changes
+    // Update selected room and fetch booked dates when ID changes
     useEffect(() => {
         const room = ROOMS.find(r => r.id === formData.roomId) || ROOMS[0]
         setSelectedRoom(room || null)
+
+        if (room) {
+            fetchBookedDates(room.id)
+        }
     }, [formData.roomId])
+
+    const fetchBookedDates = async (roomId: string) => {
+        setIsLoadingDates(true)
+        try {
+            const { data, error } = await supabase
+                .from('bookings')
+                .select('check_in, check_out')
+                .eq('room_id', roomId)
+                .neq('status', 'cancelled')
+
+            if (error) throw error
+
+            const dates: Date[] = []
+            data.forEach(booking => {
+                const start = parseISO(booking.check_in)
+                const end = parseISO(booking.check_out)
+
+                // End date is usually checkout day (vacated in morning), 
+                // but for blocking we block all days in interval
+                const interval = eachDayOfInterval({ start, end })
+                dates.push(...interval)
+            })
+            setBookedDates(dates)
+        } catch (err) {
+            console.error("Error fetching booked dates:", err)
+        } finally {
+            setIsLoadingDates(false)
+        }
+    }
 
     // Calculate stats when room or dates change
     useEffect(() => {
@@ -124,31 +162,37 @@ function BookingForm() {
                                 {/* Dates */}
                                 <div className="space-y-2">
                                     <label className="text-xs uppercase tracking-widest text-danholt-gold font-bold">Check-in Date</label>
-                                    <div className="relative group">
-                                        <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40 group-focus-within:text-danholt-gold transition-colors" />
-                                        <input
-                                            type="date"
-                                            name="checkIn"
-                                            value={formData.checkIn}
-                                            onChange={handleInputChange}
-                                            required
+                                    <div className="relative group datepicker-luxury">
+                                        <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40 group-focus-within:text-danholt-gold transition-colors z-10 pointer-events-none" />
+                                        <DatePicker
+                                            selected={formData.checkIn ? new Date(formData.checkIn) : null}
+                                            onChange={(date) => setFormData(prev => ({ ...prev, checkIn: date ? date.toISOString().split('T')[0] : '', checkOut: '' }))}
+                                            minDate={new Date()}
+                                            excludeDates={bookedDates}
+                                            placeholderText="Select date"
                                             className="w-full bg-white/5 border border-white/10 rounded-lg py-4 pl-12 pr-4 text-white focus:outline-none focus:border-danholt-gold/50 focus:bg-white/10 transition-all font-sans cursor-pointer"
+                                            dateFormat="yyyy-MM-dd"
+                                            required
                                         />
+                                        <input type="hidden" name="checkIn" value={formData.checkIn} />
                                     </div>
                                 </div>
                                 <div className="space-y-2">
                                     <label className="text-xs uppercase tracking-widest text-danholt-gold font-bold">Check-out Date</label>
-                                    <div className="relative group">
-                                        <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40 group-focus-within:text-danholt-gold transition-colors" />
-                                        <input
-                                            type="date"
-                                            name="checkOut"
-                                            value={formData.checkOut}
-                                            onChange={handleInputChange}
-                                            required
-                                            min={formData.checkIn}
+                                    <div className="relative group datepicker-luxury">
+                                        <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40 group-focus-within:text-danholt-gold transition-colors z-10 pointer-events-none" />
+                                        <DatePicker
+                                            selected={formData.checkOut ? new Date(formData.checkOut) : null}
+                                            onChange={(date) => setFormData(prev => ({ ...prev, checkOut: date ? date.toISOString().split('T')[0] : '' }))}
+                                            minDate={formData.checkIn ? addDays(new Date(formData.checkIn), 1) : new Date()}
+                                            excludeDates={bookedDates}
+                                            placeholderText="Select date"
                                             className="w-full bg-white/5 border border-white/10 rounded-lg py-4 pl-12 pr-4 text-white focus:outline-none focus:border-danholt-gold/50 focus:bg-white/10 transition-all font-sans cursor-pointer"
+                                            dateFormat="yyyy-MM-dd"
+                                            disabled={!formData.checkIn}
+                                            required
                                         />
+                                        <input type="hidden" name="checkOut" value={formData.checkOut} />
                                     </div>
                                 </div>
 
@@ -413,8 +457,27 @@ function BookingForm() {
                                         Confirm Booking
                                     </button>
                                     <p className="text-center text-gray-400 text-xs mt-3 hidden lg:block">
-                                        Payment collected upon arrival.
+                                        Payment collected upon arrival or via transfer.
                                     </p>
+
+                                    {/* Moniepoint Payment Details */}
+                                    <div className="mt-6 p-4 bg-gray-50 rounded-lg border border-gray-100 hidden lg:block">
+                                        <h4 className="text-[10px] font-bold uppercase tracking-widest text-danholt-navy/40 mb-3">Bank Transfer (Moniepoint)</h4>
+                                        <div className="space-y-2 font-mono text-[11px]">
+                                            <div className="flex justify-between">
+                                                <span className="text-gray-400">Bank:</span>
+                                                <span className="text-danholt-navy">Moniepoint</span>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <span className="text-gray-400">A/C:</span>
+                                                <span className="text-danholt-navy">Danholt Suites Ltd</span>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <span className="text-gray-400">Number:</span>
+                                                <span className="text-danholt-teal font-bold text-sm">6564614352</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </>
                         )}

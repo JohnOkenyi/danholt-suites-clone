@@ -16,6 +16,19 @@ export async function deleteBooking(id: string) {
     return { success: true }
 }
 
+export async function updateBookingStatus(id: string, status: string) {
+    const supabase = createClient()
+    const { error } = await supabase.from('bookings').update({ status }).eq('id', id)
+
+    if (error) {
+        console.error('Error updating booking status:', error)
+        return { error: error.message }
+    }
+
+    revalidatePath('/admin/bookings')
+    return { success: true }
+}
+
 export async function deleteDiningReservation(id: string) {
     const supabase = createClient()
     const { error } = await supabase.from('restaurant_reservations').delete().eq('id', id)
@@ -62,6 +75,32 @@ export async function deleteContactMessage(id: string) {
 
     if (error) {
         console.error('Error deleting contact message:', error)
+        return { error: error.message }
+    }
+
+    revalidatePath('/admin/bookings')
+    return { success: true }
+}
+
+export async function updateReservationStatus(id: string, status: string) {
+    const supabase = createClient()
+    const { error } = await supabase.from('restaurant_reservations').update({ status }).eq('id', id)
+
+    if (error) {
+        console.error('Error updating reservation status:', error)
+        return { error: error.message }
+    }
+
+    revalidatePath('/admin/bookings')
+    return { success: true }
+}
+
+export async function updateMembershipStatus(id: string, status: string) {
+    const supabase = createClient()
+    const { error } = await supabase.from('membership_requests').update({ status }).eq('id', id)
+
+    if (error) {
+        console.error('Error updating membership status:', error)
         return { error: error.message }
     }
 

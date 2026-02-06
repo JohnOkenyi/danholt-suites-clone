@@ -11,20 +11,12 @@ import RoomDetailsModal from '@/components/RoomDetailsModal'
 
 export default function RoomsPage() {
   const router = useRouter()
-  const [selectedRoom, setSelectedRoom] = useState<Room | null>(null)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-
   const handleViewDetails = (room: Room) => {
-    setSelectedRoom(room)
-    setIsModalOpen(true)
+    router.push(`/rooms/${room.id}`)
   }
 
   const handleBookNow = (room: Room) => {
     router.push(`/booking?room=${room.id}`)
-  }
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false)
   }
 
   return (
@@ -81,13 +73,7 @@ export default function RoomsPage() {
         </div>
       </section>
 
-      {/* Modal */}
-      <RoomDetailsModal
-        room={selectedRoom}
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        onBookNow={handleBookNow}
-      />
+      {/* Modal removed in favor of dynamic pages */}
     </main>
   )
 }
