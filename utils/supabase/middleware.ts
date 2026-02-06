@@ -54,13 +54,14 @@ export async function updateSession(request: NextRequest) {
         }
     )
 
-    const { data: { user } } = await supabase.auth.getUser()
+    const { data: { user }, error: authError } = await supabase.auth.getUser()
 
     // Protected routes guard
     if (request.nextUrl.pathname.startsWith('/admin') &&
-        request.nextUrl.pathname !== '/admin' &&
-        !user) {
-        return NextResponse.redirect(new URL('/admin', request.url))
+        request.nextUrl.pathname !== '/admin') {
+        if (authError || !user) {
+            return NextResponse.redirect(new URL('/admin', request.url))
+        }
     }
 
     return response
