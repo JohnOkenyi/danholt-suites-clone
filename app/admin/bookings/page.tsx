@@ -266,7 +266,6 @@ export default async function AdminDashboard() {
                                                         id={booking.id}
                                                         currentStatus={booking.status}
                                                         updateAction={updateBookingStatus}
-                                                        direction="down"
                                                     />
                                                     <DeleteButton
                                                         id={booking.id}
@@ -336,7 +335,6 @@ export default async function AdminDashboard() {
                                                         id={res.id}
                                                         currentStatus={res.status}
                                                         updateAction={updateReservationStatus}
-                                                        direction="up"
                                                     />
                                                     <DeleteButton
                                                         id={res.id}
@@ -402,7 +400,6 @@ export default async function AdminDashboard() {
                                                             id={res.id}
                                                             currentStatus={res.status}
                                                             updateAction={updateReservationStatus}
-                                                            direction="up"
                                                         />
                                                         <DeleteButton
                                                             id={res.id}
@@ -458,7 +455,6 @@ export default async function AdminDashboard() {
                                             id={m.id}
                                             currentStatus={m.status || 'pending'}
                                             updateAction={updateMembershipStatus}
-                                            direction="up"
                                         />
                                         <DeleteButton
                                             id={m.id}
