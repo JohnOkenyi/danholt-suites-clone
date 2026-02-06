@@ -8,6 +8,9 @@ CREATE TABLE IF NOT EXISTS admin_users (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
+-- Fix for existing table: ensure id column uses random uuid default
+ALTER TABLE admin_users ALTER COLUMN id SET DEFAULT gen_random_uuid();
+
 -- Enable RLS on admin_users
 ALTER TABLE admin_users ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Admin users are viewable by authenticated users" ON admin_users;
