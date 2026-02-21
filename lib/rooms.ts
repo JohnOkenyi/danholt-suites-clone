@@ -47,8 +47,8 @@ export const ROOMS: Room[] = [
         guests: 3,
         size: 45,
         bedType: "Super King Bed",
-        image: "/images/room-executive.jpg",
-        images: ["/images/room-executive.jpg"],
+        image: "/images/room-executive-deluxe-new-1.jpg",
+        images: ["/images/room-executive-deluxe-new-1.jpg", "/images/room-executive-deluxe-new-2.jpg"],
         description: "The pinnacle of luxury. Expansive living space, exclusive access, and unparalleled attention to detail.",
         amenities: [
             "Free WiFi",
