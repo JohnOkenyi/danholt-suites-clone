@@ -21,9 +21,9 @@ const amenityIcons: Record<string, any> = {
 
 export default function RoomDetailPage({ params }: { params: { id: string } }) {
     const room = ROOMS.find(r => r.id === params.id)
-    const [activeImage, setActiveImage] = (room?.images && room.images.length > 0)
-        ? useState(room.images[0])
-        : useState(room?.image || '');
+
+    // Initialize state unconditionally
+    const [activeImage, setActiveImage] = useState(room?.images?.[0] || room?.image || '');
 
     if (!room) {
         notFound()
