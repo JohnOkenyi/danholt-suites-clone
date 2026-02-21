@@ -32,13 +32,13 @@ export default function Header() {
         <div className="w-full px-6 md:px-12 flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="group relative z-50">
-            <div className={`transition-all duration-700 ${scrolled ? 'scale-75 origin-left' : 'scale-100 origin-left'}`}>
+            <div className={`transition-all duration-700 ${scrolled ? 'scale-90 origin-left' : 'scale-100 origin-left'}`}>
               <Image
                 src="/images/logo.svg"
                 alt="Danholt Suites Logo"
-                width={300}
-                height={120}
-                className="h-16 md:h-24 lg:h-32 w-auto"
+                width={180}
+                height={72}
+                className="h-10 md:h-14 lg:h-16 w-auto"
                 priority
               />
             </div>

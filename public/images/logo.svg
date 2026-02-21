@@ -1,11 +1,12 @@
 <svg width="600" height="240" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
-  <!-- Danholt Suites Official Logo Implementation -->
-  <!-- Box: x=50 to 550, y=50 to 190. Stroke width 6 for visibility. -->
-  <path d="M 50 50 H 550 V 190 H 400 M 200 190 H 50 V 50" fill="none" stroke="#C5A059" stroke-width="6" stroke-linecap="square" />
+  <!-- Danholt Suites Official Logo - Refined Clearances -->
+  <!-- Box: x=50 to 550, y=50 to 190. -->
+  <!-- WIDENED GAP: Gap starts at x=100 and ends at x=500 to ensure NO letters touch lines -->
+  <path d="M 50 50 H 550 V 190 H 500 M 100 190 H 50 V 50" fill="none" stroke="#C5A059" stroke-width="6" stroke-linecap="square" />
   
-  <!-- DANHOLT - Large, Bold Serif centered in the box -->
+  <!-- DANHOLT - Serif centered in the box -->
   <text x="300" y="138" text-anchor="middle" font-family="'Playfair Display', serif" font-weight="700" font-size="88" fill="#C5A059" style="letter-spacing: 0.05em;">DANHOLT</text>
   
-  <!-- SUITES - Medium Serif, wide-spaced, centered in the border gap -->
+  <!-- SUITES - Centered in the widened gap with clear space on both sides -->
   <text x="300" y="202" text-anchor="middle" font-family="'Playfair Display', serif" font-weight="600" font-size="34" fill="#C5A059" style="letter-spacing: 0.8em;">SUITES</text>
 </svg>
