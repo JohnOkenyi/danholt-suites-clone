@@ -1,0 +1,10 @@
+<svg width="400" height="160" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gold Rectangular Frame with Bottom Gap -->
+  <path d="M 40 40 H 360 V 120 H 260 M 140 120 H 40 V 40" fill="none" stroke="#C5A059" stroke-width="3"/>
+  
+  <!-- DANHOLT Text -->
+  <text x="200" y="85" text-anchor="middle" font-family="Playfair Display, serif" font-weight="700" font-size="52" fill="#C5A059" letter-spacing="8">DANHOLT</text>
+  
+  <!-- SUITES Text in the Gap -->
+  <text x="200" y="130" text-anchor="middle" font-family="Playfair Display, serif" font-weight="500" font-size="20" fill="#C5A059" letter-spacing="14">SUITES</text>
+</svg>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Header() {
@@ -31,19 +32,15 @@ export default function Header() {
         <div className="w-full px-6 md:px-12 flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="group relative z-50">
-            <div className={`relative border border-danholt-gold/80 px-4 py-2 md:px-6 md:py-2.5 transition-all duration-700 ${scrolled ? 'scale-90' : 'scale-100'}`}>
-              <div className="flex flex-col items-center">
-                <span className="text-lg md:text-xl font-serif font-bold text-danholt-gold tracking-[0.2em] leading-none">
-                  DANHOLT
-                </span>
-                <div className="absolute -bottom-[10px] left-1/2 -translate-x-1/2">
-                  <div className={`px-2 transition-colors duration-700 ${scrolled ? 'bg-[#020617]' : 'bg-transparent'}`}>
-                    <span className="text-[9px] md:text-[10px] font-serif font-medium tracking-[0.6em] text-danholt-gold uppercase whitespace-nowrap">
-                      SUITES
-                    </span>
-                  </div>
-                </div>
-              </div>
+            <div className={`transition-all duration-700 ${scrolled ? 'scale-90 opacity-90' : 'scale-100'}`}>
+              <Image
+                src="/images/logo.svg"
+                alt="Danholt Suites Logo"
+                width={120}
+                height={48}
+                className="h-10 md:h-12 w-auto"
+                priority
+              />
             </div>
           </Link>
 
