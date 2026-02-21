@@ -12,13 +12,13 @@ export default function Footer() {
           {/* Brand Column with Gold Line */}
           <div className="lg:col-span-1 relative pl-6">
             <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-danholt-gold h-32"></div>
-            <div className="mb-8">
+            <div className="mb-12">
               <Image
                 src="/images/logo.svg"
                 alt="Danholt Suites Logo"
-                width={160}
-                height={64}
-                className="h-12 w-auto"
+                width={300}
+                height={120}
+                className="h-20 md:h-28 lg:h-32 w-auto"
               />
             </div>
             <p className="text-gray-400 font-light leading-relaxed text-sm max-w-xs">

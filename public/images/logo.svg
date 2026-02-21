@@ -1,10 +1,11 @@
-<svg width="400" height="160" viewBox="0 0 400 160" xmlns="http://www.w3.org/2000/svg">
-  <!-- Gold Rectangular Frame with Bottom Gap -->
-  <path d="M 40 40 H 360 V 120 H 260 M 140 120 H 40 V 40" fill="none" stroke="#C5A059" stroke-width="3"/>
+<svg width="600" height="240" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
+  <!-- Danholt Suites Official Logo Implementation -->
+  <!-- Box: x=50 to 550, y=50 to 190. Stroke width 6 for visibility. -->
+  <path d="M 50 50 H 550 V 190 H 400 M 200 190 H 50 V 50" fill="none" stroke="#C5A059" stroke-width="6" stroke-linecap="square" />
   
-  <!-- DANHOLT Text -->
-  <text x="200" y="85" text-anchor="middle" font-family="Playfair Display, serif" font-weight="700" font-size="52" fill="#C5A059" letter-spacing="8">DANHOLT</text>
+  <!-- DANHOLT - Large, Bold Serif centered in the box -->
+  <text x="300" y="138" text-anchor="middle" font-family="'Playfair Display', serif" font-weight="700" font-size="88" fill="#C5A059" style="letter-spacing: 0.05em;">DANHOLT</text>
   
-  <!-- SUITES Text in the Gap -->
-  <text x="200" y="130" text-anchor="middle" font-family="Playfair Display, serif" font-weight="500" font-size="20" fill="#C5A059" letter-spacing="14">SUITES</text>
+  <!-- SUITES - Medium Serif, wide-spaced, centered in the border gap -->
+  <text x="300" y="202" text-anchor="middle" font-family="'Playfair Display', serif" font-weight="600" font-size="34" fill="#C5A059" style="letter-spacing: 0.8em;">SUITES</text>
 </svg>
