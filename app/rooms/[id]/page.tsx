@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react'
 import { ROOMS } from '@/lib/rooms'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -18,6 +21,9 @@ const amenityIcons: Record<string, any> = {
 
 export default function RoomDetailPage({ params }: { params: { id: string } }) {
     const room = ROOMS.find(r => r.id === params.id)
+    const [activeImage, setActiveImage] = (room?.images && room.images.length > 0)
+        ? useState(room.images[0])
+        : useState(room?.image || '');
 
     if (!room) {
         notFound()
@@ -36,20 +42,38 @@ export default function RoomDetailPage({ params }: { params: { id: string } }) {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
                     {/* Image Section */}
-                    <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-white/10 group">
-                        <Image
-                            src={room.image}
-                            alt={room.name}
-                            fill
-                            className="object-cover transition-transform duration-1000 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                        <div className="absolute bottom-8 left-8">
-                            <h1 className="text-4xl md:text-5xl font-serif text-white mb-2">{room.name}</h1>
-                            <div className="text-danholt-gold text-xl font-medium">
-                                ₦{room.price.toLocaleString()} <span className="text-sm font-light text-white/60">/ NIGHT</span>
+                    <div className="space-y-6">
+                        <div className="relative aspect-[4/5] rounded-2xl overflow-hidden border border-white/10 group">
+                            <Image
+                                src={activeImage}
+                                alt={room.name}
+                                fill
+                                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                            <div className="absolute bottom-8 left-8">
+                                <h1 className="text-4xl md:text-5xl font-serif text-white mb-2">{room.name}</h1>
+                                <div className="text-danholt-gold text-xl font-medium">
+                                    ₦{room.price.toLocaleString()} <span className="text-sm font-light text-white/60">/ NIGHT</span>
+                                </div>
                             </div>
                         </div>
+
+                        {/* Gallery Thumbnails */}
+                        {room.images && room.images.length > 1 && (
+                            <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+                                {room.images.map((img, index) => (
+                                    <button
+                                        key={index}
+                                        onClick={() => setActiveImage(img)}
+                                        className={`relative w-24 aspect-square rounded-lg overflow-hidden border-2 transition-all ${activeImage === img ? 'border-danholt-gold' : 'border-transparent opacity-60 hover:opacity-100'
+                                            }`}
+                                    >
+                                        <Image src={img} alt={`${room.name} view ${index + 1}`} fill className="object-cover" />
+                                    </button>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     {/* Content Section */}

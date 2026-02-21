@@ -7,6 +7,7 @@ export interface Room {
     size: number; // in m²
     bedType: string;
     image: string;
+    images?: string[];
     description: string;
     amenities: string[];
 }
