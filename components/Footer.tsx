@@ -11,7 +11,20 @@ export default function Footer() {
           {/* Brand Column with Gold Line */}
           <div className="lg:col-span-1 relative pl-6">
             <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-danholt-gold h-32"></div>
-            <h3 className="text-xl font-light uppercase tracking-widest text-danholt-gold mb-6">DANHOLT SUITES</h3>
+            <div className="relative border border-danholt-gold/80 px-6 py-3 mb-8 inline-block">
+              <div className="flex flex-col items-center">
+                <span className="text-xl font-serif font-bold text-danholt-gold tracking-[0.2em] leading-none">
+                  DANHOLT
+                </span>
+                <div className="absolute -bottom-[11px] left-1/2 -translate-x-1/2">
+                  <div className="bg-[#050505] px-2">
+                    <span className="text-[10px] font-serif font-medium tracking-[0.6em] text-danholt-gold uppercase whitespace-nowrap">
+                      SUITES
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
             <p className="text-gray-400 font-light leading-relaxed text-sm max-w-xs">
               Where every moment is crafted with intention. Experience luxury redefined.
             </p>

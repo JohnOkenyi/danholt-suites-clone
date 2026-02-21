@@ -31,13 +31,19 @@ export default function Header() {
         <div className="w-full px-6 md:px-12 flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="group relative z-50">
-            <div className="flex items-center leading-none">
-              <span className="text-xl font-serif font-bold text-danholt-cold-white tracking-wide">
-                DANHOLT
-              </span>
-              <span className="text-xl font-serif font-bold text-danholt-gold tracking-wide ml-2">
-                SUITE
-              </span>
+            <div className={`relative border border-danholt-gold/80 px-4 py-2 md:px-6 md:py-2.5 transition-all duration-700 ${scrolled ? 'scale-90' : 'scale-100'}`}>
+              <div className="flex flex-col items-center">
+                <span className="text-lg md:text-xl font-serif font-bold text-danholt-gold tracking-[0.2em] leading-none">
+                  DANHOLT
+                </span>
+                <div className="absolute -bottom-[10px] left-1/2 -translate-x-1/2">
+                  <div className={`px-2 transition-colors duration-700 ${scrolled ? 'bg-[#020617]' : 'bg-transparent'}`}>
+                    <span className="text-[9px] md:text-[10px] font-serif font-medium tracking-[0.6em] text-danholt-gold uppercase whitespace-nowrap">
+                      SUITES
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
           </Link>
 
