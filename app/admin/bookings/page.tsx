@@ -82,7 +82,7 @@ export default async function AdminDashboard() {
 
 
     return (
-        <main className="min-h-screen bg-white dark:bg-[#020617] text-[#020617] dark:text-white p-2 md:p-8 font-sans selection:bg-danholt-gold selection:text-black transition-colors duration-500 overflow-x-hidden">
+        <main className="min-h-screen bg-[var(--admin-bg)] text-[var(--admin-text)] p-2 md:p-8 font-sans selection:bg-danholt-gold selection:text-black transition-colors duration-500 overflow-x-hidden">
             {/* Background Gradients for 'World Class' feel */}
             <div className="fixed inset-0 pointer-events-none z-0">
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 rounded-full blur-[120px]" />
@@ -93,10 +93,10 @@ export default async function AdminDashboard() {
 
             <div className="relative z-10 max-w-7xl mx-auto space-y-6 md:space-y-8">
                 {/* Luxury Header - Mobile Optimized */}
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.08] dark:border-white/[0.08] backdrop-blur-xl p-6 md:p-8 rounded-2xl shadow-2xl gap-4">
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between bg-[var(--admin-card-bg)] border border-[var(--admin-border)] backdrop-blur-xl p-6 md:p-8 rounded-2xl shadow-2xl gap-4">
                     <div className="flex items-center gap-6">
                         <div>
-                            <h1 className="text-2xl md:text-3xl font-bold text-[#020617] dark:text-white font-playfair tracking-wide">Danholt Suites</h1>
+                            <h1 className="text-2xl md:text-3xl font-bold text-[var(--admin-text)] font-playfair tracking-wide">Danholt Suites</h1>
                             <div className="flex items-center gap-2 mt-1">
                                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                                 <p className="text-gray-400 text-xs uppercase tracking-[0.2em] font-medium">Command Center</p>
@@ -199,8 +199,8 @@ export default async function AdminDashboard() {
                 </section>
 
                 {/* 1. ROOM BOOKINGS - Premium Table */}
-                <section className="bg-white dark:bg-white/[0.03] border border-black/[0.08] dark:border-white/[0.08] rounded-2xl backdrop-blur-xl shadow-2xl">
-                    <div className="p-6 md:p-8 border-b border-black/[0.08] dark:border-white/[0.08] flex justify-between items-center bg-gradient-to-r from-black/[0.01] dark:from-white/[0.02] to-transparent">
+                <section className="bg-[var(--admin-card-bg)] border border-[var(--admin-border)] rounded-2xl backdrop-blur-xl shadow-2xl">
+                    <div className="p-6 md:p-8 border-b border-[var(--admin-border)] flex justify-between items-center bg-gradient-to-r from-black/[0.01] dark:from-white/[0.02] to-transparent">
                         <div className="flex items-center gap-4">
                             <div>
                                 <h2 className="text-lg md:text-xl font-playfair font-bold text-danholt-gold">Room Reservations</h2>
@@ -213,7 +213,7 @@ export default async function AdminDashboard() {
                     </div>
                     <div className="overflow-x-auto">
                         <table className="w-full text-left text-sm min-w-[800px] md:min-w-0">
-                            <thead className="bg-black/[0.03] dark:bg-black/20 text-[10px] uppercase tracking-[0.15em] text-gray-500 dark:text-blue-300/70 font-bold">
+                            <thead className="bg-black/[0.03] dark:bg-black/20 text-[10px] uppercase tracking-[0.15em] text-[var(--admin-text-secondary)] font-bold">
                                 <tr>
                                     <th className="p-4 md:p-6 font-medium">Guest Identity</th>
                                     <th className="p-4 md:p-6 font-medium">Suite Selection</th>
@@ -228,13 +228,13 @@ export default async function AdminDashboard() {
                                     <tr><td colSpan={6} className="p-16 text-center text-gray-600 italic">No bookings found in the system.</td></tr>
                                 ) : (
                                     bookings.map((booking: any) => (
-                                        <tr key={booking.id} className="group hover:bg-white/[0.15] transition-all duration-200">
+                                        <tr key={booking.id} className="group hover:bg-black/[0.02] dark:hover:bg-white/[0.05] transition-all duration-200 border-b border-[var(--admin-border)] last:border-0">
                                             <td className="p-4 md:p-6">
-                                                <div className="font-bold text-[#020617] dark:text-danholt-gold group-hover:text-[#020617] dark:group-hover:text-white group-hover:scale-105 origin-left transition-all text-base">{booking.guest_name}</div>
-                                                <div className="text-gray-500 dark:text-blue-300 text-xs mt-1 font-mono opacity-80 group-hover:opacity-100">{booking.guest_email}</div>
+                                                <div className="font-bold text-[var(--admin-text)] group-hover:scale-105 origin-left transition-all text-base">{booking.guest_name}</div>
+                                                <div className="text-[var(--admin-text-secondary)] text-xs mt-1 font-mono opacity-80">{booking.guest_email}</div>
                                             </td>
                                             <td className="p-4 md:p-6">
-                                                <span className="text-purple-800 dark:text-purple-200 font-medium font-playfair group-hover:font-bold transition-all">
+                                                <span className="text-[var(--admin-suite-text)] font-medium font-playfair group-hover:font-bold transition-all">
                                                     {booking.rooms?.name || 'Unknown Room'}
                                                 </span>
                                             </td>
@@ -286,8 +286,8 @@ export default async function AdminDashboard() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {/* 2. DINING RESERVATIONS */}
-                    <section className="bg-white dark:bg-white/[0.03] border border-black/[0.08] dark:border-white/[0.08] rounded-2xl overflow-hidden backdrop-blur-xl">
-                        <div className="p-6 md:p-8 border-b border-black/[0.08] dark:border-white/[0.08] bg-gradient-to-r from-orange-500/[0.05] to-transparent">
+                    <section className="bg-[var(--admin-card-bg)] border border-[var(--admin-border)] rounded-2xl overflow-hidden backdrop-blur-xl">
+                        <div className="p-6 md:p-8 border-b border-[var(--admin-border)] bg-gradient-to-r from-orange-500/[0.05] to-transparent">
                             <h2 className="text-lg font-playfair font-bold text-orange-400 flex items-center gap-3">
                                 <span className="w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.5)]"></span>
                                 Dining Concierge
@@ -301,7 +301,7 @@ export default async function AdminDashboard() {
                                     {dining.length === 0 ? (
                                         <tr><td className="p-12 text-center text-gray-600">No dining bookings.</td></tr>
                                     ) : dining.map((res: any) => (
-                                        <tr key={res.id} className="group hover:bg-white/[0.15] transition-all duration-200">
+                                        <tr key={res.id} className="group hover:bg-black/[0.02] dark:hover:bg-white/[0.05] transition-all duration-200 border-b border-[var(--admin-border)] last:border-0">
                                             <td className="p-5">
                                                 <div className="text-orange-700 dark:text-orange-200 font-medium group-hover:scale-105 origin-left transition-all">{res.reservation_time}</div>
                                                 <div className="text-[10px] text-orange-600/70 dark:text-orange-500/70 uppercase tracking-wider mt-1">{new Date(res.reservation_date).toLocaleDateString()}</div>
@@ -353,8 +353,8 @@ export default async function AdminDashboard() {
                     </section>
 
                     {/* 3. FACILITY BOOKINGS */}
-                    <section className="bg-white/[0.03] border border-white/[0.08] rounded-2xl overflow-hidden backdrop-blur-xl">
-                        <div className="p-6 md:p-8 border-b border-white/[0.08] bg-gradient-to-r from-teal-500/[0.05] to-transparent">
+                    <section className="bg-[var(--admin-card-bg)] border border-[var(--admin-border)] rounded-2xl overflow-hidden backdrop-blur-xl">
+                        <div className="p-6 md:p-8 border-b border-[var(--admin-border)] bg-gradient-to-r from-teal-500/[0.05] to-transparent">
                             <h2 className="text-lg font-playfair font-bold text-teal-400 flex items-center gap-3">
                                 <span className="w-2 h-2 rounded-full bg-teal-500 shadow-[0_0_10px_rgba(20,184,166,0.5)]"></span>
                                 Events & Facilities

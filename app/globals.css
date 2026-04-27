@@ -6,8 +6,36 @@
   --foreground-rgb: 245, 245, 240;
   --background-start-rgb: 2, 6, 23;
   --background-end-rgb: 0, 0, 0;
-  --gold: #D4AF37;
-  /* Sharper metallic gold */
+  --gold: #C5A059;
+  
+  /* Theme Variables - Default to Dark */
+  --admin-bg: #020617;
+  --admin-card-bg: rgba(255, 255, 255, 0.03);
+  --admin-text: #ffffff;
+  --admin-text-secondary: #94a3b8;
+  --admin-border: rgba(255, 255, 255, 0.08);
+  --admin-accent: #C5A059;
+  --admin-suite-text: #e9d5ff; /* Light purple for dark mode */
+}
+
+.light {
+  --admin-bg: #ffffff;
+  --admin-card-bg: #f8fafc;
+  --admin-text: #020617;
+  --admin-text-secondary: #475569;
+  --admin-border: #e2e8f0;
+  --admin-accent: #C5A059;
+  --admin-suite-text: #6b21a8; /* Deep purple for light mode */
+}
+
+.dark {
+  --admin-bg: #020617;
+  --admin-card-bg: rgba(255, 255, 255, 0.03);
+  --admin-text: #ffffff;
+  --admin-text-secondary: #94a3b8;
+  --admin-border: rgba(255, 255, 255, 0.08);
+  --admin-accent: #C5A059;
+  --admin-suite-text: #e9d5ff;
 }
 
 ::selection {
