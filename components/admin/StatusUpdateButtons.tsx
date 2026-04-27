@@ -71,7 +71,7 @@ export default function StatusUpdateButtons({ id, currentStatus, updateAction }:
                 {isUpdating ? (
                     <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
                 ) : (
-                    <Clock size={16} className="text-blue-400" />
+                    <Clock size={16} className="text-blue-600 dark:text-blue-400" />
                 )}
             </button>
 

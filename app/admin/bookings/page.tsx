@@ -213,7 +213,7 @@ export default async function AdminDashboard() {
                     </div>
                     <div className="overflow-x-auto">
                         <table className="w-full text-left text-sm min-w-[800px] md:min-w-0">
-                            <thead className="bg-black/20 text-[10px] uppercase tracking-[0.15em] text-blue-300/70 font-semibold">
+                            <thead className="bg-black/[0.03] dark:bg-black/20 text-[10px] uppercase tracking-[0.15em] text-gray-500 dark:text-blue-300/70 font-bold">
                                 <tr>
                                     <th className="p-4 md:p-6 font-medium">Guest Identity</th>
                                     <th className="p-4 md:p-6 font-medium">Suite Selection</th>
@@ -230,24 +230,24 @@ export default async function AdminDashboard() {
                                     bookings.map((booking: any) => (
                                         <tr key={booking.id} className="group hover:bg-white/[0.15] transition-all duration-200">
                                             <td className="p-4 md:p-6">
-                                                <div className="font-bold text-danholt-gold group-hover:text-white group-hover:scale-105 origin-left transition-all text-base">{booking.guest_name}</div>
-                                                <div className="text-blue-300 text-xs mt-1 font-mono opacity-80 group-hover:text-blue-100 group-hover:opacity-100">{booking.guest_email}</div>
+                                                <div className="font-bold text-[#020617] dark:text-danholt-gold group-hover:text-[#020617] dark:group-hover:text-white group-hover:scale-105 origin-left transition-all text-base">{booking.guest_name}</div>
+                                                <div className="text-gray-500 dark:text-blue-300 text-xs mt-1 font-mono opacity-80 group-hover:opacity-100">{booking.guest_email}</div>
                                             </td>
                                             <td className="p-4 md:p-6">
-                                                <span className="text-purple-200 font-medium font-playfair group-hover:text-white group-hover:font-bold transition-all">
+                                                <span className="text-purple-800 dark:text-purple-200 font-medium font-playfair group-hover:font-bold transition-all">
                                                     {booking.rooms?.name || 'Unknown Room'}
                                                 </span>
                                             </td>
                                             <td className="p-4 md:p-6">
-                                                <div className="text-teal-300 font-mono text-xs bg-teal-900/20 inline-block px-2 py-1 rounded border border-teal-500/10 group-hover:bg-teal-500 group-hover:text-white transition-colors">
+                                                <div className="text-gray-700 dark:text-teal-300 font-mono text-xs bg-gray-100 dark:bg-teal-900/20 inline-block px-2 py-1 rounded border border-gray-200 dark:border-teal-500/10 transition-colors">
                                                     {new Date(booking.check_in).toLocaleDateString()}
                                                 </div>
-                                                <span className="text-gray-600 mx-2 group-hover:text-white">→</span>
-                                                <div className="text-teal-300 font-mono text-xs bg-teal-900/20 inline-block px-2 py-1 rounded border border-teal-500/10 group-hover:bg-teal-500 group-hover:text-white transition-colors">
+                                                <span className="text-gray-400 dark:text-gray-600 mx-2">→</span>
+                                                <div className="text-gray-700 dark:text-teal-300 font-mono text-xs bg-gray-100 dark:bg-teal-900/20 inline-block px-2 py-1 rounded border border-gray-200 dark:border-teal-500/10 transition-colors">
                                                     {new Date(booking.check_out).toLocaleDateString()}
                                                 </div>
                                             </td>
-                                            <td className="p-4 md:p-6 font-mono text-emerald-400 font-bold group-hover:text-emerald-300 text-base">
+                                            <td className="p-4 md:p-6 font-mono text-emerald-700 dark:text-emerald-400 font-bold text-base">
                                                 {booking.total_price ? '₦' + Number(booking.total_price).toLocaleString() : '-'}
                                             </td>
                                             <td className="p-4 md:p-6">
@@ -303,17 +303,17 @@ export default async function AdminDashboard() {
                                     ) : dining.map((res: any) => (
                                         <tr key={res.id} className="group hover:bg-white/[0.15] transition-all duration-200">
                                             <td className="p-5">
-                                                <div className="text-orange-200 font-medium group-hover:text-white group-hover:scale-105 origin-left transition-all">{res.reservation_time}</div>
-                                                <div className="text-[10px] text-orange-500/70 uppercase tracking-wider mt-1 group-hover:text-orange-300">{new Date(res.reservation_date).toLocaleDateString()}</div>
+                                                <div className="text-orange-700 dark:text-orange-200 font-medium group-hover:scale-105 origin-left transition-all">{res.reservation_time}</div>
+                                                <div className="text-[10px] text-orange-600/70 dark:text-orange-500/70 uppercase tracking-wider mt-1">{new Date(res.reservation_date).toLocaleDateString()}</div>
                                             </td>
                                             <td className="p-5">
-                                                <div className="text-white font-medium group-hover:text-orange-100 font-bold">{res.guest_name}</div>
-                                                <div className="text-[10px] text-orange-400 font-bold mt-1 bg-orange-500/10 inline-block px-1.5 py-0.5 rounded border border-orange-500/20 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                                                <div className="text-[#020617] dark:text-white font-medium font-bold">{res.guest_name}</div>
+                                                <div className="text-[10px] text-orange-700 dark:text-orange-400 font-bold mt-1 bg-orange-100 dark:bg-orange-500/10 inline-block px-1.5 py-0.5 rounded border border-orange-200 dark:border-orange-500/20 transition-colors">
                                                     {res.guests} Guests
                                                 </div>
-                                                <div className="mt-1 space-y-0.5 group-hover:opacity-100 opacity-80">
-                                                    <div className="text-xs text-blue-200/60 font-mono tracking-tight group-hover:text-blue-100">{res.guest_email}</div>
-                                                    <div className="text-xs text-blue-200/60 font-mono tracking-tight group-hover:text-blue-100">{res.guest_phone}</div>
+                                                <div className="mt-1 space-y-0.5 opacity-80">
+                                                    <div className="text-xs text-gray-500 dark:text-blue-200/60 font-mono tracking-tight">{res.guest_email}</div>
+                                                    <div className="text-xs text-gray-500 dark:text-blue-200/60 font-mono tracking-tight">{res.guest_phone}</div>
                                                 </div>
                                             </td>
                                             <td className="p-5 text-xs text-gray-400 italic font-serif group-hover:text-gray-200">
@@ -371,14 +371,14 @@ export default async function AdminDashboard() {
                                         return (
                                             <tr key={res.id} className="group hover:bg-white/[0.15] transition-all duration-200">
                                                 <td className="p-5">
-                                                    <div className="text-teal-200 font-medium group-hover:text-white group-hover:scale-105 origin-left transition-all">{new Date(res.reservation_date).toLocaleDateString()}</div>
-                                                    <div className="text-[10px] text-teal-500/70 font-bold mt-1 uppercase tracking-wider group-hover:text-teal-300">Scheduled</div>
+                                                    <div className="text-teal-700 dark:text-teal-200 font-medium group-hover:scale-105 origin-left transition-all">{new Date(res.reservation_date).toLocaleDateString()}</div>
+                                                    <div className="text-[10px] text-teal-600/70 dark:text-teal-500/70 font-bold mt-1 uppercase tracking-wider">Scheduled</div>
                                                 </td>
                                                 <td className="p-5">
-                                                    <div className="text-white font-medium group-hover:text-teal-100 font-bold">{res.guest_name}</div>
-                                                    <div className="mt-1 space-y-0.5 group-hover:opacity-100 opacity-80">
-                                                        <div className="text-xs text-blue-200/60 font-mono tracking-tight group-hover:text-blue-100">{res.guest_email}</div>
-                                                        <div className="text-xs text-blue-200/60 font-mono tracking-tight group-hover:text-blue-100">{res.guest_phone}</div>
+                                                    <div className="text-[#020617] dark:text-white font-medium font-bold">{res.guest_name}</div>
+                                                    <div className="mt-1 space-y-0.5 opacity-80">
+                                                        <div className="text-xs text-gray-500 dark:text-blue-200/60 font-mono tracking-tight">{res.guest_email}</div>
+                                                        <div className="text-xs text-gray-500 dark:text-blue-200/60 font-mono tracking-tight">{res.guest_phone}</div>
                                                     </div>
                                                 </td>
                                                 <td className="p-5 text-xs text-gray-400 max-w-[200px] group-hover:text-gray-200">
