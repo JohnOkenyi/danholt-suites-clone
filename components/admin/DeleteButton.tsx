@@ -56,7 +56,7 @@ export default function DeleteButton({ id, itemName, deleteAction }: DeleteButto
                 <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
                     <div
                         onClick={(e) => e.stopPropagation()}
-                        className="bg-[#0f172a] border border-red-500/50 rounded-2xl shadow-2xl p-6 max-w-sm w-full animate-in zoom-in-95 duration-200"
+                        className="bg-white dark:bg-[#0f172a] border border-red-500/50 rounded-2xl shadow-2xl p-6 max-w-sm w-full animate-in zoom-in-95 duration-200"
                     >
                         <div className="flex flex-col items-center text-center gap-4">
                             <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center border border-red-500/20">
@@ -64,8 +64,8 @@ export default function DeleteButton({ id, itemName, deleteAction }: DeleteButto
                             </div>
 
                             <div className="space-y-1">
-                                <h3 className="text-lg font-bold text-white">Delete {itemName}?</h3>
-                                <p className="text-sm text-gray-400">
+                                <h3 className="text-lg font-bold text-[#020617] dark:text-white">Delete {itemName}?</h3>
+                                <p className="text-sm text-gray-500 dark:text-gray-400">
                                     Are you sure you want to delete this {itemName.toLowerCase()}? This action cannot be undone.
                                 </p>
                             </div>
@@ -75,7 +75,7 @@ export default function DeleteButton({ id, itemName, deleteAction }: DeleteButto
                                     type="button"
                                     onClick={handleCancel}
                                     disabled={isDeleting}
-                                    className="flex-1 py-2.5 px-4 rounded-xl font-medium bg-white/5 hover:bg-white/10 text-gray-300 transition-colors border border-white/5"
+                                    className="flex-1 py-2.5 px-4 rounded-xl font-medium bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 text-gray-600 dark:text-gray-300 transition-colors border border-black/5 dark:border-white/5"
                                 >
                                     Cancel
                                 </button>

@@ -5,6 +5,7 @@ import { useFormState, useFormStatus } from 'react-dom'
 import { login, requestPasswordReset } from '@/app/actions/auth'
 import { Lock, Mail, ArrowLeft, CheckCircle, AlertCircle } from 'lucide-react'
 import Link from 'next/link'
+import ThemeToggle from '@/components/admin/ThemeToggle'
 
 function SubmitButton({ label = 'Access Dashboard' }: { label?: string }) {
   const { pending } = useFormStatus()
@@ -47,21 +48,24 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#020617] flex items-center justify-center p-4 selection:bg-danholt-gold selection:text-black">
+    <div className="min-h-screen bg-white dark:bg-[#020617] text-[#020617] dark:text-white flex items-center justify-center p-4 selection:bg-danholt-gold selection:text-black transition-colors duration-500">
+      <div className="absolute top-8 right-8 z-50">
+        <ThemeToggle />
+      </div>
       {/* Background Gradients */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 rounded-full blur-[120px]" />
         <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-blue-900/10 rounded-full blur-[120px]" />
       </div>
 
-      <div className="bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl rounded-2xl shadow-2xl p-8 w-full max-w-md relative overflow-hidden animate-in fade-in zoom-in-95 duration-500">
+      <div className="bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.08] dark:border-white/[0.08] backdrop-blur-xl rounded-2xl shadow-2xl p-8 w-full max-w-md relative overflow-hidden animate-in fade-in zoom-in-95 duration-500">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-danholt-gold to-transparent opacity-50" />
 
         <div className="text-center mb-8">
           <div className="w-16 h-16 bg-danholt-gold/10 rounded-full flex items-center justify-center mx-auto mb-4 border border-danholt-gold/20">
             <Lock className="w-8 h-8 text-danholt-gold" />
           </div>
-          <h1 className="text-2xl font-bold text-white font-playfair tracking-wide">
+          <h1 className="text-2xl font-bold text-[#020617] dark:text-white font-playfair tracking-wide">
             {view === 'login' ? 'Admin Login' : 'Reset Access'}
           </h1>
           <p className="text-gray-400 text-sm mt-2">Danholt Suites Management</p>
@@ -77,7 +81,7 @@ export default function AdminLoginPage() {
                   type="email"
                   name="email"
                   placeholder="admin@danholtsuites.com"
-                  className="w-full bg-white/5 border border-white/10 pl-12 pr-4 py-3.5 rounded-xl text-white outline-none focus:border-danholt-gold/50 focus:ring-1 focus:ring-danholt-gold/50 transition-all placeholder:text-gray-600"
+                  className="w-full bg-black/[0.05] dark:bg-white/5 border border-black/[0.1] dark:border-white/10 pl-12 pr-4 py-3.5 rounded-xl text-[#020617] dark:text-white outline-none focus:border-danholt-gold/50 focus:ring-1 focus:ring-danholt-gold/50 transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600"
                   required
                 />
               </div>
@@ -98,7 +102,7 @@ export default function AdminLoginPage() {
                 type="password"
                 name="password"
                 placeholder="••••••••"
-                className="w-full bg-white/5 border border-white/10 px-4 py-3.5 rounded-xl text-white outline-none focus:border-danholt-gold/50 focus:ring-1 focus:ring-danholt-gold/50 transition-all placeholder:text-gray-600"
+                className="w-full bg-black/[0.05] dark:bg-white/5 border border-black/[0.1] dark:border-white/10 px-4 py-3.5 rounded-xl text-[#020617] dark:text-white outline-none focus:border-danholt-gold/50 focus:ring-1 focus:ring-danholt-gold/50 transition-all placeholder:text-gray-400 dark:placeholder:text-gray-600"
                 required
               />
             </div>

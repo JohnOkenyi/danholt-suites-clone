@@ -16,6 +16,7 @@ import {
 import DeleteButton from '@/components/admin/DeleteButton'
 import StatusUpdateButtons from '@/components/admin/StatusUpdateButtons'
 import RealtimeBookingsListener from '@/components/admin/RealtimeBookingsListener'
+import ThemeToggle from '@/components/admin/ThemeToggle'
 
 async function getBookings() {
     const supabase = createClient()
@@ -81,7 +82,7 @@ export default async function AdminDashboard() {
 
 
     return (
-        <main className="min-h-screen bg-[#020617] text-white p-2 md:p-8 font-sans selection:bg-danholt-gold selection:text-black overflow-x-hidden">
+        <main className="min-h-screen bg-white dark:bg-[#020617] text-[#020617] dark:text-white p-2 md:p-8 font-sans selection:bg-danholt-gold selection:text-black transition-colors duration-500 overflow-x-hidden">
             {/* Background Gradients for 'World Class' feel */}
             <div className="fixed inset-0 pointer-events-none z-0">
                 <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/10 rounded-full blur-[120px]" />
@@ -92,10 +93,10 @@ export default async function AdminDashboard() {
 
             <div className="relative z-10 max-w-7xl mx-auto space-y-6 md:space-y-8">
                 {/* Luxury Header - Mobile Optimized */}
-                <div className="flex flex-col md:flex-row items-start md:items-center justify-between bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl p-6 md:p-8 rounded-2xl shadow-2xl gap-4">
+                <div className="flex flex-col md:flex-row items-start md:items-center justify-between bg-black/[0.02] dark:bg-white/[0.03] border border-black/[0.08] dark:border-white/[0.08] backdrop-blur-xl p-6 md:p-8 rounded-2xl shadow-2xl gap-4">
                     <div className="flex items-center gap-6">
                         <div>
-                            <h1 className="text-2xl md:text-3xl font-bold text-white font-playfair tracking-wide">Danholt Suites</h1>
+                            <h1 className="text-2xl md:text-3xl font-bold text-[#020617] dark:text-white font-playfair tracking-wide">Danholt Suites</h1>
                             <div className="flex items-center gap-2 mt-1">
                                 <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                                 <p className="text-gray-400 text-xs uppercase tracking-[0.2em] font-medium">Command Center</p>
@@ -104,6 +105,7 @@ export default async function AdminDashboard() {
                     </div>
 
                     <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
+                        <ThemeToggle />
                         <Link
                             href="/"
                             className="flex-1 md:flex-none justify-center group flex items-center px-5 py-2.5 text-sm text-gray-400 hover:text-white transition-all bg-white/[0.02] hover:bg-white/[0.08] border border-white/[0.05] rounded-xl"
@@ -141,7 +143,7 @@ export default async function AdminDashboard() {
                         { label: 'Members', count: membership.length, color: 'text-purple-400', bg: 'from-purple-500/20 to-transparent' },
                         { label: 'Inbox', count: messages.length, color: 'text-blue-400', bg: 'from-blue-500/20 to-transparent' },
                     ].map((kpi) => (
-                        <div key={kpi.label} className="relative group overflow-hidden rounded-xl border border-white/[0.08] bg-white/[0.02] backdrop-blur-sm p-4 md:p-5 transition-all hover:bg-white/[0.04]">
+                        <div key={kpi.label} className="relative group overflow-hidden rounded-xl border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.02] dark:bg-white/[0.02] backdrop-blur-sm p-4 md:p-5 transition-all hover:bg-black/[0.05] dark:hover:bg-white/[0.04]">
                             <div className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl ${kpi.bg} opacity-20 rounded-bl-full group-hover:opacity-30 transition-opacity`} />
                             <div className={`text-2xl md:text-3xl font-bold ${kpi.color} font-playfair relative z-10`}>{kpi.count}</div>
                             <div className="text-[9px] md:text-[10px] uppercase tracking-widest text-gray-500 mt-2 font-medium relative z-10 group-hover:text-gray-300 transition-colors">{kpi.label}</div>
@@ -150,9 +152,9 @@ export default async function AdminDashboard() {
                 </div>
 
                 {/* TODAY'S AGENDA */}
-                <section className="bg-gradient-to-br from-blue-900/10 to-purple-900/10 border border-white/[0.08] rounded-2xl overflow-hidden backdrop-blur-xl">
-                    <div className="p-6 md:p-8 border-b border-white/[0.08] flex justify-between items-center">
-                        <h2 className="text-xl font-playfair font-bold text-white flex items-center gap-3">
+                <section className="bg-gradient-to-br from-blue-500/5 to-purple-500/5 dark:from-blue-900/10 dark:to-purple-900/10 border border-black/[0.08] dark:border-white/[0.08] rounded-2xl overflow-hidden backdrop-blur-xl">
+                    <div className="p-6 md:p-8 border-b border-black/[0.08] dark:border-white/[0.08] flex justify-between items-center">
+                        <h2 className="text-xl font-playfair font-bold text-[#020617] dark:text-white flex items-center gap-3">
                             <span className="text-2xl">📅</span>
                             Today&apos;s Agenda
                         </h2>
@@ -197,8 +199,8 @@ export default async function AdminDashboard() {
                 </section>
 
                 {/* 1. ROOM BOOKINGS - Premium Table */}
-                <section className="bg-white/[0.03] border border-white/[0.08] rounded-2xl backdrop-blur-xl shadow-2xl">
-                    <div className="p-6 md:p-8 border-b border-white/[0.08] flex justify-between items-center bg-gradient-to-r from-white/[0.02] to-transparent">
+                <section className="bg-white dark:bg-white/[0.03] border border-black/[0.08] dark:border-white/[0.08] rounded-2xl backdrop-blur-xl shadow-2xl">
+                    <div className="p-6 md:p-8 border-b border-black/[0.08] dark:border-white/[0.08] flex justify-between items-center bg-gradient-to-r from-black/[0.01] dark:from-white/[0.02] to-transparent">
                         <div className="flex items-center gap-4">
                             <div>
                                 <h2 className="text-lg md:text-xl font-playfair font-bold text-danholt-gold">Room Reservations</h2>
@@ -284,8 +286,8 @@ export default async function AdminDashboard() {
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                     {/* 2. DINING RESERVATIONS */}
-                    <section className="bg-white/[0.03] border border-white/[0.08] rounded-2xl overflow-hidden backdrop-blur-xl">
-                        <div className="p-6 md:p-8 border-b border-white/[0.08] bg-gradient-to-r from-orange-500/[0.05] to-transparent">
+                    <section className="bg-white dark:bg-white/[0.03] border border-black/[0.08] dark:border-white/[0.08] rounded-2xl overflow-hidden backdrop-blur-xl">
+                        <div className="p-6 md:p-8 border-b border-black/[0.08] dark:border-white/[0.08] bg-gradient-to-r from-orange-500/[0.05] to-transparent">
                             <h2 className="text-lg font-playfair font-bold text-orange-400 flex items-center gap-3">
                                 <span className="w-2 h-2 rounded-full bg-orange-500 shadow-[0_0_10px_rgba(249,115,22,0.5)]"></span>
                                 Dining Concierge
@@ -419,14 +421,14 @@ export default async function AdminDashboard() {
 
                 {/* 4. OTHER LISTS */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <section className="p-6 rounded-2xl border border-white/[0.08] bg-white/[0.02] hover:border-purple-500/30 transition-colors">
+                    <section className="p-6 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.01] dark:bg-white/[0.02] hover:border-purple-500/30 transition-colors">
                         <h3 className="text-[10px] font-bold text-purple-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
                             New Memberships
                         </h3>
                         <div className="space-y-4">
                             {membership.slice(0, 5).map((m: any) => (
-                                <div key={m.id} className="flex justify-between items-center text-sm p-3 rounded-lg bg-white/[0.02] hover:bg-white/[0.15] transition-all duration-200 border border-transparent hover:border-white/20 hover:shadow-lg hover:scale-[1.02] group">
+                                <div key={m.id} className="flex justify-between items-center text-sm p-3 rounded-lg bg-black/[0.02] dark:bg-white/[0.02] hover:bg-black/[0.05] dark:hover:bg-white/[0.15] transition-all duration-200 border border-transparent hover:border-black/10 dark:hover:border-white/20 hover:shadow-lg hover:scale-[1.02] group">
                                     <div className="flex items-center gap-3">
                                         <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center text-purple-300 text-xs font-bold border border-purple-500/30 group-hover:bg-purple-500 group-hover:text-white transition-colors">
                                             {m.full_name?.[0]}
@@ -468,14 +470,14 @@ export default async function AdminDashboard() {
                         </div>
                     </section>
 
-                    <section className="p-6 rounded-2xl border border-white/[0.08] bg-white/[0.02] hover:border-blue-500/30 transition-colors">
+                    <section className="p-6 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.01] dark:bg-white/[0.02] hover:border-blue-500/30 transition-colors">
                         <h3 className="text-[10px] font-bold text-blue-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
                             Recent Messages
                         </h3>
                         <div className="space-y-4">
                             {messages.slice(0, 5).map((m: any) => (
-                                <div key={m.id} className="text-sm p-4 rounded-lg bg-white/[0.02] border border-white/[0.04] hover:bg-white/[0.15] hover:border-white/20 transition-all duration-200 relative group hover:scale-[1.02] hover:shadow-lg">
+                                <div key={m.id} className="text-sm p-4 rounded-lg bg-black/[0.02] dark:bg-white/[0.02] border border-black/[0.04] dark:border-white/[0.04] hover:bg-black/[0.05] dark:hover:bg-white/[0.15] hover:border-black/10 dark:hover:border-white/20 transition-all duration-200 relative group hover:scale-[1.02] hover:shadow-lg">
                                     <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                                         <DeleteButton
                                             id={m.id}
