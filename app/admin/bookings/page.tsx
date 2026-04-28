@@ -422,7 +422,7 @@ export default async function AdminDashboard() {
                 {/* 4. OTHER LISTS */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <section className="p-6 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.01] dark:bg-white/[0.02] hover:border-purple-500/30 transition-colors">
-                        <h3 className="text-[10px] font-bold text-purple-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
+                        <h3 className="text-[10px] font-bold text-purple-700 dark:text-purple-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
                             New Memberships
                         </h3>
@@ -430,25 +430,25 @@ export default async function AdminDashboard() {
                             {membership.slice(0, 5).map((m: any) => (
                                 <div key={m.id} className="flex justify-between items-center text-sm p-3 rounded-lg bg-black/[0.02] dark:bg-white/[0.02] hover:bg-black/[0.05] dark:hover:bg-white/[0.15] transition-all duration-200 border border-transparent hover:border-black/10 dark:hover:border-white/20 hover:shadow-lg hover:scale-[1.02] group">
                                     <div className="flex items-center gap-3">
-                                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center text-purple-300 text-xs font-bold border border-purple-500/30 group-hover:bg-purple-500 group-hover:text-white transition-colors">
+                                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center text-purple-800 dark:text-purple-300 text-xs font-bold border border-purple-500/30 group-hover:bg-purple-500 group-hover:text-white transition-colors">
                                             {m.full_name?.[0]}
                                         </div>
                                         <div>
-                                            <span className="text-purple-100 font-medium block group-hover:text-white group-hover:font-bold transition-colors">{m.full_name}</span>
-                                            <span className="text-purple-300/50 text-[10px] block group-hover:text-purple-200">{m.email}</span>
-                                            <span className="text-purple-300/50 text-[10px] block group-hover:text-purple-200">{m.phone}</span>
+                                            <span className="text-[var(--admin-text)] font-medium block group-hover:text-[var(--admin-accent)] transition-colors">{m.full_name}</span>
+                                            <span className="text-[var(--admin-text-secondary)] text-[10px] block group-hover:text-[var(--admin-text)]">{m.email}</span>
+                                            <span className="text-[var(--admin-text-secondary)] text-[10px] block group-hover:text-[var(--admin-text)]">{m.phone}</span>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-3">
                                         <div className="flex flex-col items-end gap-2">
-                                            <span className="px-2.5 py-1 rounded text-[10px] uppercase font-bold bg-purple-500/10 text-purple-300 border border-purple-500/20 group-hover:bg-purple-500 group-hover:text-white transition-colors">{m.membership_tier}</span>
+                                            <span className="px-2.5 py-1 rounded text-[10px] uppercase font-bold bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20 group-hover:bg-purple-500 group-hover:text-white transition-colors">{m.membership_tier}</span>
                                             <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[8px] font-bold uppercase tracking-wider
-                                                ${m.status === 'confirmed' ? 'bg-green-500/10 text-green-400 border border-green-500/20' :
-                                                    m.status === 'cancelled' ? 'bg-red-500/10 text-red-400 border border-red-500/20' :
-                                                        'bg-yellow-500/10 text-yellow-400 border border-yellow-500/20'}
+                                                ${m.status === 'confirmed' ? 'bg-green-500/10 text-green-700 dark:text-green-400 border border-green-500/20' :
+                                                    m.status === 'cancelled' ? 'bg-red-500/10 text-red-700 dark:text-red-400 border border-red-500/20' :
+                                                        'bg-yellow-500/10 text-yellow-700 dark:text-yellow-400 border border-yellow-500/20'}
                                             `}>
-                                                <span className={`w-1 h-1 rounded-full ${m.status === 'confirmed' ? 'bg-green-400' :
-                                                    m.status === 'cancelled' ? 'bg-red-400' : 'bg-yellow-400'
+                                                <span className={`w-1 h-1 rounded-full ${m.status === 'confirmed' ? 'bg-green-500 dark:bg-green-400' :
+                                                    m.status === 'cancelled' ? 'bg-red-500 dark:bg-red-400' : 'bg-yellow-500 dark:bg-yellow-400'
                                                     }`}></span>
                                                 {m.status || 'pending'}
                                             </span>
@@ -471,7 +471,7 @@ export default async function AdminDashboard() {
                     </section>
 
                     <section className="p-6 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.01] dark:bg-white/[0.02] hover:border-blue-500/30 transition-colors">
-                        <h3 className="text-[10px] font-bold text-blue-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
+                        <h3 className="text-[10px] font-bold text-blue-700 dark:text-blue-400 uppercase tracking-[0.2em] mb-6 flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
                             Recent Messages
                         </h3>
@@ -485,15 +485,15 @@ export default async function AdminDashboard() {
                                             deleteAction={deleteContactMessage}
                                         />
                                     </div>
-                                    <div className="flex justify-between text-[10px] text-gray-500 mb-2 uppercase tracking-wider font-medium group-hover:text-gray-300">
-                                        <span className="text-blue-300 group-hover:text-white font-bold transition-colors">
+                                    <div className="flex justify-between text-[10px] mb-2 uppercase tracking-wider font-medium">
+                                        <span className="text-blue-800 dark:text-blue-300 group-hover:text-[var(--admin-accent)] font-bold transition-colors">
                                             {m.name}
-                                            <span className="block text-[8px] text-blue-400/50 lowercase mt-0.5 group-hover:text-blue-200">{m.email}</span>
+                                            <span className="block text-[8px] text-[var(--admin-text-secondary)] lowercase mt-0.5 group-hover:text-[var(--admin-text)]">{m.email}</span>
                                         </span>
-                                        <span className="text-blue-200/50 group-hover:text-blue-100">{new Date(m.created_at).toLocaleDateString()}</span>
+                                        <span className="text-[var(--admin-text-secondary)] group-hover:text-[var(--admin-text)]">{new Date(m.created_at).toLocaleDateString()}</span>
                                     </div>
-                                    <div className="text-white font-medium truncate opacity-90 pr-8 group-hover:opacity-100 group-hover:text-white">{m.subject}</div>
-                                    <div className="text-xs text-gray-400 truncate mt-1 pr-8 group-hover:text-gray-200">{m.message}</div>
+                                    <div className="text-[var(--admin-text)] font-medium truncate opacity-90 pr-8 group-hover:opacity-100 group-hover:text-[var(--admin-accent)]">{m.subject}</div>
+                                    <div className="text-xs text-[var(--admin-text-secondary)] truncate mt-1 pr-8 group-hover:text-[var(--admin-text)]">{m.message}</div>
                                 </div>
                             ))}
                             {messages.length === 0 && <p className="text-xs text-gray-600 italic">Inbox empty.</p>}
