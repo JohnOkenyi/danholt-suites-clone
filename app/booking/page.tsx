@@ -433,7 +433,7 @@ function BookingForm() {
                                             e.preventDefault();
                                             const form = document.getElementById('booking-form') as HTMLFormElement;
                                             if (form) {
-                                                form.requestSubmit();
+                                                formAction(new FormData(form));
                                             }
                                         }}
                                         form="booking-form"
