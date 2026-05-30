@@ -168,24 +168,24 @@ export default async function AdminDashboard() {
                         ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                 {todaysAgenda.map((item: any, idx: number) => (
-                                    <div key={`${item.id}-${idx}`} className="bg-white/[0.03] p-4 rounded-xl border border-white/[0.05] flex items-start gap-4 hover:bg-white/[0.15] hover:border-white/20 hover:scale-[1.02] hover:shadow-xl transition-all duration-300 group cursor-default">
+                                    <div key={`${item.id}-${idx}`} className="bg-[var(--admin-card-bg)] p-4 rounded-xl border border-[var(--admin-border)] flex items-start gap-4 hover:bg-black/5 dark:hover:bg-white/[0.15] hover:border-[var(--gold)]/30 hover:scale-[1.02] hover:shadow-xl transition-all duration-300 group cursor-default">
                                         <div className={`
                                             w-12 h-12 rounded-lg flex items-center justify-center text-xs font-bold
                                             ${item.type === 'Check-in' ? 'bg-danholt-gold/20 text-danholt-gold group-hover:bg-danholt-gold group-hover:text-black' :
-                                                item.type === 'Dining' ? 'bg-orange-500/20 text-orange-400 group-hover:bg-orange-500 group-hover:text-white' :
-                                                    'bg-teal-500/20 text-teal-400 group-hover:bg-teal-500 group-hover:text-white'}
+                                                item.type === 'Dining' ? 'bg-orange-500/20 text-orange-600 dark:text-orange-400 group-hover:bg-orange-500 group-hover:text-white' :
+                                                    'bg-teal-500/20 text-teal-600 dark:text-teal-400 group-hover:bg-teal-500 group-hover:text-white'}
                                             transition-colors
                                         `}>
                                             {item.time}
                                         </div>
                                         <div>
-                                            <div className="text-xs uppercase tracking-wider opacity-60 font-semibold mb-1 group-hover:text-white group-hover:opacity-100 transition-all">{item.type}</div>
-                                            <div className="font-bold text-white mb-1 group-hover:text-white group-hover:scale-105 origin-left transition-transform">{item.guest_name}</div>
-                                            {item.type === 'Dining' && <div className="text-xs text-gray-400">{item.guests} Guests</div>}
-                                            {item.special_requests && <div className="text-xs text-gray-500 italic mt-2 line-clamp-1">&quot;{item.special_requests}&quot;</div>}
+                                            <div className="text-xs uppercase tracking-wider opacity-60 font-semibold mb-1 group-hover:text-[var(--admin-text)] group-hover:opacity-100 transition-all text-[var(--admin-text-secondary)]">{item.type}</div>
+                                            <div className="font-bold text-[var(--admin-text)] mb-1 group-hover:scale-105 origin-left transition-transform">{item.guest_name}</div>
+                                            {item.type === 'Dining' && <div className="text-xs text-[var(--admin-text-secondary)]">{item.guests} Guests</div>}
+                                            {item.special_requests && <div className="text-xs text-[var(--admin-text-secondary)] italic mt-2 line-clamp-1">&quot;{item.special_requests}&quot;</div>}
                                             <div className="mt-2 flex gap-2">
                                                 {item.guest_phone && (
-                                                    <a href={`tel:${item.guest_phone}`} className="text-[10px] bg-white/5 hover:bg-white/10 px-2 py-1 rounded text-gray-300 transition-colors">
+                                                    <a href={`tel:${item.guest_phone}`} className="text-[10px] bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 px-2 py-1 rounded text-[var(--admin-text-secondary)] transition-colors">
                                                         📞 {item.guest_phone}
                                                     </a>
                                                 )}
