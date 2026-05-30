@@ -430,21 +430,11 @@ function BookingForm() {
                                     {/* Desktop Submit Button - MUST TRIGGER FORM SUBMISSION */}
                                     <button
                                         onClick={(e) => {
-                                            // Programmatically submit the form if outside of it, OR just put this button inside the form?
-                                            // The form is in another column. 
-                                            // Solution: Use HTML form attribute or just use the same server action here?
-                                            // Actually, this button is OUTSIDE the form.
-                                            // Best approach: Move this button inside a form, OR make this sidebar part of the main form.
-                                            // But structure makes that hard.
-                                            // Alternative: "remote" submit via ref or document.getElementById.
-                                            // Or: Wrap the ENTIRE grid in the <form>.
-
-                                            // I will replace `onClick={handleSubmit}` which was doing `e.preventDefault`.
-                                            // Now I need to trigger the form.
-
-                                            // Simpler hack for now: 
-                                            // Let's rely on the form having an ID and this button referring to it.
-                                            // <form id="booking-form"> ... <button form="booking-form">
+                                            e.preventDefault();
+                                            const form = document.getElementById('booking-form') as HTMLFormElement;
+                                            if (form) {
+                                                form.requestSubmit();
+                                            }
                                         }}
                                         form="booking-form"
                                         type="submit"
