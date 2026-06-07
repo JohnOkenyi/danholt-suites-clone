@@ -54,11 +54,12 @@ export async function updateSession(request: NextRequest) {
         }
     )
 
-    const { data: { user }, error: authError } = await supabase.auth.getUser()
-
     // Protected routes guard
-    if (request.nextUrl.pathname.startsWith('/admin') &&
-        !['/admin', '/admin/reset-password', '/auth/callback'].includes(request.nextUrl.pathname)) {
+    const isProtectedRoute = request.nextUrl.pathname.startsWith('/admin') &&
+        !['/admin', '/admin/reset-password', '/auth/callback'].includes(request.nextUrl.pathname);
+
+    if (isProtectedRoute) {
+        const { data: { user }, error: authError } = await supabase.auth.getUser()
 
         if (authError || !user) {
             return NextResponse.redirect(new URL('/admin', request.url))
