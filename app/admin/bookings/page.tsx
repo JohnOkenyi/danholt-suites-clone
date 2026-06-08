@@ -3,6 +3,10 @@ import { cookies } from 'next/headers'
 import Link from 'next/link'
 import { ArrowLeft, LogOut } from 'lucide-react'
 import { logout } from '@/app/actions/auth'
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 import {
     deleteBooking,
     deleteDiningReservation,
